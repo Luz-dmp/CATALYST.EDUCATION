@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Catalyst</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
+        <div class="nav-links">
+            <a href="../../index.html">Inicio</a>
+            <a href="planes.html">Planes</a>
+            <a href="blog.html">Blog</a>
+            <a href="comunidad.html">Comunidad</a>
+            <a href="login.html" class="btn-accent">Iniciar Sesión</a>
+        </div>
+    </nav>
+
+    <header class="page-header container">
+        <p class="eyebrow">VISIÓN GENERAL DE LA PLATAFORMA CATALYST</p>
+        <h1>Panel administrativo</h1>
+        <p>Una plataforma educativa donde tutores gestionan cursos, estudiantes y simulacros, y todo queda centralizado en dashboards claros.</p>
+    </header>
+
+    <main class="container">
+        <section class="overview-grid">
+            <div class="overview-card">
+                <h3>🎯 Objetivo</h3>
+                <p>Gestionar cursos, tutores, estudiantes, simulacros y actividades desde un único lugar con métricas claras.</p>
+                <ul>
+                    <li>Crear y asignar cursos</li>
+                    <li>Ver progreso de estudiantes</li>
+                    <li>Administrar roles y permisos</li>
+                </ul>
+            </div>
+            <div class="overview-card">
+                <h3>📊 Métricas globales</h3>
+                <p>Referencias rápidas sobre el uso de la plataforma y el engagement de los estudiantes.</p>
+                <ul>
+                    <li>Usuarios activos</li>
+                    <li>Simulacros creados</li>
+                    <li>Actividades entregadas</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="role-grid">
+            <h2 class="section-title">ROLES DEL SISTEMA</h2>
+            <article class="role-card">
+                <h3>1️⃣ Estudiante</h3>
+                <p>Puede ver cursos, responder simulacros, subir actividades y consultar su progreso.</p>
+                <hr>
+                <p><strong>Puede:</strong> ver cursos asignados, acceder a simulacros, subir tareas, ver resultados.</p>
+                <p><strong>No puede:</strong> ver otros estudiantes, crear simulacros, editar cursos.</p>
+            </article>
+            <article class="role-card">
+                <h3>2️⃣ Tutor / Profesor</h3>
+                <p>Puede gestionar estudiantes, crear cursos, cargar materiales y generar simulacros.</p>
+                <hr>
+                <p><strong>Puede:</strong> ver lista de estudiantes, crear cursos, subir PDFs, ver resultados.</p>
+            </article>
+            <article class="role-card">
+                <h3>3️⃣ Admin</h3>
+                <p>Accede a todo: crea tutores, asigna cursos, revisa métricas globales y administra la plataforma.</p>
+                <hr>
+                <p><strong>Puede:</strong> todo lo anterior, más gestionar roles y métricas globales.</p>
+            </article>
+        </section>
+
+        <section class="admin-stats">
+            <article class="feature-card">
+                <h3>Usuarios activos</h3>
+                <p class="stat-number">1.246</p>
+                <p>Estudiantes con sesión iniciada en la última semana.</p>
+            </article>
+            <article class="feature-card">
+                <h3>Simulacros creados</h3>
+                <p class="stat-number">28</p>
+                <p>Pruebas disponibles para la comunidad.</p>
+            </article>
+            <article class="feature-card">
+                <h3>Actividades entragadas</h3>
+                <p class="stat-number">194</p>
+                <p>Entregas pendientes de revisión.</p>
+            </article>
+        </section>
+
+        <section class="feature-grid">
+            <article class="feature-card admin-panel">
+                <h3>Lista de estudiantes</h3>
+                <p>Ver todos los estudiantes registrados y su estado actual.</p>
+                <ul class="admin-list">
+                    <li>María Ruiz <span>Activo</span></li>
+                    <li>Juan Pérez <span>En seguimiento</span></li>
+                    <li>Ana Gómez <span>Nuevo</span></li>
+                </ul>
+            </article>
+            <article class="feature-card admin-panel">
+                <h3>Crear simulacro</h3>
+                <form class="admin-form">
+                    <input type="text" placeholder="Nombre del simulacro" required>
+                    <input type="text" placeholder="Asignatura" required>
+                    <input type="date" required>
+                    <input type="number" min="1" placeholder="Duración (min)" required>
+                    <button type="submit" class="btn-accent">Crear simulacro</button>
+                </form>
+            </article>
+            <article class="feature-card admin-panel">
+                <h3>Acceso a portales</h3>
+                <p>Navega rápido entre el portal de estudiante y la vista de cursos.</p>
+                <a href="portal-estudiante.html" class="btn-outline">Abrir portal estudiante</a>
+                <a href="curso.html" class="btn-outline">Ver curso ejemplo</a>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>© 2026 Catalyst Education. Panel administrativo en desarrollo.</p>
+        </div>
+    </footer>
+</body>
+</html>

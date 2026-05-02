@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Estudiante | Catalyst</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
+        <div class="nav-links">
+            <a href="../../index.html">Inicio</a>
+            <a href="planes.html">Planes</a>
+            <a href="blog.html">Blog</a>
+            <a href="comunidad.html">Comunidad</a>
+            <a href="tutores.html">Tutores</a>
+            <a href="login.html" class="btn-accent">Iniciar Sesión</a>
+        </div>
+    </nav>
+
+    <main class="student-app">
+        <aside class="student-sidebar">
+            <div class="sidebar-brand">
+                <div class="avatar">C</div>
+                <div>
+                    <p class="eyebrow">Catalyst</p>
+                    <h2>Sophia Thompson</h2>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="#dashboard" class="menu-item active">Dashboard</a>
+                <a href="#mis-clases" class="menu-item">Mis clases</a>
+                <a href="#mis-notas" class="menu-item">Mis notas</a>
+                <a href="#horario" class="menu-item">Horario</a>
+                <a href="#mensajes" class="menu-item">Mensajes</a>
+                <a href="#ajustes" class="menu-item">Ajustes</a>
+            </nav>
+
+            <a href="login.html" class="btn-outline logout-btn">Cerrar sesión</a>
+        </aside>
+
+        <section class="student-main">
+            <div class="student-header">
+                <div>
+                    <p class="eyebrow uppercase">HOLA, SOPHIA!</p>
+                    <h1>Panel del estudiante</h1>
+                </div>
+                <div class="search-wrapper">
+                    <input type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button aria-label="Buscar">🔍</button>
+                </div>
+            </div>
+
+            <div class="portal-panels">
+                <section id="dashboard" class="portal-panel active">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card avance-card span-8">
+                            <div class="card-title">
+                                <h2>Avance por materia</h2>
+                                <span>5 materias</span>
+                            </div>
+                            <div class="progress-summary">
+                                <div class="progress-item">
+                                    <span>Matemáticas</span>
+                                    <strong>76%</strong>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Lectura crítica</span>
+                                    <strong>59%</strong>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Inglés</span>
+                                    <strong>84%</strong>
+                                </div>
+                            </div>
+                            <a href="curso.html" class="link-secondary">Ver detalles</a>
+                        </article>
+
+                        <article class="dashboard-card tutores-card span-4">
+                            <div class="card-title">
+                                <h2>Tutores</h2>
+                                <span>3</span>
+                            </div>
+                            <div class="teacher-list">
+                                <div class="teacher-item">
+                                    <div class="teacher-avatar">O</div>
+                                    <div>
+                                        <strong>Olivia Miller</strong>
+                                        <span>Tutora de matemáticas</span>
+                                    </div>
+                                    <button class="btn-secondary">Chatear</button>
+                                </div>
+                                <div class="teacher-item">
+                                    <div class="teacher-avatar">L</div>
+                                    <div>
+                                        <strong>Liam García</strong>
+                                        <span>Tutor de inglés</span>
+                                    </div>
+                                    <button class="btn-secondary">Chatear</button>
+                                </div>
+                                <div class="teacher-item">
+                                    <div class="teacher-avatar">J</div>
+                                    <div>
+                                        <strong>Jackson López</strong>
+                                        <span>Tutor de ciencias</span>
+                                    </div>
+                                    <button class="btn-secondary">Chatear</button>
+                                </div>
+                            </div>
+                            <a href="#" class="link-secondary">Ver más tutores</a>
+                        </article>
+
+                        <article class="metric-card circle-card attendance">
+                            <p>Asistencia a clases</p>
+                            <div class="circle-graph"><span style="--progress: 68%"></span></div>
+                            <strong>68%</strong>
+                        </article>
+
+                        <article class="metric-card circle-card homework">
+                            <p>Tareas</p>
+                            <div class="circle-graph"><span style="--progress: 90%"></span></div>
+                            <strong>90%</strong>
+                        </article>
+
+                        <article class="metric-card circle-card ranking">
+                            <p>Ranking estudiantil</p>
+                            <div class="circle-graph"><span style="--progress: 75%"></span></div>
+                            <strong>75%</strong>
+                        </article>
+
+                        <article class="dashboard-card clases-card span-12">
+                            <div class="card-title">
+                                <h2>Mi clase</h2>
+                                <span>Matemáticas</span>
+                            </div>
+                            <div class="course-tabs-section">
+                                <div class="course-tabs">
+                                    <a href="#muro" class="tab active">Muro</a>
+                                    <a href="#material" class="tab">Material de estudio</a>
+                                    <a href="#simulacros" class="tab">Simulacros</a>
+                                    <a href="#actividades" class="tab">Actividades</a>
+                                    <a href="#resultados" class="tab">Resultados</a>
+                                </div>
+
+                                <section id="muro" class="course-panel">
+                                    <h3>Avisos</h3>
+                                    <ul class="admin-list">
+                                        <li>Clase extra de funciones el martes <span>18:30</span></li>
+                                        <li>Nuevo material de ejercicios disponible <span>Hoy</span></li>
+                                        <li>Entrega final de geometría el viernes <span>Importante</span></li>
+                                    </ul>
+                                    <h3>Fechas importantes</h3>
+                                    <ul class="admin-list">
+                                        <li>Simulacro de funciones <span>Miércoles</span></li>
+                                        <li>Clase en vivo de problemas <span>Jueves</span></li>
+                                    </ul>
+                                    <h3>Links a clases en vivo</h3>
+                                    <ul class="admin-list">
+                                        <li>Matemáticas - Zoom <span>Acceder</span></li>
+                                        <li>Inglés - Meet <span>Acceder</span></li>
+                                    </ul>
+                                </section>
+
+                                <section id="material" class="course-panel">
+                                    <h3>PDFs</h3>
+                                    <ul class="admin-list">
+                                        <li>Guía de funciones <span>Descargar</span></li>
+                                        <li>Resumen de polinomios <span>Descargar</span></li>
+                                    </ul>
+                                    <h3>Presentaciones</h3>
+                                    <ul class="admin-list">
+                                        <li>Clase de derivadas <span>Ver</span></li>
+                                    </ul>
+                                    <h3>Videos</h3>
+                                    <ul class="admin-list">
+                                        <li>Explicación de límites <span>Ver</span></li>
+                                    </ul>
+                                    <h3>Links externos</h3>
+                                    <ul class="admin-list">
+                                        <li>Simulador de funciones <span>Ir</span></li>
+                                    </ul>
+                                </section>
+
+                                <section id="simulacros" class="course-panel">
+                                    <h3>Simulacros</h3>
+                                    <div class="admin-list">
+                                        <li>🅰️ Google Forms</li>
+                                        <li>Tutor crea el formulario y pega el link.</li>
+                                        <li>Estudiante responde y ve resultados en Forms.</li>
+                                    </div>
+                                    <div class="admin-list">
+                                        <li>🅱️ Simulacros internos (PDF)</li>
+                                        <li>Tutor sube PDF y clave de respuestas.</li>
+                                        <li>Estudiante ve el PDF, marca respuestas y el sistema corrige.</li>
+                                    </div>
+                                </section>
+
+                                <section id="actividades" class="course-panel">
+                                    <h3>Actividades / Tareas</h3>
+                                    <ul class="admin-list">
+                                        <li>Tutor crea la actividad y define la fecha de entrega.</li>
+                                        <li>Estudiante sube PDF, imagen o archivo.</li>
+                                        <li>Tutor revisa, califica y deja comentarios.</li>
+                                    </ul>
+                                </section>
+
+                                <section id="resultados" class="course-panel">
+                                    <h3>Resultados</h3>
+                                    <ul class="admin-list">
+                                        <li>Historial de simulacros completados.</li>
+                                        <li>Puntajes por materia.</li>
+                                        <li>Materias fuertes y débiles.</li>
+                                        <li>Evolución del rendimiento en el tiempo.</li>
+                                    </ul>
+                                </section>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="mis-clases" class="portal-panel">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card span-12">
+                            <div class="card-title">
+                                <h2>Mis clases</h2>
+                                <span>3 cursos activos</span>
+                            </div>
+                            <div class="teacher-list">
+                                <div class="project-item">
+                                    <div class="project-thumb">M</div>
+                                    <div>
+                                        <strong>Matemáticas - Funciones</strong>
+                                        <p>Próxima clase: Martes 18:30</p>
+                                    </div>
+                                    <a href="curso.html" class="link-secondary">Ir a clase</a>
+                                </div>
+                                <div class="project-item">
+                                    <div class="project-thumb">C</div>
+                                    <div>
+                                        <strong>Ciencias - Física</strong>
+                                        <p>Próxima clase: Miércoles 16:00</p>
+                                    </div>
+                                    <a href="curso.html" class="link-secondary">Ir a clase</a>
+                                </div>
+                                <div class="project-item">
+                                    <div class="project-thumb">I</div>
+                                    <div>
+                                        <strong>Inglés - Comprensión</strong>
+                                        <p>Próxima clase: Jueves 14:00</p>
+                                    </div>
+                                    <a href="curso.html" class="link-secondary">Ir a clase</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="mis-notas" class="portal-panel">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card span-12">
+                            <div class="card-title">
+                                <h2>Mis notas</h2>
+                                <span>Última actualización</span>
+                            </div>
+                            <div class="progress-summary">
+                                <div class="progress-item">
+                                    <span>Matemáticas</span>
+                                    <strong>82</strong>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Inglés</span>
+                                    <strong>88</strong>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Ciencias</span>
+                                    <strong>79</strong>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="horario" class="portal-panel">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card span-12">
+                            <div class="card-title">
+                                <h2>Horario</h2>
+                                <span>Semana en curso</span>
+                            </div>
+                            <div class="admin-list schedule-list">
+                                <div><strong>Lunes</strong><span>10:00 - 11:30 Matemáticas</span></div>
+                                <div><strong>Martes</strong><span>18:30 - 20:00 Matemáticas</span></div>
+                                <div><strong>Miércoles</strong><span>16:00 - 17:30 Física</span></div>
+                                <div><strong>Jueves</strong><span>14:00 - 15:30 Inglés</span></div>
+                                <div><strong>Viernes</strong><span>09:00 - 10:30 Lectura crítica</span></div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="mensajes" class="portal-panel">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card span-12">
+                            <div class="card-title">
+                                <h2>Mensajes</h2>
+                                <span>Últimos avisos</span>
+                            </div>
+                            <ul class="admin-list">
+                                <li><strong>Olivia Miller:</strong> Revisa el material de funciones antes del martes.</li>
+                                <li><strong>Liam García:</strong> Nuevo taller de conversación el jueves.</li>
+                                <li><strong>Jackson López:</strong> Consulta tus dudas en el chat del curso.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="ajustes" class="portal-panel">
+                    <div class="dashboard-grid">
+                        <article class="dashboard-card span-12">
+                            <div class="card-title">
+                                <h2>Ajustes</h2>
+                                <span>Personaliza tu portal</span>
+                            </div>
+                            <div class="admin-list">
+                                <li>Notificaciones por email <span>Activado</span></li>
+                                <li>Recordatorio de tareas <span>Activado</span></li>
+                                <li>Modo oscuro <span>Desactivado</span></li>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>© 2026 Catalyst Education. Portal de estudiantes.</p>
+        </div>
+    </footer>
+    <script src="../js/main.js" defer></script>
+</body>
+</html>
