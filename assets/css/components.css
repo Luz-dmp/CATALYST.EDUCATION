@@ -451,3 +451,31 @@
     }
 }
 
+
+/* ===== FIX CLICK NAV LINKS ===== */
+.nav-links {
+    pointer-events: auto;
+}
+
+.nav-links a {
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: none;
+}
+
+
+
+
