@@ -3,61 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cómo mejorar en Matemáticas | Catalyst</title>
+    <title>Método Pomodoro | Catalyst</title>
+
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <nav>
-        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
-        <div class="nav-links">
-            <a href="../../index.html">Inicio</a>
-            <a href="planes.html">Planes</a>
-            <a href="blog.html">Blog</a>
-            <a href="comunidad.html">Comunidad</a>
-            <a href="login.html" class="btn-accent">Iniciar Sesión</a>
+
+<!-- NAV -->
+    <nav class="navbar" role="navigation">
+        <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="assets/pages/planes.html">Planes</a>
+            <a href="assets/pages/blog.html">Blog</a>
+            <a href="assets/pages/comunidad.html">Comunidad</a>
+            <a href="assets/pages/login.html" class="btn-accent">Unirme gratis</a>
         </div>
     </nav>
+<!-- HERO -->
+<header class="hero">
+    <div class="container">
+        <span class="hero-tag">PRODUCTIVIDAD</span>
 
-    <header class="page-header container">
-        <p class="eyebrow">Artículo</p>
-        <h1>Cómo mejorar en Matemáticas</h1>
-        <p>Consejos prácticos para que dejes de atarte en las preguntas más difíciles del ICFES.</p>
-    </header>
+        <h1 class="fade-in">
+            El método <span>Pomodoro</span><br>
+            para estudiar con foco real
+        </h1>
 
-    <main class="container">
-        <article class="feature-card">
-            <h2>1. Trabaja con ejercicios de tu nivel primero</h2>
-            <p>Si comienzas por ejercicios demasiado difíciles puedes frustrarte y perder ritmo. Avanza por bloques: primero los más seguros, luego los retos.</p>
-        </article>
-        <article class="feature-card">
-            <h2>2. Usa la técnica de lectura activa</h2>
-            <p>Subraya datos clave, dibuja el dibujo mental y reformula el problema en voz alta. Esto ayuda a no saltar pasos y a entender qué te pide la pregunta.</p>
-        </article>
-        <article class="feature-card">
-            <h2>3. Revisa fórmulas reales y patrones de examen</h2>
-            <p>No memorices todo sin criterio. Identifica los tipos de preguntas que aparecen con más frecuencia y domina las fórmulas que realmente se usan.</p>
-        </article>
-        <article class="feature-card">
-            <h2>4. Practica con tiempo y repasa errores</h2>
-            <p>Después de cada simulacro, anota qué fallaste y por qué. Ese registro corto se convierte en tu mapa de mejora para la próxima ronda.</p>
-        </article>
+        <p class="fade-in">
+            Una técnica simple para organizar tu estudio, concentrarte mejor
+            y avanzar sin saturarte.
+        </p>
 
-        <section class="blog-cta">
-            <div class="cta-card">
-                <h2>¿Quieres un plan de práctica personal?</h2>
-                <p>Te ayudamos a estructurar tus días para que avances más rápido y sin desgaste.</p>
-                <a class="btn-accent" href="https://wa.me/573241249049">Hablar con un asesor</a>
+        <div class="hero-meta fade-in">
+            <div>
+                <strong>25 min</strong>
+                <span>Enfoque</span>
             </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <p>© 2026 Catalyst Education. Blog de apoyo con tips reales para tu avance.</p>
+            <div>
+                <strong>5 min</strong>
+                <span>Descanso</span>
+            </div>
+            <div>
+                <strong>4 ciclos</strong>
+                <span>Rutina</span>
+            </div>
         </div>
-    </footer>
+    </div>
+</header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section class="container features">
+    <h2 class="section-title">¿Qué es el método Pomodoro?</h2>
+
+    <div class="feature-grid">
+        <article class="feature-card fade-in">
+            <h3>Estudio por bloques</h3>
+            <p>
+                El método Pomodoro divide el estudio en bloques cortos de tiempo
+                para mantener la atención sin llegar al agotamiento.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Descansos reales</h3>
+            <p>
+                Los descansos breves ayudan al cerebro a procesar la información
+                y prepararse para el siguiente ciclo.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Más constancia</h3>
+            <p>
+                Es más fácil comenzar una sesión corta que una larga sin límite claro.
+            </p>
+        </article>
+    </div>
+</section>
+
+<!-- SECCIÓN 2 – PLAYLIST -->
+<section class="container features">
+    <h2 class="section-title">Playlist recomendada para estudiar con Pomodoro</h2>
+
+    <div class="card fade-in" style="text-align:left;">
+
+        <span class="blog-tag">LO‑FI • FOCUS</span>
+
+        <p style="max-width:720px;">
+            El ambiente influye directamente en tu concentración.
+            Estas pistas están pensadas para acompañar distintos ciclos Pomodoro
+            sin distraerte.
+        </p>
+
+        <div style="display:grid; gap:1rem; margin-top:2rem;">
+
+            <!-- TRACK 1 -->
+            <div style="
+                display:grid;
+                grid-template-columns: auto 1fr auto;
+                gap:1rem;
+                align-items:center;
+                padding:1rem 1.2rem;
+                border-radius:20px;
+                background:rgba(249,247,253,0.95);
+                border:1px solid rgba(51,54,82,0.08);
+            ">
+                <span style="font-weight:800; color:var(--accent);">01</span>
+                <div>
+                    <strong>Focus Flow</strong><br>
+                    <span class="text-small">Catalyst Lo‑Fi</span>
+                </div>
+                <span class="text-small">25:00</span>
+            </div>
+
+            <!-- TRACK 2 -->
+            <div style="
+                display:grid;
+                grid-template-columns: auto 1fr auto;
+                gap:1rem;
+                align-items:center;
+                padding:1rem 1.2rem;
+                border-radius:20px;
+                background:rgba(249,247,253,0.95);
+                border:1px solid rgba(51,54,82,0.08);
+            ">
+                <span style="font-weight:800; color:var(--accent);">02</span>
+                <div>
+                    <strong>Deep Study</strong><br>
+                    <span class="text-small">Ambient Notes</span>
+                </div>
+                <span class="text-small">50:00</span>
+            </div>
+
+            <!-- TRACK 3 -->
+            <div style="
+                display:grid;
+                grid-template-columns: auto 1fr auto;
+                gap:1rem;
+                align-items:center;
+                padding:1rem 1.2rem;
+                border-radius:20px;
+                background:rgba(249,247,253,0.95);
+                border:1px solid rgba(51,54,82,0.08);
+            ">
+                <span style="font-weight:800; color:var(--accent);">03</span>
+                <div>
+                    <strong>Short Sprint</strong><br>
+                    <span class="text-small">Minimal Beats</span>
+                </div>
+                <span class="text-small">15:00</span>
+            </div>
+
+        </div>
+
+        <p style="margin-top:2rem; max-width:720px;">
+            La música funciona mejor cuando no tiene letra y mantiene un ritmo constante,
+            ayudando a sostener el foco durante cada ciclo.
+        </p>
+
+    </div>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section class="container features">
+    <h2 class="section-title">Cómo usar Pomodoro correctamente</h2>
+
+    <div class="feature-grid">
+        <article class="feature-card fade-in">
+            <h3>Define un objetivo</h3>
+            <p>
+                Cada Pomodoro debe tener una meta clara,
+                no solo “estudiar por estudiar”.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Evita distracciones</h3>
+            <p>
+                Durante el ciclo, elimina notificaciones
+                y cualquier estímulo innecesario.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Repite el proceso</h3>
+            <p>
+                La efectividad del método está en la constancia,
+                no en una sola sesión.
+            </p>
+        </article>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="blog-cta">
+    <div class="cta-card">
+        <h2>Aplica Pomodoro con la herramienta correcta</h2>
+        <p>
+            En Catalyst integramos esta técnica directamente en Focus Mode
+            para que estudies con estructura y sin distracciones.
+        </p>
+        <a href="focus.html" class="btn-outline">Activar Focus Mode</a>
+    </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>
+            © 2026 Catalyst Education. Comunidad de estudiantes con aspiraciones altas
+            y resultados medibles.
+        </p>
+    </div>
+</footer>
+
+<script src="../js/main.js"></script>
 </body>
 </html>

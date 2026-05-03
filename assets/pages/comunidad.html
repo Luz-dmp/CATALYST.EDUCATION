@@ -1,62 +1,350 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidad | Catalyst</title>
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidad | Catalyst</title>
+
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+@keyframes moveGlow {
+    0% { transform: translate(-30%, -30%); }
+    50% { transform: translate(-10%, -10%); }
+    100% { transform: translate(-30%, -30%); }
+}
+
+/**/
+/* SECCIONES */
+.why-section {
+    text-align: center;
+    padding: 70px 0;
+}
+
+.why-section h2 {
+    margin-bottom: 10px;
+}
+
+/* FEATURES NIVEL PRO */
+.features-alt {
+    background: linear-gradient(180deg, #f8faff, #ffffff);
+    padding: 80px 0;
+    border-radius: 40px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.35s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* glow hover elegante */
+.feature-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(99,102,241,0.2), transparent);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 55px rgba(99,102,241,0.18);
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+}
+
+/* línea superior */
+.feature-card h3::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #6366f1;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+/* ICONO */
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15);
+}
+
+/* CTA */
+.cta-final {
+    background: linear-gradient(135deg, #eef67c, #fffccc);
+    padding: 90px 20px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(228, 219, 63, 0.3);
+}
+
+.cta-final::before {
+    content: "";
+    position: absolute;
+    width: 250%;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+    animation: moveGlow 10s linear infinite;
+}
+
+.btn-cta {
+    background: white;
+    color: #3b37c3;
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-weight: 800;
+    display: inline-block;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 40px rgba(255,255,255,0.25);
+}
+
+.btn-cta:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: #e0e7ff;
+}
+
+</style>
 </head>
+
 <body>
-    <nav>
-        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
-        <div class="nav-links">
-            <a href="../../index.html">Inicio</a>
-            <a href="planes.html">Planes</a>
-            <a href="blog.html">Blog</a>
-            <a href="comunidad.html" class="active">Comunidad</a>
-            <a href="login.html" class="btn-accent">Unirme</a>
+    <nav class="navbar" role="navigation">
+        <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="assets/pages/planes.html">Planes</a>
+            <a href="assets/pages/blog.html">Blog</a>
+            <a href="assets/pages/comunidad.html">Comunidad</a>
+            <a href="assets/pages/login.html" class="btn-accent">Unirme gratis</a>
         </div>
     </nav>
 
-    <header class="page-header container">
-        <h1>No estudias solo. Estudias en <span>manada</span>.</h1>
-        <p>Conecta con estudiantes motivados, sesiones grupales y apoyo constante para mantener el ritmo.</p>
-        <a class="btn-accent" href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf">Unirme al WhatsApp</a>
+    <!-- HERO -->
+    <header class="hero">
+
+    <div class="container">
+
+    <h1>
+    No estudias solo. <br>
+    <span>Estudias mejor.</span>
+    </h1>
+
+    <p>
+    No dependes de motivación. Dependes de entorno. Y eso cambia todo.
+    </p>
+
+    <div class="hero-btns">
+    <a href="login.html" class="btn-accent">Entrar a la comunidad</a>
+    <a href="#features" class="btn-outline">Cómo funciona</a>
+    </div>
+
+
+    </div>
+
+    </div>
+
     </header>
 
-    <main class="container">
-        <section class="feature-grid">
-            <article class="feature-card">
-                <h3>Sesiones diarias</h3>
-                <p>Repasos rápidos todos los días para mantener tu cerebro en ritmo y tu confianza alta.</p>
-            </article>
-            <article class="feature-card">
-                <h3>Canal exclusivo</h3>
-                <p>En un grupo privado con avisos, soporte y respuestas frescas de mentors y estudiantes.</p>
-            </article>
-            <article class="feature-card">
-                <h3>Retos y motivación</h3>
-                <p>Práctica con compañeros, ganando ritmo y energía sin estudiar en modo solitario.</p>
-            </article>
-        </section>
+    <!-- EXPLICACIÓN -->
+    <section class="why-section container">
+    <h2>¿Qué es Catalyst Comunidad?</h2>
+    <p>
+    Un sistema diseñado para que estudies sin abandonar. Te conectas, entras en ritmo y sigues.
+    </p>
+    </section>
 
-        <section class="blog-cta">
-            <div class="cta-card">
-                <h2>Únete hoy y mantente conectado</h2>
-                <p>Salta directo al grupo, recibe recursos y no pierdas el impulso mientras te preparas para el ICFES.</p>
-                <a class="btn-outline" href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf">Entrar al WhatsApp</a>
-            </div>
-        </section>
-    </main>
+    <!-- FEATURES -->
+    <section class="features-alt">
+    <div class="container feature-grid">
+
+    <div class="feature-card">
+    <div class="feature-icon">⏱️</div>
+    <h3>Sesiones activas</h3>
+    <p>Entras y ya hay movimiento. No pierdes tiempo empezando desde cero.</p>
+    </div>
+
+    <div class="feature-card">
+    <div class="feature-icon">💬</div>
+    <h3>Apoyo inmediato</h3>
+    <p>Preguntas, resuelves y continúas. Sin bloqueos.</p>
+    </div>
+
+    <div class="feature-card">
+    <div class="feature-icon">🔥</div>
+    <h3>Disciplina automática</h3>
+    <p>No dependes de ganas. El entorno te mantiene en marcha.</p>
+    </div>
+
+    </div>
+    </section>
+
+    <!-- POR QUÉ -->
+    <section class="why-section container">
+    <h2>¿Por qué funciona?</h2>
+    <p>
+    Porque elimina el mayor enemigo: estudiar solo. Aquí siempre hay inercia.
+    </p>
+    </section>
+
+
+    <!-- COMUNIDAD CATALYST -->
+    <section class="container community-section">
+
+    <h2>COMUNIDAD CATALYST</h2>
+    <p class="section-sub">
+    Lo que dice la Manada <br>
+    </p>
+
+    <div class="community-grid">
+
+    <div class="community-card">
+    <p>
+    Catalyst es muy bueno, y la verdad me gusta bastante. Al inicio pensé que iba a ser re pesado pero nada que ver, las clases son chéveres y uno sí entiende muchos temas.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Me gustan mucho las dinámicas porque no es aburrido. Los simulacros sirven full para agarrar práctica y no llegar perdido al ICFES.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Algo que me gusta bastante es la comunidad. El ambiente es bacano y uno se siente cómodo. La verdad me hacen sentir feliz estando ahí.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    En general siento que sí ayuda y que uno mejora. A veces es exigente, pero vale la pena.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    No pierdas tiempo e inscríbete ya mismo. Si no entiendes, te explican de mil formas hasta que lo logres.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    No es un pre-ICFES convencional. Aquí hay risas, ambiente joven y clases que de verdad se disfrutan.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Los profes son muy buenos y explican excelente. Se nota el nivel.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Las clases de lectura crítica y sociales cambiaron totalmente cómo entiendo los temas.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="container">
+    <div class="cta-final">
+
+    <h2>Empieza hoy</h2>
+    <p>Entra, conéctate y deja que el sistema haga el resto.</p>
+
+    <a class="btn-cta" href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf">
+    Entrar ahora
+    </a>
+
+    </div>
+    </section>
 
     <footer class="site-footer">
-        <div class="container footer-content">
-            <p>© 2026 Catalyst Education. Tu comunidad de estudio está lista para arrancar.</p>
-        </div>
+    <div class="container footer-content">
+    <p>© 2026 Catalyst Education</p>
+    </div>
     </footer>
+
     <script src="../js/main.js"></script>
 </body>
 </html>

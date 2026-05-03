@@ -3,61 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Errores comunes en el ICFES | Catalyst</title>
+    <title>Errores ICFES | Catalyst Education</title>
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+    /* =========================
+       ARTÍCULO – ESTILO PREMIUM
+    ========================= */
+    .article-wrap {
+        max-width: 880px;
+        margin: 0 auto;
+    }
+
+    /* Texto principal */
+    .article-wrap p {
+        line-height: 1.9;
+        font-size: 1.05rem;
+    }
+
+    /* Intro */
+    .article-intro {
+        margin-bottom: 4rem;
+        max-width: 760px;
+    }
+
+    /* Bloque de error */
+    .error-section {
+        padding: 2.5rem 0;
+        border-bottom: 1px solid rgba(51,54,82,0.08);
+    }
+
+    .error-section:last-child {
+        border-bottom: none;
+    }
+
+    /* Número del error */
+    .error-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(
+            135deg,
+            var(--accent),
+            #ffe58a
+        );
+        font-weight: 800;
+        color: #1f1f2e;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Título de error */
+    .error-section h2 {
+        margin-bottom: 0.8rem;
+        font-size: 1.55rem;
+    }
+
+    /* Caja solución */
+    .solution-box {
+        margin-top: 1.5rem;
+        background: rgba(250,208,44,0.14);
+        border-radius: 18px;
+        padding: 1.3rem 1.6rem;
+        font-weight: 600;
+    }
+
+    /* Bloque clave */
+    .key-block {
+        background: linear-gradient(
+            180deg,
+            rgba(255,255,255,0.95),
+            rgba(248,249,255,0.9)
+        );
+        border-radius: 32px;
+        padding: 3rem 2.6rem;
+        box-shadow: 0 24px 55px rgba(51,54,82,0.08);
+        margin: 4rem 0;
+    }
+
+    /* CTA */
+    .blog-cta {
+        margin-top: 5rem;
+    }
+    </style>
 </head>
 <body>
-    <nav>
-        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
-        <div class="nav-links">
-            <a href="../../index.html">Inicio</a>
-            <a href="planes.html">Planes</a>
-            <a href="blog.html">Blog</a>
-            <a href="comunidad.html">Comunidad</a>
-            <a href="login.html" class="btn-accent">Iniciar Sesión</a>
+    <nav class="navbar" role="navigation">
+        <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="assets/pages/planes.html">Planes</a>
+            <a href="assets/pages/blog.html">Blog</a>
+            <a href="assets/pages/comunidad.html">Comunidad</a>
+            <a href="assets/pages/login.html" class="btn-accent">Unirme gratis</a>
         </div>
     </nav>
+<!-- HEADER -->
+<header class="page-header container">
+    <p class="eyebrow">Artículo</p>
+    <h1>Errores comunes en el ICFES</h1>
+    <p>
+        Muchos estudiantes pierden puntos no por falta de estudio,
+        sino por errores simples que se pueden corregir con método.
+    </p>
+</header>
 
-    <header class="page-header container">
-        <p class="eyebrow">Artículo</p>
-        <h1>Errores comunes en el ICFES</h1>
-        <p>Descubre los fallos que más cometen los estudiantes y cómo corregirlos antes del examen.</p>
-    </header>
+<!-- MAIN -->
+<main class="container article-wrap">
 
-    <main class="container">
-        <article class="feature-card">
-            <h2>No leer bien el enunciado</h2>
-            <p>Este es el error número uno. Lee todo el enunciado con calma y subraya lo que realmente te están preguntando.</p>
-        </article>
-        <article class="feature-card">
-            <h2>Saltar pasos al resolver</h2>
-            <p>Hacer cuentas mentales apresuradas puede causar errores. Usa lápiz y papel hasta que tengas confianza en la técnica.</p>
-        </article>
-        <article class="feature-card">
-            <h2>Interpretar mal los distractores</h2>
-            <p>Los distractores son respuestas que parecen correctas. Aprende a descartar las opciones que sólo representan errores comunes.</p>
-        </article>
-        <article class="feature-card">
-            <h2>Dejar preguntas sin revisar</h2>
-            <p>Si no tienes tiempo, marca las preguntas difíciles y vuelve. Nunca abandones una pregunta sin al menos una segunda pasada.</p>
-        </article>
+    <!-- INTRO -->
+    <section class="article-intro">
+        <p>
+            El ICFES no mide solo cuánto sabes, sino <strong>cómo lees,
+            cómo piensas y cómo decides bajo presión</strong>.
+            Si ya estudiaste y sientes que tu puntaje no refleja tu esfuerzo,
+            probablemente estás cometiendo alguno de estos errores.
+        </p>
+    </section>
 
-        <section class="blog-cta">
-            <div class="cta-card">
-                <h2>¿Necesitas repasar tus errores?</h2>
-                <p>Hacemos sesiones rápidas para convertir cada error en una oportunidad de subir tu puntaje.</p>
-                <a class="btn-accent" href="https://wa.me/573241249049">Hablar con un asesor</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <p>© 2026 Catalyst Education. Blog de apoyo con tips reales para tu avance.</p>
+    <!-- ERROR 1 -->
+    <section class="error-section">
+        <div class="error-number">1</div>
+        <h2>No leer correctamente el enunciado</h2>
+        <p>
+            Es el error más frecuente. El estudiante reconoce el tema
+            y responde sin verificar exactamente qué se le está pidiendo.
+        </p>
+        <div class="solution-box">
+            ✅ Lee el enunciado completo y reformula la pregunta
+            antes de revisar las opciones.
         </div>
-    </footer>
+    </section>
+
+    <!-- ERROR 2 -->
+    <section class="error-section">
+        <div class="error-number">2</div>
+        <h2>Resolver con afán y saltarse pasos</h2>
+        <p>
+            Resolver todo “en la cabeza” aumenta los errores,
+            especialmente en matemáticas y razonamiento cuantitativo.
+        </p>
+        <div class="solution-box">
+            ✅ Usa el cuadernillo y escribe los pasos clave,
+            incluso si el ejercicio parece sencillo.
+        </div>
+    </section>
+
+    <!-- ERROR 3 -->
+    <section class="error-section">
+        <div class="error-number">3</div>
+        <h2>Caer en los distractores</h2>
+        <p>
+            Los distractores están diseñados para parecer correctos,
+            pero representan errores típicos de interpretación.
+        </p>
+        <div class="solution-box">
+            ✅ Elige la opción que responde exactamente la pregunta,
+            no la que “suena mejor”.
+        </div>
+    </section>
+
+    <!-- ERROR 4 -->
+    <section class="error-section">
+        <div class="error-number">4</div>
+        <h2>No revisar las respuestas</h2>
+        <p>
+            El miedo a cambiar una respuesta correcta impide corregir
+            errores simples detectables con una segunda lectura.
+        </p>
+        <div class="solution-box">
+            ✅ Marca las preguntas dudosas y vuelve solo a esas
+            al final del examen.
+        </div>
+    </section>
+
+    <!-- BLOQUE CLAVE -->
+    <section class="key-block">
+        <h2>La clave para mejorar rápido</h2>
+        <p>
+            La mayoría de los puntos que se pierden en el ICFES
+            no se pierden por no saber, sino por
+            <strong>repetir los mismos errores de método</strong>.
+        </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="blog-cta">
+        <div class="cta-card">
+            <h2>Convierte tus errores en puntos</h2>
+            <p>
+                En Catalyst identificamos cómo respondes
+                y te enseñamos a corregir tus errores con estrategia.
+            </p>
+            <a href="https://wa.me/573241249049" class="btn-accent" target="_blank">
+                Hablar con un asesor
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>© 2026 Catalyst Education. Blog de apoyo para estudiantes ambiciosos.</p>
+    </div>
+</footer>
+
+<script src="../js/main.js"></script>
 </body>
 </html>

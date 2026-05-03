@@ -11,9 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
+    <nav class="navbar" role="navigation">
         <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
-        <div class="nav-links">
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
             <a href="index.html" class="active">Inicio</a>
             <a href="assets/pages/planes.html">Planes</a>
             <a href="assets/pages/blog.html">Blog</a>
@@ -30,7 +37,7 @@
                 Plataforma educativa con <span class="typewriter" data-words="mentores expertos,simulacros reales,planes adaptativos"></span> que te guían hacia tu mejor resultado.
             </p>
             <div class="hero-btns fade-in">
-                <a href="assets/pages/login.html" class="btn-accent">🚀 Empezar ahora</a>
+                <a href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf" class="btn-accent">🚀 Empezar ahora</a>
                 <a href="#mentores" class="btn-outline">Conocer la manada</a>
             </div>
             <div class="hero-meta fade-in">
@@ -84,13 +91,84 @@
         </section>
 
         <section id="mentores" class="container">
-            <h2 class="section-title">Tus Mentores de Manada</h2>
-            <div class="mentor-grid">
-                <div class="card"><img src="assets/img/mentors/Octopus.png" alt="Mentor Octopus" class="mentor-img"><h3>Octopus</h3><p>Matemáticas</p></div>
-                <div class="card"><img src="assets/img/mentors/clarín.png" alt="Mentor Clarín" class="mentor-img"><h3>Clarín</h3><p>Lectura Crítica</p></div>
-                <div class="card"><img src="assets/img/mentors/Lautaro.png" alt="Mentor Lautaro" class="mentor-img"><h3>Lautaro</h3><p>Ciencias Sociales</p></div>
-                <div class="card"><img src="assets/img/mentors/Lumi.png" alt="Mentor Lumi" class="mentor-img"><h3>Lumi</h3><p>Ciencias Naturales</p></div>
-                <div class="card"><img src="assets/img/mentors/Capuchino.png" alt="Mentor Capuchino" class="mentor-img"><h3>Capuchino</h3><p>Inglés</p></div>
+            <div style="text-align:center; margin-bottom:3.5rem;">
+                <span style="background:#fffbeb; color:#111827; padding:8px 22px; border-radius:999px; font-weight:700; font-size:0.9rem;">LA MANADA</span>
+                <h2 class="section-title" style="margin-top:1.2rem;">Tus Mentores de Manada</h2>
+                <p style="max-width:720px; margin:0 auto; color:#555; font-size:1.12rem;">
+                    Haz clic o pasa el mouse sobre cada tarjeta para que se voltee
+                </p>
+            </div>
+
+            <div class="mentor-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.2rem;">
+                <div class="flip-card" data-mentor="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="assets/img/mentors/Octopus.png" alt="Octopus">
+                            <h3>Octopus</h3>
+                            <p>Matemáticas</p>
+                        </div>
+                        <div class="flip-card-back" style="background: #f2cfff;">
+                            <p class="quote">"¡Los números no son tu enemigo, son tus aliados!"</p>
+                            <small>— Octopus</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" data-mentor="1">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="assets/img/mentors/clarín.png" alt="Clarín">
+                            <h3>Clarín</h3>
+                            <p>Lectura Crítica</p>
+                        </div>
+                        <div class="flip-card-back" style="background: #d5c0b0;">
+                            <p class="quote">"No leas solo con los ojos, lee con la mente."</p>
+                            <small>— Clarín</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" data-mentor="2">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="assets/img/mentors/Lautaro.png" alt="Lautaro">
+                            <h3>Lautaro</h3>
+                            <p>Ciencias Sociales</p>
+                        </div>
+                        <div class="flip-card-back" style="background: #bcbcbc;">
+                            <p class="quote">"La historia no es solo fechas, es entender por qué pasan las cosas."</p>
+                            <small>— Lautaro</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" data-mentor="3">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="assets/img/mentors/Lumi.png" alt="Lumi">
+                            <h3>Lumi</h3>
+                            <p>Ciencias Naturales</p>
+                        </div>
+                        <div class="flip-card-back" style="background: #e2b796;">
+                            <p class="quote">"Todo en la naturaleza tiene una explicación lógica y fascinante."</p>
+                            <small>— Lumi</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" data-mentor="4">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="assets/img/mentors/Capuchino.png" alt="Capuchino">
+                            <h3>Capuchino</h3>
+                            <p>Inglés</p>
+                        </div>
+                        <div class="flip-card-back" style="background: #e3c0a4;">
+                            <p class="quote">"No necesitas ser perfecto, solo constante. ¡You got this!"</p>
+                            <small>— Capuchino</small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

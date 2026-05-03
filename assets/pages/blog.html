@@ -8,16 +8,24 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <div class="logo"><img src="../img/Logo.png" alt="Catalyst"></div>
-        <div class="nav-links">
-            <a href="../../index.html">Inicio</a>
-            <a href="planes.html">Planes</a>
-            <a href="blog.html" class="active">Blog</a>
-            <a href="comunidad.html">Comunidad</a>
-            <a href="login.html" class="btn-accent">Iniciar Sesión</a>
+    <nav class="navbar" role="navigation">
+        <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="assets/pages/planes.html">Planes</a>
+            <a href="assets/pages/blog.html">Blog</a>
+            <a href="assets/pages/comunidad.html">Comunidad</a>
+            <a href="assets/pages/login.html" class="btn-accent">Unirme gratis</a>
         </div>
     </nav>
 
@@ -27,48 +35,59 @@
     </header>
 
     <main class="container">
-        <section class="blog-intro">
-            <div class="blog-intro-text">
-                <p class="eyebrow">Blog Catalyst</p>
-                <h2>Tips rápidos para estudiar mejor y avanzar más rápido</h2>
-                <p>Actualizaciones semanales con ideas prácticas, estrategias de resolución y motivación para llegar al ICFES con confianza.</p>
-            </div>
+
+        <!-- ====================
+             DESTACADO
+        ===================== -->
+        <section class="blog-featured">
+
+            <article class="featured-card">
+                <span class="blog-tag">🔥 Destacado</span>
+
+                <h2>Estudia con método, no con estrés</h2>
+
+                <p>
+                    No es que no puedas con el contenido, es que necesitas estructura. 
+                    El método Pomodoro te ayuda a enfocarte, avanzar y no bloquearte bajo presión.
+                </p>
+
+                <a href="post-matematicas.html" class="btn-accent">
+                    Leer artículo
+                </a>
+            </article>
+
         </section>
 
+        <!-- ====================
+             BLOG GRID
+        ===================== -->
         <section class="blog-grid">
-            <article class="card blog-card">
-                <span class="blog-tag">Matemáticas</span>
-                <h3>Cómo mejorar en Matemáticas</h3>
-                <p>Estrategias del mentor Octopus para no bloquearte en los ejercicios más difíciles.</p>
-                <a href="post-matematicas.html" class="btn-outline">Leer más →</a>
-            </article>
+
             <article class="card blog-card">
                 <span class="blog-tag">Estrategia</span>
                 <h3>Errores comunes en el ICFES</h3>
-                <p>Descubre las fallas que cometen la mayoría de estudiantes y cómo evitarlas con rapidez.</p>
-                <a href="post-errores-icfes.html" class="btn-outline">Leer más →</a>
+                <p>
+                    Las fallas que bajan tu puntaje sin que te des cuenta.
+                </p>
+                <a href="post-errores-icfes.html" class="btn-outline">
+                    Leer más →
+                </a>
             </article>
-            <article class="card blog-card">
-                <span class="blog-tag">Productividad</span>
-                <h3>Repasos que funcionan</h3>
-                <p>Técnicas de revisión activa para memorizar conceptos sin saturarte.</p>
-                <a href="post-repasos-funcionan.html" class="btn-outline">Leer más →</a>
-            </article>
+
+
             <article class="card blog-card">
                 <span class="blog-tag">Motivación</span>
-                <h3>Rutinas diarias para mantener el foco</h3>
-                <p>Pequeños hábitos que transforman tu estudio y te ayudan a ser constante sin perder energía.</p>
-                <a href="post-rutinas-diaras.html" class="btn-outline">Leer más →</a>
+                <h3>Rutinas para mantener el foco</h3>
+                <p>
+                    Cómo estudiar incluso cuando no tienes ganas.
+                </p>
+                <a href="post-rutinas-diaras.html" class="btn-outline">
+                    Leer más →
+                </a>
             </article>
+
         </section>
 
-        <section class="blog-cta">
-            <div class="cta-card">
-                <h2>¿Quieres más apoyo?</h2>
-                <p>Conecta con un asesor, recibe material exclusivo y acelera el avance en tu preparación ICFES.</p>
-                <a class="btn-accent" href="https://wa.me/573241249049">Hablar con un asesor</a>
-            </div>
-        </section>
     </main>
 
     <footer class="site-footer">
@@ -79,3 +98,8 @@
     <script src="../js/main.js"></script>
 </body>
 </html>
+
+
+
+
+

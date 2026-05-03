@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Mode | Catalyst</title>
+
+    <!-- CSS CATALYST -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+    <nav class="navbar" role="navigation">
+        <div class="logo"><img src="assets/img/Logo.png" alt="Catalyst"></div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="assets/pages/planes.html">Planes</a>
+            <a href="assets/pages/blog.html">Blog</a>
+            <a href="assets/pages/comunidad.html">Comunidad</a>
+            <a href="assets/pages/login.html" class="btn-accent">Unirme gratis</a>
+        </div>
+    </nav>
+
+<!-- HERO PEQUEÑO (COHERENTE CON BLOG) -->
+<header class="page-header container">
+    <span class="hero-tag">PRODUCTIVIDAD</span>
+    <h1>Focus Mode</h1>
+    <p>
+        Estudia con estructura real. Organiza tu tiempo, elimina distracciones
+        y aplica el método Pomodoro dentro de Catalyst.
+    </p>
+</header>
+
+<main class="container">
+
+    <!-- CARD PRINCIPAL -->
+    <section class="card" style="max-width:900px;margin:0 auto 4rem;">
+        
+        <div class="focus-layout">
+
+            <!-- VIDEO -->
+            <div class="focus-video">
+                <video id="focusVideo" autoplay muted loop playsinline></video>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="focus-content">
+                <span class="text-small" id="statusText">Fase de enfoque</span>
+                <div class="timer" id="timer">25:00</div>
+
+                <div class="focus-controls">
+                    <button class="btn-accent" id="startBtn">Comenzar</button>
+                    <button class="btn-outline" id="resetBtn">
+                        <i class="fas fa-rotate-right"></i>
+                    </button>
+                </div>
+
+                <!-- AJUSTES -->
+                <div class="focus-settings">
+                    <div>
+                        <label class="text-small">Estudio</label>
+                        <div class="segmented" id="studyBtns">
+                            <button data-val="25" class="active">25m</button>
+                            <button data-val="40">40m</button>
+                            <button data-val="50">50m</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-small">Descanso</label>
+                        <div class="segmented" id="breakBtns">
+                            <button data-val="5" class="active">5m</button>
+                            <button data-val="10">10m</button>
+                            <button data-val="15">15m</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-small">Ciclos</label>
+                        <div class="segmented" id="cycleBtns">
+                            <button data-val="2">2</button>
+                            <button data-val="4" class="active">4</button>
+                            <button data-val="6">6</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>© 2026 Catalyst Education. Estudia con enfoque, estudia inteligente.</p>
+    </div>
+</footer>
+
+<!-- ================== JS FOCUS ================== -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    let study = 25, rest = 5, cycles = 4;
+    let currentCycle = 1;
+    let seconds = study * 60;
+    let inBreak = false;
+    let interval = null;
+
+    const timerEl = document.getElementById("timer");
+    const video = document.getElementById("focusVideo");
+    const startBtn = document.getElementById("startBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const statusText = document.getElementById("statusText");
+
+    function setVideo(state) {
+        video.src = `../img/fox-${state}.mp4`;
+        video.play().catch(()=>{});
+    }
+
+    function updateTimer() {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        timerEl.textContent = `${m}:${s < 10 ? "0"+s : s}`;
+    }
+
+    function toggleTimer() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+            startBtn.textContent = "Continuar";
+            return;
+        }
+
+        startBtn.textContent = "Pausar";
+        setVideo(inBreak ? "break" : "study");
+
+        interval = setInterval(() => {
+            seconds--;
+            updateTimer();
+
+            if (seconds <= 0) {
+                clearInterval(interval);
+                interval = null;
+
+                if (!inBreak) {
+                    inBreak = true;
+                    seconds = rest * 60;
+                    statusText.textContent = "Tiempo de descanso";
+                    setVideo("break");
+                } else {
+                    inBreak = false;
+                    currentCycle++;
+                    if (currentCycle > cycles) {
+                        statusText.textContent = "Sesión completada 🎉";
+                        setVideo("stop");
+                        startBtn.textContent = "Comenzar";
+                        return;
+                    }
+                    seconds = study * 60;
+                    statusText.textContent = `Fase de enfoque · ${currentCycle}/${cycles}`;
+                    setVideo("study");
+                }
+
+                startBtn.textContent = "Comenzar";
+                updateTimer();
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(interval);
+        currentCycle = 1;
+        inBreak = false;
+        seconds = study * 60;
+        statusText.textContent = "Fase de enfoque";
+        startBtn.textContent = "Comenzar";
+        setVideo("stop");
+        updateTimer();
+    }
+
+    startBtn.onclick = toggleTimer;
+    resetBtn.onclick = resetTimer;
+
+    function setup(id, cb) {
+        document.querySelectorAll(id+" button").forEach(btn=>{
+            btn.onclick=()=>{
+                document.querySelectorAll(id+" button").forEach(b=>b.classList.remove("active"));
+                btn.classList.add("active");
+                cb(+btn.dataset.val);
+                resetTimer();
+            };
+        });
+    }
+
+    setup("#studyBtns", v=>study=v);
+    setup("#breakBtns", v=>rest=v);
+    setup("#cycleBtns", v=>cycles=v);
+
+    setVideo("stop");
+    updateTimer();
+});
+</script>
+
+</body>
+</html>
