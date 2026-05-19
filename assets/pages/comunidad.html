@@ -125,6 +125,29 @@
     background: #e0e7ff;
 }
 
+
+</style>
+
+<style>
+/* Page-specific fixes: ensure features display correctly */
+.features-alt .feature-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: start;
+}
+.features-alt .feature-card {
+    position: relative;
+    z-index: 2;
+    min-height: 160px;
+}
+.features-alt .container {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+.features-alt {
+    overflow: visible;
+}
 </style>
 </head>
 
@@ -148,6 +171,7 @@
     <div class="nav-links" id="navLinks">
         <a href="../../index.html">Inicio</a>
         <a href="planes.html">Planes</a>
+        <a href="resultados.html">Resultados</a>
         <a href="blog.html">Blog</a>
         <a href="comunidad.html">Comunidad</a>
         <a href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf" class="btn-accent">Unirme gratis</a>
@@ -159,24 +183,20 @@
 
     <div class="container">
 
-    <h1>
+    <h1 class="fade-in">
     No estudias solo. <br>
     <span>Estudias mejor.</span>
     </h1>
 
-    <p>
+    <p class="fade-in">
     No dependes de motivación. Dependes de entorno. Y eso cambia todo.
     </p>
 
     <div class="hero-btns">
-    <a href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf" class="btn-accent">Entrar a la comunidad</a>
+    <a href="login.html" class="btn-accent">Entrar a la comunidad</a>
     <a href="#features" class="btn-outline">Cómo funciona</a>
     </div>
 
-
-    </div>
-
-    </div>
 
     </header>
 
@@ -189,22 +209,22 @@
     </section>
 
     <!-- FEATURES -->
-    <section class="features-alt">
+    <section id="features" class="features-alt">
     <div class="container feature-grid">
 
-    <div class="feature-card">
+    <div class="feature-card fade-in">
     <div class="feature-icon">⏱️</div>
     <h3>Sesiones activas</h3>
     <p>Entras y ya hay movimiento. No pierdes tiempo empezando desde cero.</p>
     </div>
 
-    <div class="feature-card">
+    <div class="feature-card fade-in">
     <div class="feature-icon">💬</div>
     <h3>Apoyo inmediato</h3>
     <p>Preguntas, resuelves y continúas. Sin bloqueos.</p>
     </div>
 
-    <div class="feature-card">
+    <div class="feature-card fade-in">
     <div class="feature-icon">🔥</div>
     <h3>Disciplina automática</h3>
     <p>No dependes de ganas. El entorno te mantiene en marcha.</p>
@@ -353,5 +373,17 @@
     </footer>
 
     <script src="../js/main.js"></script>
+    <script>
+    // Smooth scroll to #features anchor and ensure focus
+    document.addEventListener('click', function(e){
+        const a = e.target.closest('a[href="#features"]');
+        if(!a) return;
+        e.preventDefault();
+        const target = document.getElementById('features');
+        if(target){
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+    });
+    </script>
 </body>
 </html>

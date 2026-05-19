@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Mode | Catalyst</title>
+    <title>Planes | Catalyst</title>
 
     <!-- CSS CATALYST -->
     <link rel="stylesheet" href="../css/variables.css">
@@ -18,8 +18,13 @@
 <body>
 
 <nav class="navbar" role="navigation">
+
         <div class="logo"><img src="../../assets/img/Logo.png" alt="Catalyst"></div>
 
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+    
     <button class="menu-toggle" id="menuToggle"
         aria-label="Abrir menú"
         aria-expanded="false"
@@ -32,6 +37,7 @@
     <div class="nav-links" id="navLinks">
         <a href="../../index.html">Inicio</a>
         <a href="planes.html" class="active">Planes</a>
+        <a href="resultados.html">Resultados</a>
         <a href="blog.html">Blog</a>
         <a href="comunidad.html">Comunidad</a>
         <a href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf" class="btn-accent">Unirme gratis</a>
@@ -40,10 +46,13 @@
 
 <!-- CONTENIDO DE LA PÁGINA -->
 
-        <header class="page-header container">
-        <h1>Planes para cada etapa del ICFES</h1>
-        <p>Selecciona la ruta que mejor se adapta a tu ritmo y obtén seguimiento, simulacros y mentorías efectivas.</p>
-    </header>
+        <header class="hero">
+            <div class="container">
+                <span class="hero-tag">Planes flexibles</span>
+                <h1 class="fade-in">Planes para cada etapa del ICFES</h1>
+                <p class="fade-in">Selecciona la ruta que mejor se adapta a tu ritmo y obtén seguimiento, simulacros y mentorías efectivas. Desde el primer paso hasta el resultado perfecto.</p>
+            </div>
+        </header>
 
     <main class="container">
         <section class="pricing-section">
@@ -58,52 +67,150 @@
                     <div class="plan-badge">Gratis</div>
                     <h3>Plan Starter</h3>
                     <p class="price-tag">Gratis</p>
+                    <p class="plan-description">Perfecto para comenzar tu preparación y conocer la plataforma.</p>
                     <ul>
-                        <li>Acceso a simulacros básicos</li>
-                        <li>Resumen de resultados instantáneo</li>
-                        <li>Comunidad de apoyo</li>
-                        <li>Guías rápidas de estudio</li>
+                        <li><i class="fas fa-check"></i> Acceso a 3 simulacros ICFES</li>
+                        <li><i class="fas fa-check"></i> Informe de resultado de simulacros</li>
+                        <li><i class="fas fa-check"></i> Comunidad de apoyo</li>
+                        <li><i class="fas fa-check"></i> Acceso limitado al plan de estudio</li>
                     </ul>
                     <a class="btn-accent" href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf">Comenzar ahora</a>
                 </article>
+
                 <article class="plan-card featured">
                     <div class="plan-badge">Premium</div>
                     <h3>Plan Premium</h3>
-                    <p class="price-tag">$50.000 COP</p>
+                    <p class="price-tag">$50.000 COP<span>/mes</span></p>
+                    <p class="plan-description">La ruta completa para estudiantes comprometidos con resultados reales.</p>
                     <ul>
-                        <li>Clases diarias</li>
-                        <li>Simulacros completos</li>
-                        <li>Plan de estudio personalizado</li>
-                        <li>Seguimiento y asesoría directa</li>
+                        <li><i class="fas fa-check"></i> Clases diarias en vivo</li>
+                        <li><i class="fas fa-check"></i> Acceso a 7 simulacros ICFESs</li>
+                        <li><i class="fas fa-check"></i> Plan de estudio personalizado</li>
+                        <li><i class="fas fa-check"></i> Seguimiento y asesoría directa</li>
+                        <li><i class="fas fa-check"></i> Mentoría 1:1 semanal</li>
+                        <li><i class="fas fa-check"></i> Acceso completo al blog</li>
+                        <li><i class="fas fa-check"></i> Certificado de participación</li>
                     </ul>
-                    <a class="btn-outline" href="https://wa.me/573241249049">Hablar con un asesor</a>
+                    <a class="btn-accent" href="https://wa.me/573241249049">Hablar con un asesor</a>
                 </article>
             </div>
         </section>
 
         <section class="benefits-section">
-            <h2 class="section-title">Qué incluye cada plan</h2>
+            <h2 class="section-title">Por qué elegir Catalyst</h2>
             <div class="benefits-grid">
                 <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
                     <h3>Rutinas que funcionan</h3>
-                    <p>Estudia con un calendario inteligente que te mantiene en ritmo sin abrumarte.</p>
+                    <p>Estudia con un calendario inteligente que te mantiene en ritmo sin abrumarte. Adaptado a tu horario y nivel.</p>
                 </article>
                 <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
                     <h3>Feedback inmediato</h3>
-                    <p>Saber qué mejorar después de cada simulacro acelera tu progreso.</p>
+                    <p>Saber qué mejorar después de cada simulacro acelera tu progreso. Análisis detallado por área y materia.</p>
                 </article>
                 <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
                     <h3>Mentores motivadores</h3>
-                    <p>Respuestas claras, apoyo constante y energía positiva en cada clase.</p>
+                    <p>Respuestas claras, apoyo constante y energía positiva en cada clase. Un equipo que cree en ti.</p>
                 </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Método probado</h3>
+                    <p>Técnicas de estudio basadas en ciencia cognitiva y años de experiencia con miles de estudiantes.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Acceso total</h3>
+                    <p>Estudia desde cualquier dispositivo. Nuestra plataforma se adapta a tu teléfono, tablet o computadora.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Resultados garantizados</h3>
+                    <p>El 82% de nuestros estudiantes mejoran su puntaje en promedio. Tú puedes ser el siguiente.</p>
+                </article>
+            </div>
+        <section class="comparison-section">
+            <h2 class="section-title">Compara nuestros planes</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="feature-name">Características</div>
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-name featured">Premium</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-name">Simulacros</div>
+                    <div class="plan-feature">5 básicos</div>
+                    <div class="plan-feature featured">Ilimitados</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-name">Clases en vivo</div>
+                    <div class="plan-feature"><i class="fas fa-times"></i></div>
+                    <div class="plan-feature featured"><i class="fas fa-check"></i> Diarias</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-name">Mentoría 1:1</div>
+                    <div class="plan-feature"><i class="fas fa-times"></i></div>
+                    <div class="plan-feature featured"><i class="fas fa-check"></i> Semanal</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-name">Plan personalizado</div>
+                    <div class="plan-feature"><i class="fas fa-times"></i></div>
+                    <div class="plan-feature featured"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-name">Acceso al blog</div>
+                    <div class="plan-feature">Limitado</div>
+                    <div class="plan-feature featured">Completo</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="section-title">Preguntas frecuentes</h2>
+            <div class="faq-grid">
+                <details class="faq-item">
+                    <summary>¿Puedo cambiar de plan en cualquier momento?</summary>
+                    <p>Sí, puedes actualizar tu plan en cualquier momento escribiendo al número +57 324 1249 049</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Qué pasa si no estoy satisfecho?</summary>
+                    <p>Ofrecemos garantía de satisfacción. Si no ves mejoras en el primer mes, te devolvemos el 100% de tu inversión.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Las clases son grabadas?</summary>
+                    <p>Sí, todas las clases quedan grabadas y disponibles para que puedas revisarlas cuando necesites.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Cuánto tiempo dura cada plan?</summary>
+                    <p>Los planes durán todo el calendarío para que puedas disfrutar de todos los beneficios sin preocupaciones.</p>
+                </details>
             </div>
         </section>
 
         <section class="cta-section">
             <div class="cta-card">
-                <h2>¿Listo para comenzar?</h2>
-                <p>Activa tu plan y empieza a entrenar con la manada que te impulsa a superar el ICFES.</p>
-                <a class="btn-accent" href="https://wa.me/573241249049">Unirme ahora</a>
+
+
+                <h2>¿Listo para transformar tu ICFES?</h2>
+                <p>Únete a miles de estudiantes que ya están dominando el examen con Catalyst. Tu futuro académico comienza hoy.</p>
+                <div class="cta-buttons">
+                    <a class="btn-accent" href="login.html">Comenzar gratis</a>
+                    <a class="btn-outline" href="https://wa.me/573241249049">Hablar con un asesor</a>
+                </div>
+
             </div>
         </section>
     </main>
@@ -113,7 +220,13 @@
             <p>© 2026 Catalyst Education. Diseñado para ayudarte a dominar el ICFES.</p>
         </div>
     </footer>
+
     <script src="../js/main.js"></script>
+    <script src="../js/planes.js"></script>
 </body>
+
 <script src="../js/main.js"></script>
 </html>
+
+</html>
+

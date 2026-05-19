@@ -1209,12 +1209,28 @@ nav {
     line-height: 1.7;
 }
 
-.plan-card li::before {
-    content: "✓";
+.plan-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1rem;
+    line-height: 1.6;
+}
+
+.price-tag span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-left: 0.25rem;
+}
+
+.plan-card li i {
     color: var(--accent);
-    font-size: 0.9rem;
-    line-height: 1.4;
     margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.plan-card li i.fa-times {
+    color: #ef4444;
 }
 
 .benefits-section {
@@ -1223,11 +1239,17 @@ nav {
     padding: 3.5rem 1.5rem;
 }
 
-.benefits-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    margin-top: 1.8rem;
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(250, 208, 44, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 1.5rem;
 }
 
 .cta-section {
@@ -1261,6 +1283,111 @@ nav {
 .cta-card .btn-accent,
 .cta-card .btn-outline {
     min-width: 220px;
+}
+
+.comparison-section {
+    padding: 4rem 0 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 28px;
+    margin: 2rem 0;
+}
+
+.comparison-table {
+    max-width: 1000px;
+    margin: 2rem auto 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(51, 54, 82, 0.08);
+}
+
+.comparison-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: var(--primary);
+    color: white;
+}
+
+.comparison-header .feature-name,
+.comparison-header .plan-name {
+    padding: 1.2rem 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.comparison-row:nth-child(even) {
+    background: rgba(250, 208, 44, 0.05);
+}
+
+.feature-name {
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.plan-feature {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.plan-feature.featured {
+    background: rgba(250, 208, 44, 0.08);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.plan-feature i {
+    font-size: 1.1rem;
+}
+
+.faq-section {
+    padding: 4rem 0 2rem;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 2rem auto 0;
+}
+
+.faq-item {
+    border: 1px solid rgba(51, 54, 82, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.faq-item summary {
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    transition: background 0.3s ease;
+}
+
+.faq-item summary:hover {
+    background: rgba(250, 208, 44, 0.1);
+}
+
+.faq-item p {
+    padding: 0 1.5rem 1.2rem;
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
 }
 
 .stat-grid {
@@ -1691,8 +1818,11 @@ nav {
     }
 }
 
-
-
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
 
 .flip-card {
     perspective: 1000px;
@@ -1821,4 +1951,62 @@ nav {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+}
+
+/* Animaciones para la página de planes */
+.plan-card,
+.feature-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.plan-card.animate-in,
+.feature-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto ripple para botones */
+.btn-accent,
+.btn-outline {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Mejoras para FAQ */
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(51, 54, 82, 0.12);
+}
+
+/* Tooltip mejorado para tabla de comparación */
+.plan-feature {
+    cursor: help;
+    transition: all 0.2s ease;
+}
+
+.plan-feature:hover {
+    background: rgba(250, 208, 44, 0.1);
+    transform: scale(1.02);
 }

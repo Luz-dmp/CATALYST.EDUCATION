@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejercicio | Catalyst</title>
+
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.quiz-header {
+  display: none;
+}
+
+.quiz-container {
+  max-width: 1080px;
+  margin: 0 auto 60px;
+}
+
+.exercise-card {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1.5px solid rgba(51, 54, 82, 0.1);
+  border-radius: 28px;
+  padding: 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 20px 50px rgba(51, 54, 82, 0.08);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.exercise-card:hover {
+  border-color: rgba(250, 208, 44, 0.2);
+  box-shadow: 0 30px 70px rgba(99, 102, 241, 0.12);
+  transform: translateY(-4px);
+}
+
+.exercise-card h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exercise-card h2::before {
+  content: "📚";
+  font-size: 1.8rem;
+}
+
+.exercise-card p,
+.exercise-card .text {
+  color: var(--text-main);
+  line-height: 1.8;
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+/* HERO FADE-IN INMEDIATO */
+.hero .fade-in {
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exercise-buttons {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.exercise-buttons button {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 14px;
+  border: 2px solid rgba(51, 54, 82, 0.12);
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-buttons button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(250, 208, 44, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.exercise-buttons button:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  background: rgba(250, 208, 44, 0.08);
+  box-shadow: 0 16px 35px rgba(99, 102, 241, 0.15);
+}
+
+.exercise-buttons button:hover::before {
+  transform: translateX(100%);
+}
+
+.exercise-feedback {
+  min-height: 80px;
+  padding: 24px 28px;
+  border-radius: 16px;
+  border: 2px solid rgba(51, 54, 82, 0.08);
+  font-weight: 600;
+  line-height: 1.8;
+  display: none;
+  background: rgba(249, 250, 251, 0.98);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exercise-feedback.show {
+  display: block;
+}
+
+.exercise-feedback.correct {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.exercise-feedback.incorrect {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.table-box {
+  display: block;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px rgba(51, 54, 82, 0.08);
+  border: 1.5px solid rgba(51, 54, 82, 0.1);
+}
+
+.table-box table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.table-box th,
+.table-box td {
+  padding: 18px 18px;
+  text-align: left;
+  border: 1px solid rgba(99, 102, 241, 0.16);
+  vertical-align: top;
+  white-space: normal;
+}
+
+.table-box th {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(250, 208, 44, 0.12));
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.table-box td {
+  background: rgba(255, 255, 255, 0.98);
+  word-break: break-word;
+}
+
+.table-box tr:nth-child(even) td {
+  background: rgba(249, 250, 251, 0.95);
+}
+
+.table-box td strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+@media (max-width: 900px) {
+  .table-box table {
+    min-width: 720px;
+  }
+
+  .exercise-card {
+    padding: 28px 22px;
+  }
+
+  .exercise-card h2 {
+    font-size: 1.55rem;
+  }
+
+  .exercise-buttons button {
+    padding: 16px 18px;
+    font-size: 0.95rem;
+  }
+}
+
+.question-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.question-number {
+  background: linear-gradient(135deg, var(--accent), #ffe58a);
+  color: #1f1f2e;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.question-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.question-time i {
+  color: var(--accent);
+}
+
+.question-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.option-btn {
+  all: unset;
+  padding: 16px 20px;
+  border: 1.5px solid rgba(51, 54, 82, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-main);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), #ffe58a);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.option-btn:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+  box-shadow: 0 10px 24px rgba(250, 208, 44, 0.15);
+}
+
+.option-btn.selected {
+  background: linear-gradient(135deg, var(--accent), #ffe58a);
+  color: #1f1f2e;
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(250, 208, 44, 0.25);
+}
+
+.option-btn.correct {
+  background: #d1fae5;
+  color: #047857;
+  border-color: #10b981;
+}
+
+.option-btn.incorrect {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #f87171;
+}
+
+.feedback {
+  min-height: 50px;
+  margin-bottom: 30px;
+  padding: 16px;
+  border-radius: 12px;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.feedback.show {
+  display: flex;
+}
+
+.feedback.correct {
+  background: #d1fae5;
+  color: #047857;
+  border: 1px solid #10b981;
+}
+
+.feedback.incorrect {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #f87171;
+}
+
+.progress-container {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(51, 54, 82, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #ffe58a);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.quiz-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-next {
+  flex: 1;
+  padding: 13px;
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: none;
+}
+
+.btn-next.show {
+  display: block;
+}
+
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(250, 208, 44, 0.25);
+}
+
+.btn-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.results-container {
+  display: none;
+  text-align: center;
+}
+
+.results-container.show {
+  display: block;
+}
+
+.results-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.results-score {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.results-message {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.results-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.results-actions a,
+.results-actions button {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.results-actions .btn-accent {
+  background: var(--accent);
+  color: var(--bg-dark);
+  box-shadow: 0 10px 24px rgba(250, 208, 44, 0.2);
+}
+
+.results-actions .btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(250, 208, 44, 0.28);
+}
+
+.results-actions .btn-outline {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary);
+  border: 1.5px solid rgba(51, 54, 82, 0.15);
+}
+
+.results-actions .btn-outline:hover {
+  background: rgba(250, 208, 44, 0.1);
+  border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .quiz-card {
+    padding: 24px;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+
+  .option-btn {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .results-actions {
+    flex-direction: column;
+  }
+
+  .results-actions a,
+  .results-actions button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar" role="navigation">
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+
+    <button class="menu-toggle" id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="dashboar.html">Dashboard</a>
+        <a href="planes.html">Planes</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="blog.html">Blog</a>
+        <a href="comunidad.html">Comunidad</a>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header class="hero">
+  <div class="container">
+    <h1 class="fade-in">Micro simulacro</h1>
+    <p class="fade-in">Sin límite de tiempo. Responde con calma y aprende con cada feedback.</p>
+  </div>
+</header>
+
+<!-- EJERCICIOS -->
+<div class="quiz-container container">
+  <div class="exercise-card">
+    <h2>Matemáticas</h2>
+    <p>
+      Fernando recibe las operaciones:<br><br>
+      <strong>10 − 4 ÷ 2</strong> y <strong>5 × 2 + 4</strong><br><br>
+      para calcular su diferencia.<br><br>
+      Él hace:<br>
+      6 ÷ 2 = 3<br>
+      5 × 6 = 30<br>
+      y luego: 30 − 3 = 27
+    </p>
+    <p><strong>¿Por qué su interpretación es incorrecta?</strong></p>
+    <div class="exercise-buttons" id="math-buttons" role="group" aria-label="Preguntas de Matemáticas">
+      <button onclick="responder('math','A')">A. Porque los cálculos iniciales son correctos pero la diferencia es 3 − 30 = −27</button>
+      <button onclick="responder('math','B')">B. Porque primero se resuelven multiplicaciones y divisiones, obteniendo 8 y 14, y la diferencia es 6</button>
+      <button onclick="responder('math','C')">C. Porque la prioridad la tiene multiplicar y dividir, obteniendo 8 y 14, y la diferencia es 8 − 14 = −6</button>
+      <button onclick="responder('math','D')">D. Porque las operaciones se hacen en orden de lectura, dando 11</button>
+    </div>
+    <div class="exercise-feedback" id="math-feedback" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Lectura Crítica</h2>
+    <div class="text">
+      <p><strong>Por qué nuestra mente es más conocida que el cuerpo.</strong></p>
+      <p>
+        Por otra parte, para saber que conocemos nuestra mente no sólo antes y más ciertamente,
+        sino también más evidentemente que el cuerpo, hay que observar que es evidente por luz natural
+        que no hay afecciones o cualidades de la nada; y por tanto donde quiera que observemos algunas,
+        debe hallarse necesariamente una cosa o una sustancia a la que pertenezcan.
+      </p>
+      <p>
+        Y cuanta más observemos en esa cosa o sustancia, tanto más claramente la conoceremos.
+      </p>
+      <p>
+        Tomado de: René Descartes sobre los principios de la filosofía.
+      </p>
+    </div>
+    <p><strong>55. La afirmación "no hay afecciones o cualidades de la nada" permite:</strong></p>
+    <div class="exercise-buttons" id="lectura-buttons" role="group" aria-label="Preguntas de Lectura Crítica">
+      <button onclick="responder('lectura','A')">A. sostener que si existe una sustancia, entonces podemos observar sus cualidades.</button>
+      <button onclick="responder('lectura','B')">B. demostrar que si conocemos algo, entonces existen sus cualidades.</button>
+      <button onclick="responder('lectura','C')">C. sostener que si observamos algunas cualidades, entonces existe algo a lo que pertenecen.</button>
+      <button onclick="responder('lectura','D')">D. afirmar que aunque existe una sustancia no podemos conocer sus cualidades.</button>
+    </div>
+    <div class="exercise-feedback" id="lectura-feedback" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Ciencias Sociales</h2>
+    <p>
+      Durante el siglo XIX, en la mayoría de los países de América Latina,
+      las poblaciones negras e indígenas fueron marginadas socialmente.
+      Tenían acceso limitado a la educación, ocupaban los últimos lugares en espacios públicos
+      y eran considerados inferiores políticamente.
+    </p>
+    <p><strong>Este tipo de discriminación partía del criterio según el cual:</strong></p>
+    <div class="exercise-buttons" id="sociales-buttons" role="group" aria-label="Preguntas de Ciencias Sociales">
+      <button onclick="responder('sociales','A')">A. El color de la piel determina la calidad de la persona.</button>
+      <button onclick="responder('sociales','B')">B. Todos los seres humanos son iguales.</button>
+      <button onclick="responder('sociales','C')">C. Los negros e indios no tienen inteligencia.</button>
+      <button onclick="responder('sociales','D')">D. La riqueza determina la calidad de la persona.</button>
+    </div>
+    <div class="exercise-feedback" id="sociales-feedback" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>Ciencias Naturales</h2>
+    <div class="text">
+      <p>
+        La mayoría de los ingresos de los campesinos de un municipio provienen de la pesca en un lago alimentado por un río.
+        Las épocas secas reducen el agua disponible y afectan la economía de la comunidad.
+      </p>
+      <p>
+        Un grupo de investigadores propone alternativas económicas para aprovechar los recursos del municipio sin afectar a la población.
+      </p>
+      <p><strong>La tabla muestra primero los datos del municipio y luego las alternativas analizadas.</strong></p>
+    </div>
+    <div class="table-box">
+      <table>
+        <tr>
+          <th>Características del municipio</th>
+          <th>Minería artesanal de oro</th>
+          <th>Extracción de gas natural por fracturamiento hidráulico (fracking)</th>
+          <th>Producción de madera</th>
+          <th>Cultivo de guayaba</th>
+        </tr>
+        <tr>
+          <td>
+            <strong>Recurso hídrico disponible:</strong> estacional y muy limitado.<br>
+            <strong>Condiciones climáticas:</strong> épocas secas la mayor parte del año.<br>
+            <strong>Ecosistema mayoritario:</strong> bosque tropical muy seco.
+          </td>
+          <td>
+            Se encuentra un yacimiento de oro en el lecho del lago. Es explotable; requiere extraer el material del fondo del lago sin uso de contaminantes, aumentando la probabilidad de alteración del cauce del río.
+          </td>
+          <td>
+            Se encuentra gas natural y su explotación es rentable, pero requiere grandes cantidades de agua para ser extraído. Provoca la contaminación de fuentes hídricas cercanas.
+          </td>
+          <td>
+            Por las características climáticas no es explotable, ya que en la zona predomina una vegetación que se compone principalmente de matorrales densos y árboles pequeños.
+          </td>
+          <td>
+            El suelo es apto para este cultivo. Su explotación es rentable y se adapta a regiones de lluvias anuales esporádicas; su cosecha se da en tiempo seco.
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p><strong>Los investigadores concluyen que la mejor alternativa es el fracking. ¿Hay evidencia suficiente para esta conclusión?</strong></p>
+    <div class="exercise-buttons" id="ciencias-buttons" role="group" aria-label="Preguntas de Ciencias Naturales">
+      <button onclick="responder('ciencias','A')">A. Sí, porque es una alternativa que no presenta ningún riesgo para el río.</button>
+      <button onclick="responder('ciencias','B')">B. No, porque es la única actividad que contaminaría las fuentes hídricas.</button>
+      <button onclick="responder('ciencias','C')">C. Sí, porque es la única alternativa que no afectaría el clima del municipio.</button>
+      <button onclick="responder('ciencias','D')">D. No, porque es una actividad que provocaría alteraciones al cauce del río.</button>
+    </div>
+    <div class="exercise-feedback" id="ciencias-feedback" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="exercise-card">
+    <h2>English</h2>
+    <div class="text">
+      <h3>Fitness and health</h3>
+      <p><em>by Dr. Charles Perry</em></p>
+      <p>
+        A strong body is often the aim, if not always the result, of working out.
+        However, “just because someone looks fit on the outside,
+        it doesn’t necessarily mean they are healthy on the inside,” Dr. Michael Smith says.
+      </p>
+      <p>
+        “Fitness and health, things that can and should be connected,
+        are often very different things,” he mentions.
+      </p>
+      <p>
+        Nutritionist Anna Jackson explains that “fitness is when your body gets used to exercise...
+        Health can be explained as the lack of disease,
+        but it also depends on environmental factors such as pollution or a poor diet.”
+      </p>
+    </div>
+    <p><strong>Based on Dr. Smith’s words in paragraph 1, we can imagine that:</strong></p>
+    <div class="exercise-buttons" id="english-buttons" role="group" aria-label="Preguntas de English">
+      <button onclick="responder('english','A')">A. the possibility to achieve a gorgeous body is exciting.</button>
+      <button onclick="responder('english','B')">B. the solution to curing illnesses is being strong.</button>
+      <button onclick="responder('english','C')">C. a healthy shape might make us good-looking people.</button>
+      <button onclick="responder('english','D')">D. a person who doesn’t look fit can also be healthy.</button>
+    </div>
+    <div class="exercise-feedback" id="english-feedback" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+const respuestas = {
+  math: {
+    correct: 'C',
+    feedback: {
+      A: `A. ❌ Incorrecta.<br><br>Los cálculos iniciales no son correctos porque ignoran la jerarquía de operaciones: no se debe resolver primero la resta para luego dividir.`,
+      B: `B. ❌ Incorrecta.<br><br>Aunque calcula bien cada expresión, invierte el orden de la diferencia. La instrucción es restar la segunda a la primera (8 − 14), no 14 − 8.`,
+      C: `C. ✅ Correcta.<br><br>Respeta la jerarquía de operaciones y realiza correctamente la diferencia en el orden indicado:<br><br>10 − 4 ÷ 2 = 8<br>5 × 2 + 4 = 14<br>Diferencia: 8 − 14 = −6`,
+      D: `D. ❌ Incorrecta.<br><br>Las operaciones no se resuelven en orden de lectura, sino siguiendo la prioridad matemática (÷ y × primero).`
+    }
+  },
+  lectura: {
+    correct: 'C',
+    feedback: {
+      A: `A. ❌ Incorrecta.<br><br>El texto no afirma que toda sustancia necesariamente pueda observarse. Lo que sostiene es lo contrario: si observamos cualidades, entonces debe existir una sustancia a la que pertenezcan.`,
+      B: `B. ❌ Incorrecta.<br><br>Esta opción habla del conocimiento en general, pero el texto se centra en la relación entre cualidades y sustancia, no entre conocer y cualidades.`,
+      C: `C. ✅ Correcta.<br><br>Corresponde exactamente a la idea de Descartes: no existen cualidades sin algo que las posea. Si observamos afecciones o cualidades, necesariamente debe existir una sustancia a la que pertenezcan.`,
+      D: `D. ❌ Incorrecta.<br><br>El texto afirma lo contrario: mientras más cualidades observamos, mejor conocemos la sustancia.`
+    }
+  },
+  sociales: {
+    correct: 'A',
+    feedback: {
+      A: `✅ Correcto<br><br>La discriminación descrita se basa en criterios raciales, donde el color de piel se usa para justificar desigualdad y exclusión social.`,
+      B: `❌ Incorrecto<br><br>Esta opción expresa un principio de igualdad, que va en contra de la discriminación descrita.`,
+      C: `❌ Incorrecto<br><br>Aunque fue un prejuicio histórico, la pregunta busca el criterio general de discriminación, no una afirmación específica sobre capacidades.`,
+      D: `❌ Incorrecto<br><br>Esta opción corresponde a discriminación económica, no racial.`
+    }
+  },
+  ciencias: {
+    correct: 'B',
+    feedback: {
+      A: `A. ❌ Incorrecta.<br><br>El texto afirma explícitamente que el fracking contamina fuentes hídricas cercanas, por lo tanto sí representa un riesgo para el agua del municipio.`,
+      B: `B. ✅ Correcta.<br><br>El fracking requiere grandes cantidades de agua y además contamina fuentes hídricas. Por eso no hay evidencia suficiente para afirmar que sea la mejor alternativa.`,
+      C: `C. ❌ Incorrecta.<br><br>El problema principal del municipio no es el clima, sino la disponibilidad de agua. Además, el texto no menciona efectos climáticos asociados al fracking.`,
+      D: `D. ❌ Incorrecta.<br><br>La alteración del cauce del río corresponde a la minería artesanal de oro, no a la extracción de gas mediante fracking.`
+    }
+  },
+  english: {
+    correct: 'D',
+    feedback: {
+      A: `A. ❌ Incorrect.<br><br>Esta opción habla de emociones y belleza física (“gorgeous body”), pero Dr. Smith nunca menciona emoción o atractivo. Su punto es sobre la diferencia entre apariencia y salud real.`,
+      B: `B. ❌ Incorrect.<br><br>El texto no dice que ser fuerte cure enfermedades. De hecho, explica que una persona fit puede seguir teniendo mala salud.`,
+      C: `C. ❌ Incorrect.<br><br>Esta opción confunde apariencia física con salud. El texto insiste en que verse fit y estar realmente sano no son necesariamente lo mismo.`,
+      D: `D. ✅ Correct.<br><br>Esta es la inferencia lógica de Dr. Smith: si verse fit no garantiza salud, alguien que no se ve fit también puede ser saludable.`
+    }
+  }
+};
+
+function responder(section, option) {
+  const feedback = document.getElementById(`${section}-feedback`);
+  const buttons = document.querySelectorAll(`#${section}-buttons button`);
+  const data = respuestas[section];
+  const correct = data.correct;
+
+  buttons.forEach((btn) => {
+    const letter = btn.textContent.trim().charAt(0);
+    btn.disabled = true;
+    btn.classList.remove('correct', 'incorrect');
+    if (letter === correct) btn.classList.add('correct');
+    if (letter === option && letter !== correct) btn.classList.add('incorrect');
+  });
+
+  if (option === correct) {
+    feedback.classList.add('show', 'correct');
+    feedback.classList.remove('incorrect');
+  } else {
+    feedback.classList.add('show', 'incorrect');
+    feedback.classList.remove('correct');
+  }
+
+  feedback.innerHTML = data.feedback[option];
+}
+
+document.getElementById('menuToggle').addEventListener('click', function() {
+  const navLinks = document.getElementById('navLinks');
+  const isActive = navLinks.classList.contains('active');
+  navLinks.classList.toggle('active');
+  this.setAttribute('aria-expanded', !isActive);
+});
+
+// Reveal hero immediately unless user prefers reduced motion
+try{
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.hero .fade-in').forEach(el=>el.classList.add('appear'));
+  } else {
+    document.querySelectorAll('.hero .fade-in').forEach(el=>el.style.opacity=1);
+  }
+}catch(e){}
+</script>
+
+</body>
+</html>
