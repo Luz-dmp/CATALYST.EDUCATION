@@ -250,6 +250,107 @@
             font-size: 1.1rem;
         }
 
+        .student-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(51, 54, 82, 0.12);
+        }
+
+        .student-name {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+
+        .student-name strong {
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .student-doc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .dashboard-summary {
+            margin-bottom: 2.5rem;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .main-score-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .score-display {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin: 0;
+            display: block;
+        }
+
+        .score-label {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.8rem;
+            display: block;
+        }
+
+        .score-level {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: var(--bg-dark);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .side-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .side-metric-item {
+            background: rgba(250, 208, 44, 0.08);
+            border: 1px solid rgba(250, 208, 44, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .side-metric-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .side-metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.6rem;
+            line-height: 1.4;
+        }
+
         .report-summary {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -272,14 +373,6 @@
             font-size: 1.25rem;
             margin: 0 0 1.2rem;
             font-weight: 700;
-        }
-
-        .score-label {
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            line-height: 1;
-            margin: 0;
         }
 
         .status-pill {
@@ -309,6 +402,10 @@
             .report-summary {
                 grid-template-columns: 1fr;
             }
+            .main-score-block {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
             .search-box {
                 flex-direction: column;
             }
@@ -323,8 +420,8 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .score-label {
-                font-size: 3.5rem;
+            .score-number {
+                font-size: 4rem;
             }
             .results-output h3 {
                 font-size: 1.4rem;
@@ -356,8 +453,14 @@
             .metric-card span {
                 font-size: 0.9rem;
             }
-            .score-label {
-                font-size: 2.8rem;
+            .score-number {
+                font-size: 3.2rem;
+            }
+            .side-metric-value {
+                font-size: 2.2rem;
+            }
+            .student-name {
+                font-size: 1.4rem;
             }
             .area-card {
                 padding: 1.2rem;
@@ -391,6 +494,21 @@
             }
             .metric-card strong {
                 font-size: clamp(1.6rem, 6vw, 2rem);
+            }
+            .score-number {
+                font-size: 2.8rem;
+            }
+            .side-metrics {
+                grid-template-columns: 1fr;
+            }
+            .side-metric-value {
+                font-size: 2rem;
+            }
+            .student-name {
+                font-size: 1.2rem;
+            }
+            .dashboard-summary {
+                padding: 1.5rem;
             }
             .results-output h3 {
                 font-size: 1.3rem;
@@ -443,7 +561,7 @@
 
         <div class="search-box">
             <input id="doc" type="text" placeholder="Número de documento" aria-label="Número de documento">
-            <button class="btn-accent" onclick="consultar()">Consultar</button>
+            <button type="button" class="btn-accent" onclick="consultar()">Consultar</button>
         </div>
 
         <div id="resultado" class="results-output"></div>
@@ -456,30 +574,93 @@
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="../js/main.js"></script>
 <script>
-const data = [
-    {
-        documento: "123",
-        respuestas_correctas: 35,
-        percentil_global: 90,
-        matematicas: 88,
-        lectura: 80,
-        sociales: 81,
-        naturales: 83,
-        ingles: 90
-    },
-    {
-        documento: "456",
-        respuestas_correctas: 28,
-        percentil_global: 65,
-        matematicas: 70,
-        lectura: 75,
-        sociales: 67,
-        naturales: 69,
-        ingles: 78
+
+const SUPABASE_URL = "https://wqnkrlvleprpryymupvl.supabase.co";
+const SUPABASE_KEY = "sb_publishable_VkXAJcQj_l1MrdfDEUpXlA_uCzZFDi_";
+
+const supabaseClient = typeof supabase !== 'undefined' && supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+console.log("Supabase global:", typeof supabase, supabase);
+console.log("Supabase project URL:", SUPABASE_URL);
+console.log("Supabase client ready:", !!supabaseClient);
+
+function setErrorMessage(message) {
+    const resultado = document.getElementById('resultado');
+    if (resultado) {
+        resultado.innerHTML = `<p class="no-result">${message}</p>`;
     }
-];
+}
+
+async function consultar() {
+    const docInput = document.getElementById('doc');
+    const resultado = document.getElementById('resultado');
+    const doc = docInput ? docInput.value.trim() : "";
+
+    console.log("Consultar documento:", doc);
+
+    if (!supabaseClient) {
+        console.error("Supabase no está disponible", window.supabase);
+        setErrorMessage("❌ Error interno: no se pudo inicializar Supabase.");
+        return;
+    }
+
+    if (!doc) {
+        setErrorMessage("❌ Ingresa un número de documento válido.");
+        return;
+    }
+
+    if (resultado) {
+        resultado.innerHTML = `<p class="no-result">Buscando resultados...</p>`;
+    }
+
+    const docValue = doc; // mantener como texto para la columna documento
+
+    try {
+        const { data, error } = await supabaseClient
+            .from("resultados_cat_core_02")
+            .select("*")
+            .eq("documento", docValue);
+
+        console.log("Supabase consulta documento:", docValue);
+        console.log("Supabase datos recibidos:", data, "longitud:", data?.length);
+        console.log("Supabase error:", error);
+
+        if (error) {
+            console.error("Error en consulta Supabase:", error);
+            setErrorMessage(`❌ Error al consultar los resultados: ${error.message || 'Intenta nuevamente.'}`);
+            return;
+        }
+
+        if (!data || !data.length) {
+            setErrorMessage("❌ Documento no encontrado o no visible. Verifica la tabla, el campo 'documento' y las políticas RLS.");
+            return;
+        }
+
+        const persona = data[0];
+        console.log("Persona encontrada:", persona);
+
+        const personaFormateada = {
+            nombre: persona.nombre,
+            documento: persona.documento,
+            matematicas: persona.matematicas,
+            lectura: persona.lectura,
+            sociales: persona.sociales,
+            naturales: persona.naturales,
+            ingles: persona.ingles,
+            respuestas_correctas: persona.respuestas_correctas,
+            percentil_global: persona.percentil,
+            puntaje_global: persona.puntaje_global
+        };
+
+        resultado.innerHTML = renderResult(personaFormateada);
+    } catch (err) {
+        console.error("Error inesperado en consultar():", err);
+        setErrorMessage("❌ Ocurrió un problema al buscar los datos.");
+    }
+}
+
 
 const areas = [
     {key: 'matematicas', label: 'Matemáticas', icon: '∑'},
@@ -673,22 +854,14 @@ function computeAverage(values) {
     return Math.round(sum / values.length);
 }
 
-function getGroupAverages() {
-    const totals = areas.reduce((acc, area) => ({ ...acc, [area.key]: 0 }), {});
-    data.forEach(student => {
-        areas.forEach(area => {
-            totals[area.key] += student[area.key];
-        });
-    });
-
-    const averages = areas.reduce((acc, area) => ({
-        ...acc,
-        [area.key]: Math.round(totals[area.key] / data.length)
-    }), {});
-
-    averages.overall = Math.round(areas.reduce((sum, area) => sum + averages[area.key], 0) / areas.length);
-    return averages;
-}
+const FIXED_GROUP_AVERAGE = {
+    matematicas: 64,
+    lectura: 61,
+    sociales: 57,
+    naturales: 59,
+    ingles: 55,
+    overall: 59
+};
 
 function compareScore(score, average) {
     if (score >= average) {
@@ -748,60 +921,43 @@ function createAreaCard(area, score, average) {
 }
 
 function renderResult(persona) {
-    const groupAverage = getGroupAverages();
+    const groupAverage = FIXED_GROUP_AVERAGE;
     const summary = buildGlobalSummary(persona, groupAverage);
 
     const scores = areas.map(area => persona[area.key]);
-    const internationalRanking = summary.globalScore >= groupAverage.overall ? 'estás por encima de la media del grupo' : 'estás por debajo de la media del grupo';
 
     return `
-        <div class="report-summary">
-            <section class="overview-card">
-                <h3>Puntaje Global</h3>
-                <div class="score-label">${summary.globalScore}</div>
-                <div class="metric-subtitle">/100</div>
-                <div class="status-pill">${summary.performance.title}</div>
-                <p class="progress-text" style="margin-top: 1.2rem;">Calificación promedio sobre cinco áreas de dominio.</p>
-            </section>
-            <section class="insight-card">
-                <h3>Análisis general</h3>
-                <p>El estudiante demuestra capacidad para <strong>${summary.performance.competency.toLowerCase()}</strong> ${internationalRanking}.</p>
-                <p><strong>${summary.strengths} áreas fuertes</strong> identificadas con puntajes ≥ 70.</p>
-                <p><strong>${summary.areasBelowAverage} áreas</strong> que requieren enfoque y mejora continua.</p>
-                <p><strong>Percentil:</strong> ${persona.percentil_global}% (posición comparativa)</p>
-            </section>
+        <div class="student-header">
+            <h2 class="student-name">Resultados de: <strong>${persona.nombre || 'Estudiante'}</strong></h2>
+            <p class="student-doc">Documento: ${persona.documento}</p>
         </div>
 
-        <div class="metric-grid">
-            ${createMetricCard('Nota Global', summary.globalScore, '/100')}
-            ${createMetricCard('Percentil', persona.percentil_global, '%')}
-            ${createMetricCard('Promedio Grupo', groupAverage.overall, '/100')}
-            ${createMetricCard('Puntos de mejora', summary.areasBelowAverage)}
+        <div class="dashboard-summary">
+            <div class="main-score-block">
+                <div class="score-display">
+                    <div class="score-number">${persona.puntaje_global || summary.globalScore}</div>
+                    <div class="score-label">Puntaje Global</div>
+                    <div class="score-level">${summary.performance.title}</div>
+                </div>
+                
+                <div class="side-metrics">
+                    <div class="side-metric-item">
+                        <div class="side-metric-value">${persona.percentil_global || 'N/A'}</div>
+                        <div class="side-metric-label">Percentil</div>
+                    </div>
+                    <div class="side-metric-item">
+                        <div class="side-metric-value">${persona.respuestas_correctas || 0}</div>
+                        <div class="side-metric-label">Respuestas<br>Correctas</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <h3>Puntaje por áreas</h3>
+        <h3>Desempeño por áreas</h3>
         <div class="results-list">
             ${areas.map(area => createAreaCard(area, persona[area.key], groupAverage[area.key])).join('')}
         </div>
     `;
-}
-
-function consultar() {
-    const doc = document.getElementById('doc').value.trim();
-    const resultado = document.getElementById('resultado');
-
-    if (!doc) {
-        resultado.innerHTML = `<p class="no-result">❌ Ingresa un número de documento válido.</p>`;
-        return;
-    }
-
-    const persona = data.find(item => item.documento === doc);
-    if (!persona) {
-        resultado.innerHTML = `<p class="no-result">❌ Documento no encontrado. Verifica e intenta otra vez.</p>`;
-        return;
-    }
-
-    resultado.innerHTML = renderResult(persona);
 }
 </script>
 </body>
