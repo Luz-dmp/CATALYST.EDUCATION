@@ -88,6 +88,53 @@
             min-width: 0;
         }
 
+        .simulacros-selection {
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.8rem;
+            box-shadow: 0 16px 32px rgba(51, 54, 82, 0.06);
+        }
+
+        .simulacros-selection h3 {
+            margin: 0 0 1rem;
+            color: var(--primary);
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .simulacros-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .simulacro-btn {
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(51, 54, 82, 0.12);
+            background: var(--bg-light);
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            text-align: center;
+            min-height: 62px;
+        }
+
+        .simulacro-btn:hover,
+        .simulacro-btn.active {
+            border-color: rgba(250, 208, 44, 0.9);
+            box-shadow: 0 12px 28px rgba(250, 208, 44, 0.15);
+            transform: translateY(-1px);
+            background: #fff8e6;
+        }
+
+        .detalle-resultado {
+            margin-top: 1.5rem;
+        }
+
         .metric-card {
             background: rgba(255, 255, 255, 0.98);
             border: 1px solid rgba(51, 54, 82, 0.08);
@@ -586,11 +633,64 @@ console.log("Supabase global:", typeof supabase, supabase);
 console.log("Supabase project URL:", SUPABASE_URL);
 console.log("Supabase client ready:", !!supabaseClient);
 
+const SIMULACROS_TABLES = [
+    { table: 'resultados_cat_nova_01_a', label: 'CAT NOVA 01 - Primera presentación' },
+    { table: 'resultados_cat_nova_01_b', label: 'CAT NOVA 01 - Segunda presentación' },
+    { table: 'resultados_cat_core_02', label: 'CAT CORE 02' }
+];
+
+let simulacrosData = [];
+
 function setErrorMessage(message) {
     const resultado = document.getElementById('resultado');
     if (resultado) {
         resultado.innerHTML = `<p class="no-result">${message}</p>`;
     }
+}
+
+function formatPersonaData(persona) {
+    return {
+        nombre: persona.nombre,
+        documento: persona.documento,
+        matematicas: persona.matematicas,
+        lectura: persona.lectura,
+        sociales: persona.sociales,
+        naturales: persona.naturales,
+        ingles: persona.ingles,
+        respuestas_correctas: persona.respuestas_correctas,
+        percentil_global: persona.percentil,
+        puntaje_global: persona.puntaje_global
+    };
+}
+
+function renderBotones(results) {
+    return `
+        <div class="simulacros-selection">
+            <h3>Selecciona el simulacro</h3>
+            <div class="simulacros-buttons">
+                ${results.map((item, index) => `
+                    <button type="button" class="simulacro-btn" onclick="mostrarResultado(${index})">
+                        ${item.label}
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+        <div id="detalle-resultado" class="detalle-resultado"></div>
+    `;
+}
+
+function mostrarResultado(index) {
+    const detalle = document.getElementById('detalle-resultado');
+    const botones = document.querySelectorAll('.simulacro-btn');
+
+    if (!detalle || !simulacrosData[index]) return;
+
+    botones.forEach((button, idx) => {
+        button.classList.toggle('active', idx === index);
+    });
+
+    const personaFormateada = formatPersonaData(simulacrosData[index].persona);
+    detalle.innerHTML = renderResult(personaFormateada);
 }
 
 async function consultar() {
@@ -618,46 +718,45 @@ async function consultar() {
     const docValue = doc; // mantener como texto para la columna documento
 
     try {
-        const { data, error } = await supabaseClient
-            .from("resultados_cat_core_02")
-            .select("*")
-            .eq("documento", docValue);
+        const queries = SIMULACROS_TABLES.map(({ table }) => (
+            supabaseClient.from(table).select('*').eq('documento', docValue)
+        ));
 
-        console.log("Supabase consulta documento:", docValue);
-        console.log("Supabase datos recibidos:", data, "longitud:", data?.length);
-        console.log("Supabase error:", error);
+        const queryResults = await Promise.all(queries);
 
-        if (error) {
-            console.error("Error en consulta Supabase:", error);
-            setErrorMessage(`❌ Error al consultar los resultados: ${error.message || 'Intenta nuevamente.'}`);
+        console.log('Supabase consultas múltiples:', queryResults);
+
+        const availableResults = queryResults.map((result, index) => {
+            if (result.error) {
+                return { error: result.error, label: SIMULACROS_TABLES[index].label, persona: null };
+            }
+
+            return {
+                label: SIMULACROS_TABLES[index].label,
+                persona: result.data?.[0] || null,
+                table: SIMULACROS_TABLES[index].table
+            };
+        });
+
+        const validResults = availableResults.filter(item => item.persona);
+        simulacrosData = validResults;
+
+        if (availableResults.some(item => item.error)) {
+            const firstError = availableResults.find(item => item.error).error;
+            console.error('Error en consultas múltiples Supabase:', firstError);
+            setErrorMessage(`❌ Error al consultar los resultados: ${firstError.message || 'Intenta nuevamente.'}`);
             return;
         }
 
-        if (!data || !data.length) {
-            setErrorMessage("❌ Documento no encontrado o no visible. Verifica la tabla, el campo 'documento' y las políticas RLS.");
+        if (!validResults.length) {
+            setErrorMessage('❌ Documento no encontrado o no visible. Verifica la tabla, el campo documento y las políticas RLS.');
             return;
         }
 
-        const persona = data[0];
-        console.log("Persona encontrada:", persona);
-
-        const personaFormateada = {
-            nombre: persona.nombre,
-            documento: persona.documento,
-            matematicas: persona.matematicas,
-            lectura: persona.lectura,
-            sociales: persona.sociales,
-            naturales: persona.naturales,
-            ingles: persona.ingles,
-            respuestas_correctas: persona.respuestas_correctas,
-            percentil_global: persona.percentil,
-            puntaje_global: persona.puntaje_global
-        };
-
-        resultado.innerHTML = renderResult(personaFormateada);
+        resultado.innerHTML = renderBotones(validResults);
     } catch (err) {
-        console.error("Error inesperado en consultar():", err);
-        setErrorMessage("❌ Ocurrió un problema al buscar los datos.");
+        console.error('Error inesperado en consultar():', err);
+        setErrorMessage('❌ Ocurrió un problema al buscar los datos.');
     }
 }
 
