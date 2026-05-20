@@ -10,6 +10,92 @@
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        .section-alt {
+            background: linear-gradient(180deg, #f8faff, #ffffff);
+            padding: 4rem 0 3rem;
+        }
+
+        .section-alt .section-header {
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        .section-alt .section-title {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-alt .section-copy {
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .section-alt .blog-tag {
+            display: inline-flex;
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(250, 208, 44, 0.16);
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .section-alt .feature-grid {
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .section-alt .feature-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 160px;
+        }
+
+        .section-alt .feature-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(99,102,241,0.2), transparent);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .section-alt .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 55px rgba(99,102,241,0.18);
+        }
+
+        .section-alt .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .section-alt .feature-card h3::before {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 720px) {
+            .section-alt {
+                padding: 3rem 0 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -37,7 +123,7 @@
         <a href="resultados.html">Resultados</a>
         <a href="blog.html">Blog</a>
         <a href="comunidad.html">Comunidad</a>
-        <a href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf" class="btn-accent">Unirme gratis</a>
+        <a href="login.html" class="btn-accent">Unirme gratis</a>
     </div>
 </nav>
 <!-- HERO -->
@@ -104,86 +190,28 @@
     </div>
 </section>
 
-<!-- SECCIÓN 2 – PLAYLIST -->
-<section class="container features">
-    <h2 class="section-title">Playlist recomendada para estudiar con Pomodoro</h2>
+<section class="container features section-alt">
+    <div class="section-header">
+    
+        <h2 class="section-title">¿Por qué funciona el método Pomodoro?</h2>
+        <p class="section-copy">Con intervalos claros y pausas bien definidas, el método Pomodoro transforma tu estudio en bloques productivos sin saturarte.</p>
+    </div>
 
-    <div class="card fade-in" style="text-align:left;">
-
-        <span class="blog-tag">LO‑FI • FOCUS</span>
-
-        <p style="max-width:720px;">
-            El ambiente influye directamente en tu concentración.
-            Estas pistas están pensadas para acompañar distintos ciclos Pomodoro
-            sin distraerte.
-        </p>
-
-        <div style="display:grid; gap:1rem; margin-top:2rem;">
-
-            <!-- TRACK 1 -->
-            <div style="
-                display:grid;
-                grid-template-columns: auto 1fr auto;
-                gap:1rem;
-                align-items:center;
-                padding:1rem 1.2rem;
-                border-radius:20px;
-                background:rgba(249,247,253,0.95);
-                border:1px solid rgba(51,54,82,0.08);
-            ">
-                <span style="font-weight:800; color:var(--accent);">01</span>
-                <div>
-                    <strong>Focus Flow</strong><br>
-                    <span class="text-small">Catalyst Lo‑Fi</span>
-                </div>
-                <span class="text-small">25:00</span>
-            </div>
-
-            <!-- TRACK 2 -->
-            <div style="
-                display:grid;
-                grid-template-columns: auto 1fr auto;
-                gap:1rem;
-                align-items:center;
-                padding:1rem 1.2rem;
-                border-radius:20px;
-                background:rgba(249,247,253,0.95);
-                border:1px solid rgba(51,54,82,0.08);
-            ">
-                <span style="font-weight:800; color:var(--accent);">02</span>
-                <div>
-                    <strong>Deep Study</strong><br>
-                    <span class="text-small">Ambient Notes</span>
-                </div>
-                <span class="text-small">50:00</span>
-            </div>
-
-            <!-- TRACK 3 -->
-            <div style="
-                display:grid;
-                grid-template-columns: auto 1fr auto;
-                gap:1rem;
-                align-items:center;
-                padding:1rem 1.2rem;
-                border-radius:20px;
-                background:rgba(249,247,253,0.95);
-                border:1px solid rgba(51,54,82,0.08);
-            ">
-                <span style="font-weight:800; color:var(--accent);">03</span>
-                <div>
-                    <strong>Short Sprint</strong><br>
-                    <span class="text-small">Minimal Beats</span>
-                </div>
-                <span class="text-small">15:00</span>
-            </div>
-
+    <div class="feature-grid">
+        <div class="feature-card fade-in">
+            <h3>Mantiene tu mente fresca</h3>
+            <p>Al trabajar en intervalos cortos, evitas la fatiga mental que reduce tu rendimiento.</p>
         </div>
 
-        <p style="margin-top:2rem; max-width:720px;">
-            La música funciona mejor cuando no tiene letra y mantiene un ritmo constante,
-            ayudando a sostener el foco durante cada ciclo.
-        </p>
+        <div class="feature-card fade-in">
+            <h3>Mejora la concentración</h3>
+            <p>Saber que solo debes enfocarte 25 minutos hace más fácil eliminar distracciones.</p>
+        </div>
 
+        <div class="feature-card fade-in">
+            <h3>Reduce la procrastinación</h3>
+            <p>Comenzar es más sencillo cuando el compromiso es corto y claro.</p>
+        </div>
     </div>
 </section>
 
