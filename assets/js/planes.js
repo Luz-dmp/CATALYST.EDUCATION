@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (openItem !== item) {
                     openItem.removeAttribute('open');
                 }
-                    });
-                });
             });
         });
+    });
+});
