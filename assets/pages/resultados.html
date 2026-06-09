@@ -733,35 +733,72 @@ async function consultar() {
     }
 
     const docValue = doc; // mantener como texto para la columna documento
+    const docValueNum = Number(doc);
+    const isNumeric = !Number.isNaN(docValueNum);
 
     try {
-        const queries = SIMULACROS_TABLES.map(({ table }) => (
-            supabaseClient.from(table).select('*').eq('documento', docValue)
-        ));
+        // Construimos consultas robustas por tabla: intentamos eq con string, eq con número (si aplica) y luego ilike si no hay coincidencias
+        const queries = SIMULACROS_TABLES.map(({ table, label }) => (async () => {
+            console.log(`Iniciando consulta en tabla ${table} para documento:`, docValue);
+
+            // 1) Intento: igualdad con texto
+            let res = await supabaseClient.from(table).select('*').eq('documento', docValue);
+            console.log(`Respuesta eq(string) ${table}:`, res);
+
+            // 2) Si no hay datos y el documento es numérico, intentamos con número (columnas tipo integer)
+            if ((!res.error) && (!res.data || res.data.length === 0) && isNumeric) {
+                console.log(`No se encontraron filas con eq(string) en ${table}, intentando eq(number):`, docValueNum);
+                res = await supabaseClient.from(table).select('*').eq('documento', docValueNum);
+                console.log(`Respuesta eq(number) ${table}:`, res);
+            }
+
+            // 3) Si aún no hay datos y no hay error, intentamos ilike (solo si la columna es texto). Capturamos excepciones.
+            if ((!res.error) && (!res.data || res.data.length === 0)) {
+                try {
+                    console.log(`Intentando ilike en ${table} con: %${docValue}%`);
+                    const resIlike = await supabaseClient.from(table).select('*').ilike('documento', `%${docValue}%`);
+                    console.log(`Respuesta ilike ${table}:`, resIlike);
+                    if (!resIlike.error) res = resIlike;
+                } catch (e) {
+                    console.warn(`ilike no aplicable o arrojó error en tabla ${table}:`, e);
+                }
+            }
+
+            return { table, label, result: res };
+        })());
 
         const queryResults = await Promise.all(queries);
 
-        console.log('Supabase consultas múltiples:', queryResults);
+        console.log('Supabase consultas múltiples (detallado):', queryResults);
 
-        const availableResults = queryResults.map((result, index) => {
-            if (result.error) {
-                return { error: result.error, label: SIMULACROS_TABLES[index].label, persona: null };
+        const availableResults = queryResults.map(({ result, label, table }) => {
+            if (result && result.error) {
+                return { error: result.error, label, persona: null, table };
             }
 
-            return {
-                label: SIMULACROS_TABLES[index].label,
-                persona: result.data?.[0] || null,
-                table: SIMULACROS_TABLES[index].table
-            };
+            const persona = result && result.data && result.data.length ? result.data[0] : null;
+            return { label, persona, table, raw: result && result.data };
+        });
+
+        // Logs por tabla: diferencias entre sin datos y error
+        availableResults.forEach(item => {
+            if (item.error) {
+                console.error(`Error consultando tabla ${item.table}:`, item.error);
+            } else if (!item.persona) {
+                console.log(`Sin coincidencias en tabla ${item.table}`);
+            } else {
+                console.log(`Encontrado en tabla ${item.table}:`, item.persona);
+            }
         });
 
         const validResults = availableResults.filter(item => item.persona);
         simulacrosData = validResults;
 
-        if (availableResults.some(item => item.error)) {
-            const firstError = availableResults.find(item => item.error).error;
-            console.error('Error en consultas múltiples Supabase:', firstError);
-            setErrorMessage(`❌ Error al consultar los resultados: ${firstError.message || 'Intenta nuevamente.'}`);
+        // Si hubo errores pero también hay resultados válidos, mostramos los válidos y avisamos en consola
+        const firstError = availableResults.find(item => item.error);
+        if (firstError && validResults.length === 0) {
+            console.error('Error en consultas múltiples Supabase (sin datos válidos):', firstError.error);
+            setErrorMessage(`❌ Error al consultar los resultados: ${firstError.error.message || 'Intenta nuevamente.'}`);
             return;
         }
 
@@ -771,6 +808,7 @@ async function consultar() {
         }
 
         resultado.innerHTML = renderBotones(validResults);
+        console.log('simulacrosData listo para render:', simulacrosData);
 
         setTimeout(() => {
             if (validResults.length > 0) {
