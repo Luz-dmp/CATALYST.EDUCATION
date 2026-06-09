@@ -646,12 +646,16 @@ console.log("Supabase global:", typeof supabase, supabase);
 console.log("Supabase project URL:", SUPABASE_URL);
 console.log("Supabase client ready:", !!supabaseClient);
 
-const SIMULACROS_TABLES = [
-    { table: 'resultados_cat_nova_01_a', label: 'CAT NOVA 01 - Primera presentación' },
-    { table: 'resultados_cat_nova_01_b', label: 'CAT NOVA 01 - Segunda presentación' },
-    { table: 'resultados_cat_core_02', label: 'CAT CORE 02' }
-];
+    const SIMULACROS_TABLES = [
+        { table: 'resultados_cat_nova_01_a', label: 'CAT NOVA 01 - Primera presentación' },
+        { table: 'resultados_cat_nova_01_b', label: 'CAT NOVA 01 - Segunda presentación' },
+        { table: 'resultados_cat_core_02', label: 'CAT CORE 02' },
+        { table: 'resultados_cat_nova_02_a', label: 'CAT NOVA 02 - Primera presentación' }
+    ];
 
+
+
+ 
 let simulacrosData = [];
 
 function setErrorMessage(message) {
@@ -725,7 +729,7 @@ async function consultar() {
     }
 
     if (resultado) {
-        resultado.innerHTML = `<p class="no-result">Buscando resultados...</p>`;
+        resultado.innerHTML = `<p class="no-result">Buscando tus resultados...</p>`;
     }
 
     const docValue = doc; // mantener como texto para la columna documento
@@ -767,6 +771,13 @@ async function consultar() {
         }
 
         resultado.innerHTML = renderBotones(validResults);
+
+        setTimeout(() => {
+            if (validResults.length > 0) {
+                mostrarResultado(0);
+            }
+        }, 100);
+
     } catch (err) {
         console.error('Error inesperado en consultar():', err);
         setErrorMessage('❌ Ocurrió un problema al buscar los datos.');
