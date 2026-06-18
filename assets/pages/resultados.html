@@ -650,12 +650,8 @@ console.log("Supabase client ready:", !!supabaseClient);
         { table: 'resultados_cat_nova_01_a', label: 'CAT NOVA 01 - Primera presentación' },
         { table: 'resultados_cat_nova_01_b', label: 'CAT NOVA 01 - Segunda presentación' },
         { table: 'resultados_cat_core_02', label: 'CAT CORE 02' },
-<<<<<<< HEAD
         { table: 'resultados_cat_nova_02_a', label: 'CAT NOVA 02 - Primera presentación' },
         { table: 'resultados_cat_nova_02_b', label: 'CAT NOVA 02 - Segunda presentación' }
-=======
-        { table: 'resultados_cat_nova_02_a', label: 'CAT NOVA 02 - Primera presentación' }
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
     ];
 
 
@@ -722,15 +718,12 @@ async function consultar() {
 
     console.log("Consultar documento:", doc);
 
-<<<<<<< HEAD
     // Limpiar estado previo
     simulacrosData = [];
     if (resultado) {
         resultado.innerHTML = '';
     }
 
-=======
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
     if (!supabaseClient) {
         console.error("Supabase no está disponible", window.supabase);
         setErrorMessage("❌ Error interno: no se pudo inicializar Supabase.");
@@ -738,11 +731,7 @@ async function consultar() {
     }
 
     if (!doc) {
-<<<<<<< HEAD
         setErrorMessage("❌ Ingresa un número de documento.");
-=======
-        setErrorMessage("❌ Ingresa un número de documento válido.");
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
         return;
     }
 
@@ -750,7 +739,6 @@ async function consultar() {
         resultado.innerHTML = `<p class="no-result">Buscando tus resultados...</p>`;
     }
 
-<<<<<<< HEAD
     try {
         // Búsqueda exacta únicamente con .eq() - sin ilike() ni coincidencias parciales
         const queries = SIMULACROS_TABLES.map(({ table, label }) => (async () => {
@@ -759,50 +747,13 @@ async function consultar() {
             // Búsqueda exacta solo
             const res = await supabaseClient.from(table).select('*').eq('documento', doc);
             console.log(`Respuesta eq en ${table}:`, res);
-=======
-    const docValue = doc; // mantener como texto para la columna documento
-    const docValueNum = Number(doc);
-    const isNumeric = !Number.isNaN(docValueNum);
-
-    try {
-        // Construimos consultas robustas por tabla: intentamos eq con string, eq con número (si aplica) y luego ilike si no hay coincidencias
-        const queries = SIMULACROS_TABLES.map(({ table, label }) => (async () => {
-            console.log(`Iniciando consulta en tabla ${table} para documento:`, docValue);
-
-            // 1) Intento: igualdad con texto
-            let res = await supabaseClient.from(table).select('*').eq('documento', docValue);
-            console.log(`Respuesta eq(string) ${table}:`, res);
-
-            // 2) Si no hay datos y el documento es numérico, intentamos con número (columnas tipo integer)
-            if ((!res.error) && (!res.data || res.data.length === 0) && isNumeric) {
-                console.log(`No se encontraron filas con eq(string) en ${table}, intentando eq(number):`, docValueNum);
-                res = await supabaseClient.from(table).select('*').eq('documento', docValueNum);
-                console.log(`Respuesta eq(number) ${table}:`, res);
-            }
-
-            // 3) Si aún no hay datos y no hay error, intentamos ilike (solo si la columna es texto). Capturamos excepciones.
-            if ((!res.error) && (!res.data || res.data.length === 0)) {
-                try {
-                    console.log(`Intentando ilike en ${table} con: %${docValue}%`);
-                    const resIlike = await supabaseClient.from(table).select('*').ilike('documento', `%${docValue}%`);
-                    console.log(`Respuesta ilike ${table}:`, resIlike);
-                    if (!resIlike.error) res = resIlike;
-                } catch (e) {
-                    console.warn(`ilike no aplicable o arrojó error en tabla ${table}:`, e);
-                }
-            }
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
 
             return { table, label, result: res };
         })());
 
         const queryResults = await Promise.all(queries);
 
-<<<<<<< HEAD
         console.log('Supabase consultas múltiples:', queryResults);
-=======
-        console.log('Supabase consultas múltiples (detallado):', queryResults);
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
 
         const availableResults = queryResults.map(({ result, label, table }) => {
             if (result && result.error) {
@@ -813,11 +764,7 @@ async function consultar() {
             return { label, persona, table, raw: result && result.data };
         });
 
-<<<<<<< HEAD
         // Logs por tabla
-=======
-        // Logs por tabla: diferencias entre sin datos y error
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
         availableResults.forEach(item => {
             if (item.error) {
                 console.error(`Error consultando tabla ${item.table}:`, item.error);
@@ -829,39 +776,23 @@ async function consultar() {
         });
 
         const validResults = availableResults.filter(item => item.persona);
-<<<<<<< HEAD
 
         // Si hubo errores pero también hay resultados válidos, mostramos los válidos
         const firstError = availableResults.find(item => item.error);
         if (firstError && validResults.length === 0) {
             console.error('Error en consultas múltiples Supabase (sin datos válidos):', firstError.error);
             simulacrosData = [];
-=======
-        simulacrosData = validResults;
-
-        // Si hubo errores pero también hay resultados válidos, mostramos los válidos y avisamos en consola
-        const firstError = availableResults.find(item => item.error);
-        if (firstError && validResults.length === 0) {
-            console.error('Error en consultas múltiples Supabase (sin datos válidos):', firstError.error);
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
             setErrorMessage(`❌ Error al consultar los resultados: ${firstError.error.message || 'Intenta nuevamente.'}`);
             return;
         }
 
         if (!validResults.length) {
-<<<<<<< HEAD
             simulacrosData = [];
             setErrorMessage('❌ Documento no encontrado.');
             return;
         }
 
         simulacrosData = validResults;
-=======
-            setErrorMessage('❌ Documento no encontrado. Por favor, notifica al administrador.');
-            return;
-        }
-
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
         resultado.innerHTML = renderBotones(validResults);
         console.log('simulacrosData listo para render:', simulacrosData);
 
@@ -873,10 +804,7 @@ async function consultar() {
 
     } catch (err) {
         console.error('Error inesperado en consultar():', err);
-<<<<<<< HEAD
         simulacrosData = [];
-=======
->>>>>>> 120bd5a096416cb44ca60436d884b81447a3089a
         setErrorMessage('❌ Ocurrió un problema al buscar los datos.');
     }
 }
