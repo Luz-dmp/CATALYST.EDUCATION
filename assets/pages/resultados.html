@@ -823,24 +823,25 @@
         }
 
         .progress-index-card {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             align-items: center;
+            text-align: center;
         }
 
         .progress-index-score {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--accent);
-            text-align: center;
             line-height: 1;
         }
 
         .progress-index-bar {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 1rem;
+            width: 100%;
         }
 
         .progress-index-fill {
@@ -922,11 +923,17 @@
             }
 
             .progress-index-card {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                text-align: center;
             }
 
             .progress-index-score {
-                font-size: 2.4rem;
+                font-size: 3rem;
+            }
+
+            .progress-index-bar {
+                width: 100%;
+                text-align: center;
             }
 
             .evolution-chart {
@@ -973,8 +980,19 @@
                 padding: 1.2rem;
             }
 
+            .progress-index-card {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+
             .progress-index-score {
-                font-size: 2rem;
+                font-size: 2.6rem;
+                min-width: 100px;
+            }
+
+            .progress-index-bar {
+                flex: 1;
+                text-align: left;
             }
         }
 
@@ -1015,6 +1033,20 @@
             .progress-index-container,
             .averages-summary {
                 padding: 1.2rem;
+            }
+
+            .progress-index-card {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .progress-index-score {
+                font-size: 2.4rem;
+            }
+
+            .progress-index-bar {
+                width: 100%;
             }
 
             .averages-grid {
