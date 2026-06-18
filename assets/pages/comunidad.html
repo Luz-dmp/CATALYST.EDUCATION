@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidad | Catalyst</title>
+
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+@keyframes moveGlow {
+    0% { transform: translate(-30%, -30%); }
+    50% { transform: translate(-10%, -10%); }
+    100% { transform: translate(-30%, -30%); }
+}
+
+/**/
+/* SECCIONES */
+.why-section {
+    text-align: center;
+    padding: 70px 0;
+}
+
+.why-section h2 {
+    margin-bottom: 10px;
+}
+
+/* FEATURES NIVEL PRO */
+.features-alt {
+    background: linear-gradient(180deg, #f8faff, #ffffff);
+    padding: 80px 0;
+    border-radius: 40px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.35s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* glow hover elegante */
+.feature-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(99,102,241,0.2), transparent);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 55px rgba(99,102,241,0.18);
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+}
+
+/* línea superior */
+.feature-card h3::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #6366f1;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+/* ICONO */
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15);
+}
+
+/* CTA */
+.cta-final {
+    background: linear-gradient(135deg, #faf7f0 0%, #ffffff 50%, #f0f4ff 100%);
+    border-radius: 40px;
+    padding: 4rem 3rem;
+    text-align: center;
+    color: var(--primary);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(51, 54, 82, 0.12);
+    border: 1px solid rgba(250, 208, 44, 0.15);
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.cta-final::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(250, 208, 44, 0.12), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.cta-final h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-final p {
+    max-width: 680px;
+    margin: 0 auto 4.5rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-cta {
+    background: linear-gradient(135deg, var(--accent), #ffd700);
+    color: var(--primary);
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1rem;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition: all 0.35s ease;
+    box-shadow: 0 15px 40px rgba(250, 208, 44, 0.35);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 60px rgba(250, 208, 44, 0.45);
+}
+
+.btn-cta:active {
+    transform: translateY(-1px);
+}
+
+
+</style>
+
+<style>
+/* Page-specific fixes: ensure features display correctly */
+.features-alt .feature-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: start;
+}
+.features-alt .feature-card {
+    position: relative;
+    z-index: 2;
+    min-height: 160px;
+}
+.features-alt .container {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+.features-alt {
+    overflow: visible;
+}
+</style>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L6YE3WYDGJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L6YE3WYDGJ');
+</script>
+
+</head>
+
+<body>
+<nav class="navbar" role="navigation">
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="../../index.html">Inicio</a>
+        <a href="planes.html">Planes</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="blog.html">Blog</a>
+        <a href="comunidad.html">Comunidad</a>
+        <a href="login.html" class="btn-accent">Unirme gratis</a>
+    </div>
+</nav>
+
+    <!-- HERO -->
+    <header class="hero">
+
+    <div class="container">
+
+    <h1 class="fade-in">
+    No estudias solo. <br>
+    <span>Estudias mejor.</span>
+    </h1>
+
+    <p class="fade-in">
+    No dependes de motivación. Dependes de entorno. Y eso cambia todo.
+    </p>
+
+    <div class="hero-btns">
+    <a href="login.html" class="btn-accent">Entrar a la comunidad</a>
+    <a href="#features" class="btn-outline">Cómo funciona</a>
+    </div>
+
+
+    </header>
+
+    <!-- EXPLICACIÓN -->
+    <section class="why-section container">
+    <h2>¿Qué es Catalyst Comunidad?</h2>
+    <p>
+    Un sistema diseñado para que estudies sin abandonar. Te conectas, entras en ritmo y sigues.
+    </p>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features-alt">
+    <div class="container feature-grid">
+
+    <div class="feature-card fade-in">
+    <div class="feature-icon">⏱️</div>
+    <h3>Sesiones activas</h3>
+    <p>Entras y ya hay movimiento. No pierdes tiempo empezando desde cero.</p>
+    </div>
+
+    <div class="feature-card fade-in">
+    <div class="feature-icon">💬</div>
+    <h3>Apoyo inmediato</h3>
+    <p>Preguntas, resuelves y continúas. Sin bloqueos.</p>
+    </div>
+
+    <div class="feature-card fade-in">
+    <div class="feature-icon">🔥</div>
+    <h3>Disciplina automática</h3>
+    <p>No dependes de ganas. El entorno te mantiene en marcha.</p>
+    </div>
+
+    </div>
+    </section>
+
+    <!-- POR QUÉ -->
+    <section class="why-section container">
+    <h2>¿Por qué funciona?</h2>
+    <p>
+    Porque elimina el mayor enemigo: estudiar solo. Aquí siempre hay inercia.
+    </p>
+    </section>
+
+
+    <!-- COMUNIDAD CATALYST -->
+    <section class="container community-section">
+
+    <h2>COMUNIDAD CATALYST</h2>
+    <p class="section-sub">
+    Lo que dice la Manada <br>
+    </p>
+
+    <div class="community-grid">
+
+    <div class="community-card">
+    <p>
+    Catalyst es muy bueno, y la verdad me gusta bastante. Al inicio pensé que iba a ser re pesado pero nada que ver, las clases son chéveres y uno sí entiende muchos temas.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Me gustan mucho las dinámicas porque no es aburrido. Los simulacros sirven full para agarrar práctica y no llegar perdido al ICFES.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Algo que me gusta bastante es la comunidad. El ambiente es bacano y uno se siente cómodo. La verdad me hacen sentir feliz estando ahí.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    En general siento que sí ayuda y que uno mejora. A veces es exigente, pero vale la pena.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    No pierdas tiempo e inscríbete ya mismo. Si no entiendes, te explican de mil formas hasta que lo logres.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    No es un pre-ICFES convencional. Aquí hay risas, ambiente joven y clases que de verdad se disfrutan.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Los profes son muy buenos y explican excelente. Se nota el nivel.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    <div class="community-card">
+    <p>
+    Las clases de lectura crítica y sociales cambiaron totalmente cómo entiendo los temas.
+    </p>
+    <div class="user">
+    <div class="avatar">A</div>
+    <div>
+    <strong>Anónimo</strong>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="container">
+        <div class="cta-final">
+            <h2>Empieza hoy</h2>
+            <p>Entra, conéctate y deja que el sistema haga el resto.</p>
+            <a class="btn-cta" href="https://chat.whatsapp.com/IEb6G6sKjDKDqB0bnU4ZHf">Entrar ahora</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+    <div class="container footer-content">
+    <p>© 2026 Catalyst Education</p>
+    </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+    // Smooth scroll to #features anchor and ensure focus
+    document.addEventListener('click', function(e){
+        const a = e.target.closest('a[href="#features"]');
+        if(!a) return;
+        e.preventDefault();
+        const target = document.getElementById('features');
+        if(target){
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+    });
+    </script>
+</body>
+</html>

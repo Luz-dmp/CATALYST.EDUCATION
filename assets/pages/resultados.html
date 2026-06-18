@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Pre-ICFES | Catalyst Education</title>
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .results-panel {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 22px 45px rgba(51, 54, 82, 0.08);
+            overflow: hidden;
+            margin: 2rem auto;
+            max-width: 1100px;
+        }
+
+        .results-panel .section-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid rgba(51, 54, 82, 0.08);
+        }
+
+        .results-panel .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin: 0 0 0.5rem;
+            font-weight: 800;
+        }
+
+        .results-panel .section-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(51, 54, 82, 0.08);
+        }
+
+        .search-box input {
+            max-width: 420px;
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+            border: 1px solid rgba(51, 54, 82, 0.12);
+            background: rgba(255, 255, 255, 0.98);
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(250, 208, 44, 0.16);
+        }
+
+        .search-box button {
+            min-width: 180px;
+        }
+
+        .results-output {
+            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            min-width: 0;
+        }
+
+        .simulacros-selection {
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.8rem;
+            box-shadow: 0 16px 32px rgba(51, 54, 82, 0.06);
+        }
+
+        .simulacros-selection h3 {
+            margin: 0 0 1rem;
+            color: var(--primary);
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .simulacros-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .simulacro-btn {
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(51, 54, 82, 0.12);
+            background: var(--bg-light);
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            text-align: center;
+            min-height: 62px;
+        }
+
+        .simulacro-btn:hover,
+        .simulacro-btn.active {
+            border-color: rgba(250, 208, 44, 0.9);
+            box-shadow: 0 12px 28px rgba(250, 208, 44, 0.15);
+            transform: translateY(-1px);
+            background: #fff8e6;
+        }
+
+        .detalle-resultado {
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 1.6rem;
+            text-align: center;
+            box-shadow: 0 18px 32px rgba(51, 54, 82, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 0;
+            overflow-wrap: break-word;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 42px rgba(51, 54, 82, 0.12);
+        }
+
+        .metric-card span {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .metric-card strong {
+            display: block;
+            font-size: 2.4rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .metric-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .results-output h3 {
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 700;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(51, 54, 82, 0.08);
+        }
+
+        .results-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .area-card {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 48px rgba(51, 54, 82, 0.12);
+        }
+
+        .area-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .area-meta h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .area-score {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .level-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(250, 208, 44, 0.15);
+            color: var(--accent);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid rgba(250, 208, 44, 0.35);
+        }
+
+        .progress-track {
+            background: rgba(51, 54, 82, 0.08);
+            border-radius: 999px;
+            height: 18px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-fill {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+            transition: width 0.6s ease;
+            box-shadow: inset 0 0 12px rgba(250, 208, 44, 0.2);
+        }
+
+        .progress-text,
+        .area-description,
+        .area-recommendation {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin: 0.8rem 0 0;
+            color: var(--text-muted);
+        }
+
+        .area-recommendation {
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(250, 208, 44, 0.12);
+            padding: 1rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.55rem 1rem;
+            background: rgba(250, 208, 44, 0.14);
+            border: 1px solid rgba(250, 208, 44, 0.35);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .no-result {
+            background: rgba(250, 208, 44, 0.12);
+            border: 1px solid rgba(250, 208, 44, 0.35);
+            border-radius: 24px;
+            padding: 2rem;
+            color: var(--primary);
+            margin: 2rem 0;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .student-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(51, 54, 82, 0.12);
+        }
+
+        .student-name {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+
+        .student-name strong {
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .student-doc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .dashboard-summary {
+            margin-bottom: 2.5rem;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .main-score-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .score-display {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin: 0;
+            display: block;
+        }
+
+        .score-label {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.8rem;
+            display: block;
+        }
+
+        .score-level {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: var(--bg-dark);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .side-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .side-metric-item {
+            background: rgba(250, 208, 44, 0.08);
+            border: 1px solid rgba(250, 208, 44, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .side-metric-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .side-metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.6rem;
+            line-height: 1.4;
+        }
+
+        .report-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .overview-card,
+        .insight-card {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .overview-card h3,
+        .insight-card h3 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin: 0 0 1.2rem;
+            font-weight: 700;
+        }
+
+        .status-pill {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: var(--bg-dark);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .insight-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin: 0.8rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .results-panel {
+                margin: 1rem 1rem;
+            }
+            .results-panel .section-header {
+                padding: 1.8rem 1.5rem;
+            }
+            .report-summary {
+                grid-template-columns: 1fr;
+            }
+            .main-score-block {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .search-box {
+                flex-direction: column;
+            }
+            .search-box input,
+            .search-box button {
+                width: 100%;
+            }
+            .search-box button {
+                margin-top: 1rem;
+            }
+            .area-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .score-number {
+                font-size: 4rem;
+            }
+            .results-output h3 {
+                font-size: 1.4rem;
+            }
+            .area-score {
+                font-size: 2.2rem;
+            }
+            .area-card,
+            .metric-card,
+            .overview-card,
+            .insight-card {
+                padding: 1.5rem;
+            }
+            .progress-track {
+                height: 14px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .results-panel .section-header p {
+                font-size: 0.95rem;
+            }
+            .metric-card strong {
+                font-size: 2rem;
+            }
+            .metric-card span {
+                font-size: 0.9rem;
+            }
+            .score-number {
+                font-size: 3.2rem;
+            }
+            .side-metric-value {
+                font-size: 2.2rem;
+            }
+            .student-name {
+                font-size: 1.4rem;
+            }
+            .area-card {
+                padding: 1.2rem;
+            }
+            .search-box {
+                padding: 1.2rem 1rem;
+            }
+            .results-output {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .search-box {
+                gap: 0.75rem;
+            }
+            .search-box button {
+                padding: 1rem;
+            }
+            .metric-card span {
+                font-size: 0.85rem;
+            }
+            .area-score {
+                font-size: 1.9rem;
+            }
+            .metric-card {
+                padding: 1.2rem;
+            }
+            .metric-card strong {
+                font-size: clamp(1.6rem, 6vw, 2rem);
+            }
+            .score-number {
+                font-size: 2.8rem;
+            }
+            .side-metrics {
+                grid-template-columns: 1fr;
+            }
+            .side-metric-value {
+                font-size: 2rem;
+            }
+            .student-name {
+                font-size: 1.2rem;
+            }
+            .dashboard-summary {
+                padding: 1.5rem;
+            }
+            .results-output h3 {
+                font-size: 1.3rem;
+            }
+            .status-pill {
+                font-size: 0.95rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+    </style>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6YE3WYDGJ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-L6YE3WYDGJ');
+    </script>
+
+</head>
+
+<body>
+
+<nav class="navbar" role="navigation">
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="../../index.html">Inicio</a>
+        <a href="planes.html">Planes</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="blog.html">Blog</a>
+        <a href="comunidad.html">Comunidad</a>
+        <a href="login.html" class="btn-accent">Unirme gratis</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <span class="hero-tag">Resultados</span>
+        <h1 class="fade-in">Revisa tu rendimiento Pre-ICFES</h1>
+        <p class="fade-in">Ingresa tu número de documento y descubre tu nivel en cada área con una vista clara y optimizada.</p>
+    </div>
+</header>
+
+<main class="container">
+    <section class="results-panel">
+        <div class="section-header">
+            <h2>Informe de resultados</h2>
+            <p>Prueba diagnóstica</p>
+        </div>
+
+        <div class="search-box">
+            <input id="doc" type="text" placeholder="Número de documento" aria-label="Número de documento">
+            <button type="button" class="btn-accent" onclick="consultar()">Consultar</button>
+        </div>
+
+        <div id="resultado" class="results-output"></div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>© 2026 Catalyst Education. Impulsa tu preparación con claridad y estilo.</p>
+    </div>
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="../js/main.js"></script>
+<script>
+
+const SUPABASE_URL = "https://wqnkrlvleprpryymupvl.supabase.co";
+const SUPABASE_KEY = "sb_publishable_VkXAJcQj_l1MrdfDEUpXlA_uCzZFDi_";
+
+const supabaseClient = typeof supabase !== 'undefined' && supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+console.log("Supabase global:", typeof supabase, supabase);
+console.log("Supabase project URL:", SUPABASE_URL);
+console.log("Supabase client ready:", !!supabaseClient);
+
+    const SIMULACROS_TABLES = [
+        { table: 'resultados_cat_nova_01_a', label: 'CAT NOVA 01 - Primera presentación' },
+        { table: 'resultados_cat_nova_01_b', label: 'CAT NOVA 01 - Segunda presentación' },
+        { table: 'resultados_cat_core_02', label: 'CAT CORE 02' },
+        { table: 'resultados_cat_nova_02_a', label: 'CAT NOVA 02 - Primera presentación' },
+        { table: 'resultados_cat_nova_02_b', label: 'CAT NOVA 02 - Segunda presentación' }
+    ];
+
+
+
+ 
+let simulacrosData = [];
+
+function setErrorMessage(message) {
+    const resultado = document.getElementById('resultado');
+    if (resultado) {
+        resultado.innerHTML = `<p class="no-result">${message}</p>`;
+    }
+}
+
+function formatPersonaData(persona) {
+    return {
+        nombre: persona.nombre,
+        documento: persona.documento,
+        matematicas: persona.matematicas,
+        lectura: persona.lectura,
+        sociales: persona.sociales,
+        naturales: persona.naturales,
+        ingles: persona.ingles,
+        respuestas_correctas: persona.respuestas_correctas,
+        percentil_global: persona.percentil,
+        puntaje_global: persona.puntaje_global
+    };
+}
+
+function renderBotones(results) {
+    return `
+        <div class="simulacros-selection">
+            <h3>Selecciona el simulacro</h3>
+            <div class="simulacros-buttons">
+                ${results.map((item, index) => `
+                    <button type="button" class="simulacro-btn" onclick="mostrarResultado(${index})">
+                        ${item.label}
+                    </button>
+                `).join('')}
+            </div>
+        </div>
+        <div id="detalle-resultado" class="detalle-resultado"></div>
+    `;
+}
+
+function mostrarResultado(index) {
+    const detalle = document.getElementById('detalle-resultado');
+    const botones = document.querySelectorAll('.simulacro-btn');
+
+    if (!detalle || !simulacrosData[index]) return;
+
+    botones.forEach((button, idx) => {
+        button.classList.toggle('active', idx === index);
+    });
+
+    const personaFormateada = formatPersonaData(simulacrosData[index].persona);
+    detalle.innerHTML = renderResult(personaFormateada);
+}
+
+async function consultar() {
+    const docInput = document.getElementById('doc');
+    const resultado = document.getElementById('resultado');
+    const doc = docInput ? docInput.value.trim() : "";
+
+    console.log("Consultar documento:", doc);
+
+    // Limpiar estado previo
+    simulacrosData = [];
+    if (resultado) {
+        resultado.innerHTML = '';
+    }
+
+    if (!supabaseClient) {
+        console.error("Supabase no está disponible", window.supabase);
+        setErrorMessage("❌ Error interno: no se pudo inicializar Supabase.");
+        return;
+    }
+
+    if (!doc) {
+        setErrorMessage("❌ Ingresa un número de documento.");
+        return;
+    }
+
+    if (resultado) {
+        resultado.innerHTML = `<p class="no-result">Buscando tus resultados...</p>`;
+    }
+
+    try {
+        // Búsqueda exacta únicamente con .eq() - sin ilike() ni coincidencias parciales
+        const queries = SIMULACROS_TABLES.map(({ table, label }) => (async () => {
+            console.log(`Iniciando consulta en tabla ${table} para documento:`, doc);
+
+            // Búsqueda exacta solo
+            const res = await supabaseClient.from(table).select('*').eq('documento', doc);
+            console.log(`Respuesta eq en ${table}:`, res);
+
+            return { table, label, result: res };
+        })());
+
+        const queryResults = await Promise.all(queries);
+
+        console.log('Supabase consultas múltiples:', queryResults);
+
+        const availableResults = queryResults.map(({ result, label, table }) => {
+            if (result && result.error) {
+                return { error: result.error, label, persona: null, table };
+            }
+
+            const persona = result && result.data && result.data.length ? result.data[0] : null;
+            return { label, persona, table, raw: result && result.data };
+        });
+
+        // Logs por tabla
+        availableResults.forEach(item => {
+            if (item.error) {
+                console.error(`Error consultando tabla ${item.table}:`, item.error);
+            } else if (!item.persona) {
+                console.log(`Sin coincidencias en tabla ${item.table}`);
+            } else {
+                console.log(`Encontrado en tabla ${item.table}:`, item.persona);
+            }
+        });
+
+        const validResults = availableResults.filter(item => item.persona);
+
+        // Si hubo errores pero también hay resultados válidos, mostramos los válidos
+        const firstError = availableResults.find(item => item.error);
+        if (firstError && validResults.length === 0) {
+            console.error('Error en consultas múltiples Supabase (sin datos válidos):', firstError.error);
+            simulacrosData = [];
+            setErrorMessage(`❌ Error al consultar los resultados: ${firstError.error.message || 'Intenta nuevamente.'}`);
+            return;
+        }
+
+        if (!validResults.length) {
+            simulacrosData = [];
+            setErrorMessage('❌ Documento no encontrado.');
+            return;
+        }
+
+        simulacrosData = validResults;
+        resultado.innerHTML = renderBotones(validResults);
+        console.log('simulacrosData listo para render:', simulacrosData);
+
+        setTimeout(() => {
+            if (validResults.length > 0) {
+                mostrarResultado(0);
+            }
+        }, 100);
+
+    } catch (err) {
+        console.error('Error inesperado en consultar():', err);
+        simulacrosData = [];
+        setErrorMessage('❌ Ocurrió un problema al buscar los datos.');
+    }
+}
+
+
+const areas = [
+    {key: 'matematicas', label: 'Matemáticas', icon: '∑'},
+    {key: 'lectura', label: 'Lectura Crítica', icon: '📖'},
+    {key: 'sociales', label: 'Ciencias Sociales', icon: '🌍'},
+    {key: 'naturales', label: 'Ciencias Naturales', icon: '🧬'},
+    {key: 'ingles', label: 'Inglés', icon: '🌐'}
+];
+
+const levels = [
+    {
+        max: 30,
+        color: 'red',
+        title: 'Bajo',
+        competency: 'Reconoce ideas simples y conceptos básicos.',
+        recommendation: 'Revisa fundamentos y realiza ejercicios guiados con ejemplos paso a paso.'
+    },
+    {
+        max: 50,
+        color: 'orange',
+        title: 'Básico',
+        competency: 'Relaciona información directa y responde preguntas sencillas.',
+        recommendation: 'Practica con textos cortos, problemas resueltos y retroalimentación frecuente.'
+    },
+    {
+        max: 70,
+        color: 'yellow',
+        title: 'Intermedio',
+        competency: 'Interpreta datos, analiza situaciones y aplica conocimientos en contexto.',
+        recommendation: 'Trabaja con ejercicios de razonamiento, lectura crítica y problemas integrados.'
+    },
+    {
+        max: 85,
+        color: 'green',
+        title: 'Avanzado',
+        competency: 'Analiza, argumenta y resuelve problemas de complejidad media.',
+        recommendation: 'Profundiza con simulacros reales y revisa errores para ajustar tu estrategia.'
+    },
+    {
+        max: 100,
+        color: 'green',
+        title: 'Excelente',
+        competency: 'Sintetiza, evalúa y comunica soluciones con seguridad.',
+        recommendation: 'Mantén práctica con desafíos de nivel superior y enfoca el repaso en detalles.'
+    }
+];
+const recomendaciones = {
+    matematicas: {
+        bajo: [
+            "Refuerza operaciones básicas y aritmética.",
+            "Practica problemas paso a paso.",
+            "Revisa fracciones y porcentajes.",
+            "Trabaja comprensión de enunciados.",
+            "Haz ejercicios de lógica básica."
+        ],
+        medio: [
+            "Practica interpretación de gráficas.",
+            "Resuelve problemas con varias variables.",
+            "Refuerza ecuaciones.",
+            "Mejora rapidez en cálculos.",
+            "Aplica matemáticas a la vida real."
+        ],
+        alto: [
+            "Resuelve problemas tipo ICFES avanzados.",
+            "Practica argumentación matemática.",
+            "Trabaja funciones y modelos.",
+            "Optimiza estrategias de solución.",
+            "Entrena con simulacros."
+        ]
+    },
+
+    lectura: {
+        bajo: [
+            "Identifica ideas principales en textos.",
+            "Practica lectura literal.",
+            "Trabaja vocabulario básico.",
+            "Resume textos cortos.",
+            "Responde preguntas simples."
+        ],
+        medio: [
+            "Relaciona ideas entre párrafos.",
+            "Practica inferencias.",
+            "Analiza estructura de textos.",
+            "Identifica ideas implícitas.",
+            "Trabaja textos argumentativos."
+        ],
+        alto: [
+            "Evalúa intención del autor.",
+            "Analiza argumentos complejos.",
+            "Compara textos.",
+            "Trabaja lectura crítica avanzada.",
+            "Practica textos filosóficos."
+        ]
+    },
+
+    sociales: {
+        bajo: [
+            "Refuerza conceptos básicos de historia.",
+            "Ubica eventos en el tiempo.",
+            "Identifica actores sociales.",
+            "Estudia geografía básica.",
+            "Reconoce problemáticas sociales."
+        ],
+        medio: [
+            "Analiza causas y consecuencias.",
+            "Relaciona eventos históricos.",
+            "Interpreta mapas.",
+            "Evalúa diferentes perspectivas.",
+            "Trabaja pensamiento crítico."
+        ],
+        alto: [
+            "Analiza conflictos sociales complejos.",
+            "Evalúa argumentos políticos.",
+            "Relaciona múltiples variables sociales.",
+            "Profundiza en historia global.",
+            "Practica análisis crítico avanzado."
+        ]
+    },
+
+    naturales: {
+        bajo: [
+            "Refuerza conceptos básicos de biología.",
+            "Estudia física básica.",
+            "Comprende cambios químicos simples.",
+            "Identifica variables en experimentos.",
+            "Practica conceptos clave."
+        ],
+        medio: [
+            "Relaciona conceptos científicos.",
+            "Analiza fenómenos naturales.",
+            "Interpreta datos experimentales.",
+            "Trabaja modelos científicos.",
+            "Aplica conceptos en contextos."
+        ],
+        alto: [
+            "Analiza fenómenos complejos.",
+            "Trabaja investigación científica.",
+            "Evalúa hipótesis.",
+            "Interpreta datos avanzados.",
+            "Resuelve problemas científicos."
+        ]
+    },
+
+    ingles: {
+        bajo: [
+            "Aprende vocabulario básico.",
+            "Practica frases simples.",
+            "Relaciona palabras con imágenes.",
+            "Lee textos cortos.",
+            "Escucha inglés básico."
+        ],
+        medio: [
+            "Comprende textos simples.",
+            "Practica gramática básica.",
+            "Lee diálogos.",
+            "Aprende conectores.",
+            "Ejercita comprensión lectora."
+        ],
+        alto: [
+            "Analiza textos completos.",
+            "Practica inferencias.",
+            "Amplía vocabulario.",
+            "Lee artículos en inglés.",
+            "Haz simulacros tipo Saber 11."
+        ]
+    }
+};
+
+function nivelLogico(score) {
+    if (score < 50) return "bajo";
+    if (score < 70) return "medio";
+    return "alto";
+}
+
+function obtenerRecomendaciones(areaKey, score) {
+    const nivel = nivelLogico(score);
+    const lista = recomendaciones[areaKey][nivel];
+
+    // Solo muestra 3 aleatorias (MEJOR UX)
+    const seleccionadas = lista.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    return seleccionadas.join("<br>• ");
+}
+
+function getPerformance(score) {
+    return levels.find(level => score <= level.max) || levels[levels.length - 1];
+}
+
+function computeAverage(values) {
+    const sum = values.reduce((acc, value) => acc + value, 0);
+    return Math.round(sum / values.length);
+}
+
+const FIXED_GROUP_AVERAGE = {
+    matematicas: 64,
+    lectura: 61,
+    sociales: 57,
+    naturales: 59,
+    ingles: 55,
+    overall: 59
+};
+
+function compareScore(score, average) {
+    if (score >= average) {
+        return { text: 'Por encima del promedio', badge: 'above' };
+    }
+    return { text: 'Por debajo del promedio', badge: 'below' };
+}
+
+function buildGlobalSummary(persona, groupAverage) {
+    const scores = areas.map(area => persona[area.key]);
+    const globalScore = computeAverage(scores);
+    const performance = getPerformance(globalScore);
+    const comparison = compareScore(globalScore, groupAverage.overall);
+
+    return {
+        globalScore,
+        performance,
+        comparison,
+        strengths: scores.filter(score => score >= 70).length,
+        areasBelowAverage: areas.filter(area => persona[area.key] < groupAverage[area.key]).length
+    };
+}
+
+function createMetricCard(label, value, suffix = '') {
+    return `
+        <div class="metric-card">
+            <span>${label}</span>
+            <strong>${value}${suffix}</strong>
+        </div>
+    `;
+}
+
+function createAreaCard(area, score, average) {
+    const performance = getPerformance(score);
+    const comparison = compareScore(score, average);
+
+    return `
+        <article class="area-card">
+            <div class="area-meta">
+                <div>
+                    <h4>${area.label}</h4>
+                    <div class="level-pill">${performance.title}</div>
+                </div>
+                <div class="area-score">${score}/100</div>
+            </div>
+            <div class="progress-track">
+                <span class="progress-fill" style="width: ${score}%;"></span>
+            </div>
+            <p class="area-description"><strong>Habilidad:</strong> ${performance.competency}</p>
+            <p class="comparison-badge">${comparison.text} (Promedio: ${average}%)</p>
+            <div class="area-recommendation">
+                <strong>Recomendación:</strong><br>
+                • ${obtenerRecomendaciones(area.key, score)}
+            </div>
+        </article>
+    `;
+}
+
+function renderResult(persona) {
+    const groupAverage = FIXED_GROUP_AVERAGE;
+    const summary = buildGlobalSummary(persona, groupAverage);
+
+    const scores = areas.map(area => persona[area.key]);
+
+    return `
+        <div class="student-header">
+            <h2 class="student-name">Resultados de: <strong>${persona.nombre || 'Estudiante'}</strong></h2>
+            <p class="student-doc">Documento: ${persona.documento}</p>
+        </div>
+
+        <div class="dashboard-summary">
+            <div class="main-score-block">
+                <div class="score-display">
+                    <div class="score-number">${persona.puntaje_global || summary.globalScore}</div>
+                    <div class="score-label">Puntaje Global</div>
+                    <div class="score-level">${summary.performance.title}</div>
+                </div>
+                
+                <div class="side-metrics">
+                    <div class="side-metric-item">
+                        <div class="side-metric-value">${persona.percentil_global || 'N/A'}</div>
+                        <div class="side-metric-label">Percentil</div>
+                    </div>
+                    <div class="side-metric-item">
+                        <div class="side-metric-value">${persona.respuestas_correctas || 0}</div>
+                        <div class="side-metric-label">Respuestas<br>Correctas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Desempeño por áreas</h3>
+        <div class="results-list">
+            ${areas.map(area => createAreaCard(area, persona[area.key], groupAverage[area.key])).join('')}
+        </div>
+    `;
+}
+</script>
+</body>
+</html>

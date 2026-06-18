@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Pomodoro | Catalyst</title>
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        .section-alt {
+            background: linear-gradient(180deg, #f8faff, #ffffff);
+            padding: 4rem 0 3rem;
+        }
+
+        .section-alt .section-header {
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+
+        .section-alt .section-title {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-alt .section-copy {
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .section-alt .blog-tag {
+            display: inline-flex;
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(250, 208, 44, 0.16);
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .section-alt .feature-grid {
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .section-alt .feature-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 160px;
+        }
+
+        .section-alt .feature-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(99,102,241,0.2), transparent);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .section-alt .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 55px rgba(99,102,241,0.18);
+        }
+
+        .section-alt .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .section-alt .feature-card h3::before {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 720px) {
+            .section-alt {
+                padding: 3rem 0 2rem;
+            }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6YE3WYDGJ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-L6YE3WYDGJ');
+    </script>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar" role="navigation">
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="../../index.html">Inicio</a>
+        <a href="planes.html">Planes</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="blog.html">Blog</a>
+        <a href="comunidad.html">Comunidad</a>
+        <a href="login.html" class="btn-accent">Unirme gratis</a>
+    </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+    <div class="container">
+        <span class="hero-tag">PRODUCTIVIDAD</span>
+
+        <h1 class="fade-in">
+            El método <span>Pomodoro</span><br>
+            para estudiar con foco real
+        </h1>
+
+        <p class="fade-in">
+            Una técnica simple para organizar tu estudio, concentrarte mejor
+            y avanzar sin saturarte.
+        </p>
+
+        <div class="hero-meta fade-in">
+            <div>
+                <strong>25 min</strong>
+                <span>Enfoque</span>
+            </div>
+            <div>
+                <strong>5 min</strong>
+                <span>Descanso</span>
+            </div>
+            <div>
+                <strong>4 ciclos</strong>
+                <span>Rutina</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section class="container features">
+    <h2 class="section-title">¿Qué es el método Pomodoro?</h2>
+
+    <div class="feature-grid">
+        <article class="feature-card fade-in">
+            <h3>Estudio por bloques</h3>
+            <p>
+                El método Pomodoro divide el estudio en bloques cortos de tiempo
+                para mantener la atención sin llegar al agotamiento.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Descansos reales</h3>
+            <p>
+                Los descansos breves ayudan al cerebro a procesar la información
+                y prepararse para el siguiente ciclo.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Más constancia</h3>
+            <p>
+                Es más fácil comenzar una sesión corta que una larga sin límite claro.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="container features section-alt">
+    <div class="section-header">
+    
+        <h2 class="section-title">¿Por qué funciona el método Pomodoro?</h2>
+        <p class="section-copy">Con intervalos claros y pausas bien definidas, el método Pomodoro transforma tu estudio en bloques productivos sin saturarte.</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card fade-in">
+            <h3>Mantiene tu mente fresca</h3>
+            <p>Al trabajar en intervalos cortos, evitas la fatiga mental que reduce tu rendimiento.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+            <h3>Mejora la concentración</h3>
+            <p>Saber que solo debes enfocarte 25 minutos hace más fácil eliminar distracciones.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+            <h3>Reduce la procrastinación</h3>
+            <p>Comenzar es más sencillo cuando el compromiso es corto y claro.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section class="container features">
+    <h2 class="section-title">Cómo usar Pomodoro correctamente</h2>
+
+    <div class="feature-grid">
+        <article class="feature-card fade-in">
+            <h3>Define un objetivo</h3>
+            <p>
+                Cada Pomodoro debe tener una meta clara,
+                no solo “estudiar por estudiar”.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Evita distracciones</h3>
+            <p>
+                Durante el ciclo, elimina notificaciones
+                y cualquier estímulo innecesario.
+            </p>
+        </article>
+
+        <article class="feature-card fade-in">
+            <h3>Repite el proceso</h3>
+            <p>
+                La efectividad del método está en la constancia,
+                no en una sola sesión.
+            </p>
+        </article>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="blog-cta">
+    <div class="cta-card">
+        <h2>Aplica Pomodoro con la herramienta correcta</h2>
+        <p>
+            En Catalyst integramos esta técnica directamente en Focus Mode
+            para que estudies con estructura y sin distracciones.
+        </p>
+        <a href="focus.html" class="btn-outline">Activar Focus Mode</a>
+    </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>
+            © 2026 Catalyst Education. Comunidad de estudiantes con aspiraciones altas
+            y resultados medibles.
+        </p>
+    </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

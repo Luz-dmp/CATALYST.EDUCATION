@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Catalyst</title>
+
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* DASHBOARD IMPROVEMENTS */
+.dashboard-hero {
+  padding: 80px 0 100px;
+}
+
+.dashboard-hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.dashboard-left h1 {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+
+.dashboard-left p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.dashboard-actions .logout-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(51, 54, 82, 0.1);
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  color: var(--primary);
+}
+
+.dashboard-actions .logout-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-dark);
+  transform: translateY(-2px);
+}
+
+.progress-section {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(51, 54, 82, 0.08);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.progress-header h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.progress-badge {
+  background: linear-gradient(135deg, var(--accent), #fad830);
+  color: var(--bg-dark);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  height: 10px;
+  background: rgba(51, 54, 82, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #fad830);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 20px rgba(250, 208, 44, 0.4);
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.course-card {
+  background: white;
+  border: 1.5px solid rgba(51, 54, 82, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 15px 35px rgba(51, 54, 82, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(250, 208, 44, 0.3);
+  box-shadow: 0 25px 60px rgba(99, 102, 241, 0.12);
+}
+
+.course-header {
+  margin-bottom: 16px;
+}
+
+.course-tag {
+  display: inline-block;
+  background: rgba(250, 208, 44, 0.15);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.course-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--primary);
+}
+
+.course-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.course-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(51, 54, 82, 0.08);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.status-badge {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.status-badge.locked {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.course-btn {
+  padding: 12px 18px;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg-dark);
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  align-self: flex-start;
+}
+
+.course-btn.active:hover {
+  background: #fad830;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(250, 208, 44, 0.3);
+}
+
+.course-btn.locked {
+  background: rgba(51, 54, 82, 0.08);
+  border-color: rgba(51, 54, 82, 0.08);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.upgrade-banner {
+  background: linear-gradient(135deg, var(--accent), #fad830);
+  border-radius: 20px;
+  padding: 32px;
+  color: var(--bg-dark);
+  margin-top: 40px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(250, 208, 44, 0.2);
+}
+
+.upgrade-banner h3 {
+  font-size: 1.5rem;
+  margin: 0 0 12px;
+  color: var(--bg-dark);
+}
+
+.upgrade-banner p {
+  color: rgba(31, 31, 46, 0.8);
+  margin: 0 0 20px;
+}
+
+.upgrade-banner a {
+  display: inline-block;
+  background: white;
+  color: var(--accent);
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.upgrade-banner a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 900px) {
+  .dashboard-hero-inner {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-left h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L6YE3WYDGJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L6YE3WYDGJ');
+</script>
+
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar" role="navigation">
+    <div class="logo">
+        <img src="../../assets/img/Logo.png" alt="Catalyst">
+    </div>
+
+    <button class="menu-toggle" id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="../../index.html">Inicio</a>
+        <a href="planes.html">Planes</a>        <a href="resultados.html">Resultados</a>        <a href="blog.html">Blog</a>
+        <a href="comunidad.html">Comunidad</a>
+    </div>
+</nav>
+
+<!-- HERO DASHBOARD -->
+<header class="hero dashboard-hero">
+  <div class="container dashboard-hero-inner">
+    <div class="dashboard-left">
+      <div class="dashboard-top"> 
+        <div class="dashboard-title">
+            <h1 class="fade-in">Tu Dashboard</h1>
+            <p id="userGreeting" class="fade-in">Cargando tu información...</p>
+          </div>
+        <div class="dashboard-actions">
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Salir
+          </button>
+        </div>
+      </div>
+      <p style="max-width: 560px; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">Aquí puedes ver tu avance, comenzar la práctica gratuita y avanzar hacia las secciones premium. Mantén el ritmo y completa tu objetivo diario.</p>
+    </div>
+
+    <div>
+      <div class="progress-section">
+        <div class="progress-header">
+          <h2>Tu Progreso General</h2>
+          <span class="progress-badge" id="progressPercentage" aria-live="polite">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+        <div class="progress-text">
+          <span>Necesitas más dedicación</span>
+          <span id="progressDetail">0 / 100%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURSOS -->
+<main class="container">
+  <h2 class="section-title">Tu plan de estudio</h2>
+  <div class="courses-grid" id="coursesGrid">
+    <!-- Cursos se cargarán dinámicamente -->
+  </div>
+
+  <!-- BANNER UPGRADE -->
+  <div id="upgradeBanner"></div>
+</main>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCxQs3AEOZcplPl-NFvsqSs87fDsE5JroA",
+  authDomain: "catalyst-app-8eae5.firebaseapp.com",
+  projectId: "catalyst-app-8eae5",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Reveal hero immediately (respect prefers-reduced-motion)
+try{
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.hero .fade-in').forEach(el=>el.classList.add('appear'));
+  } else {
+    document.querySelectorAll('.hero .fade-in').forEach(el=>el.style.opacity=1);
+  }
+}catch(e){}
+
+// Detectar usuario y cargar datos
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()){
+      const data = docSnap.data();
+      const userEmail = user.email.split("@")[0];
+
+      // Actualizar greeting
+      document.getElementById("userGreeting").innerText = 
+        `Bienvenido, ${userEmail} 👋`;
+
+      // Actualizar progreso
+      const progress = (data.progress || 0) * 100;
+      document.getElementById("progressPercentage").innerText = progress.toFixed(0) + "%";
+      const pf = document.getElementById("progressFill");
+      pf.style.width = progress + "%";
+      pf.setAttribute('aria-valuenow', progress.toFixed(0));
+      document.getElementById("progressDetail").innerText = 
+        `${progress.toFixed(0)} / 100%`;
+
+      // Cargar cursos
+      loadCourses(data);
+    }
+
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+// CARGAR CURSOS
+function loadCourses(userData) {
+  const coursesData = [
+    {
+      id: 1,
+      tag: "Gratuito",
+      title: "Día 1: Bases del ICFES",
+      description: "Práctica básica + mini simulacro de 30 preguntas",
+      locked: false,
+      link: "ejercicio.html"
+    },
+    {
+      id: 2,
+      tag: "Premium",
+      title: "Día 2: Simulacro Completo",
+      description: "Examen completo con todas las secciones del ICFES",
+      locked: userData.plan === "free",
+      link: "planes.html"
+    },
+    {
+      id: 3,
+      tag: "Premium",
+      title: "Día 3: Mentoría + Plan Avanzado",
+      description: "Sesión 1:1 con mentor + plan de estudio personalizado",
+      locked: userData.plan === "free",
+      link: "planes.html"
+    }
+  ];
+
+  const grid = document.getElementById("coursesGrid");
+  grid.innerHTML = "";
+
+  coursesData.forEach(course => {
+    const isUnlocked = !course.locked;
+    
+    const card = document.createElement("div");
+    card.className = "course-card";
+    card.innerHTML = `
+      <div class="course-header">
+        <span class="course-tag">${course.tag}</span>
+        <h3>${course.title}</h3>
+      </div>
+      <div class="course-content">
+        <p>${course.description}</p>
+        <div class="course-status">
+          <span>Estado</span>
+          <span class="status-badge ${!isUnlocked ? 'locked' : ''}">
+            ${isUnlocked ? '✓ Disponible' : '🔒 Bloqueado'}
+          </span>
+        </div>
+        <button class="course-btn ${isUnlocked ? 'active' : 'locked'}" 
+          ${isUnlocked ? `onclick="window.location.href='${course.link}'"` : ''}>
+          ${isUnlocked ? 'Comenzar →' : '<span class="lock-icon">🔒</span>Desbloquear'}
+        </button>
+      </div>
+    `;
+    
+    grid.appendChild(card);
+  });
+
+  // Mostrar banner de upgrade si es usuario free
+  const upgradeBanner = document.getElementById("upgradeBanner");
+  if(userData.plan === "free") {
+    upgradeBanner.innerHTML = `
+      <div class="upgrade-banner">
+        <h3>🚀 Sube a Premium</h3>
+        <p>Accede a simulacros completos, mentoría 1:1 y un plan de estudio personalizado</p>
+        <a href="planes.html">Ver planes premium</a>
+      </div>
+    `;
+  } else {
+    upgradeBanner.innerHTML = "";
+  }
+}
+
+// LOGOUT
+window.logout = function(){
+  signOut(auth);
+  window.location.href = "login.html";
+}
+
+// Menú mobile
+document.getElementById("menuToggle").addEventListener("click", function(){
+  const navLinks = document.getElementById("navLinks");
+  const isActive = navLinks.classList.contains("active");
+  
+  navLinks.classList.toggle("active");
+  this.setAttribute("aria-expanded", !isActive);
+});
+
+</script>
+
+</body>
+</html>
