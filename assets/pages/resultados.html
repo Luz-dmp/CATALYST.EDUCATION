@@ -565,6 +565,462 @@
                 padding: 0.6rem 1.2rem;
             }
         }
+
+        /* NUEVOS ESTILOS PARA ANÁLISIS DE EVOLUCIÓN */
+        .evolution-section {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid rgba(51, 54, 82, 0.12);
+        }
+
+        .evolution-section h3 {
+            margin: 0 0 2rem;
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .evolution-summary-card {
+            background: rgba(250, 208, 44, 0.08);
+            border: 1px solid rgba(250, 208, 44, 0.25);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .evolution-summary-card h4 {
+            margin: 0 0 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .evolution-summary-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .evolution-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .evolution-metric-item {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 18px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 12px 24px rgba(51, 54, 82, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .evolution-metric-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(51, 54, 82, 0.1);
+        }
+
+        .evolution-metric-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .evolution-metric-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .evolution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .evolution-chart-container,
+        .evolution-areas-container {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .evolution-chart-container h4,
+        .evolution-areas-container h4 {
+            margin: 0 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .evolution-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            gap: 0.8rem;
+            padding: 0 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+            border-radius: 12px 12px 0 0;
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-top: 0.5rem;
+            position: relative;
+            transition: filter 0.3s ease;
+            box-shadow: 0 8px 16px rgba(250, 208, 44, 0.15);
+        }
+
+        .chart-bar:hover {
+            filter: brightness(1.15);
+        }
+
+        .chart-value {
+            font-weight: 700;
+            color: var(--bg-dark);
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .chart-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            position: absolute;
+            bottom: -1.5rem;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .areas-evolution-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .area-evolution-item {
+            display: grid;
+            grid-template-columns: 120px 1fr 60px;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .area-evo-label {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .area-evo-bar {
+            background: rgba(51, 54, 82, 0.08);
+            border-radius: 999px;
+            height: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .area-evo-change {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.6s ease;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .area-evo-value {
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        .evolution-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.98);
+            border: 2px solid rgba(51, 54, 82, 0.08);
+            border-radius: 20px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(51, 54, 82, 0.12);
+        }
+
+        .highlight-card.highlight-positive {
+            border-color: rgba(250, 208, 44, 0.35);
+            background: rgba(250, 208, 44, 0.08);
+        }
+
+        .highlight-card.highlight-info {
+            border-color: rgba(52, 152, 219, 0.35);
+            background: rgba(52, 152, 219, 0.08);
+        }
+
+        .highlight-icon {
+            font-size: 2rem;
+            min-width: 40px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .highlight-content h5 {
+            margin: 0 0 0.5rem;
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .highlight-content p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .progress-index-container {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .progress-index-container h4 {
+            margin: 0 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .progress-index-card {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .progress-index-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .progress-index-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .progress-index-fill {
+            background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+            height: 20px;
+            border-radius: 999px;
+            transition: width 0.8s ease;
+            box-shadow: 0 6px 16px rgba(250, 208, 44, 0.2);
+        }
+
+        .progress-index-explanation {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .averages-summary {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 18px 36px rgba(51, 54, 82, 0.08);
+        }
+
+        .averages-summary h4 {
+            margin: 0 0 1.5rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .averages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .average-item {
+            background: rgba(51, 54, 82, 0.04);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .average-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(51, 54, 82, 0.1);
+        }
+
+        .average-item.average-global {
+            background: rgba(250, 208, 44, 0.12);
+            border: 1px solid rgba(250, 208, 44, 0.35);
+            font-weight: 700;
+        }
+
+        .average-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .average-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        @media (max-width: 900px) {
+            .evolution-content {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-index-card {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-index-score {
+                font-size: 2.4rem;
+            }
+
+            .evolution-chart {
+                height: 160px;
+            }
+
+            .chart-label {
+                bottom: -1.8rem;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .evolution-metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .evolution-metric-item {
+                padding: 1rem;
+            }
+
+            .evolution-metric-value {
+                font-size: 1.6rem;
+            }
+
+            .area-evolution-item {
+                grid-template-columns: 90px 1fr 50px;
+                gap: 0.8rem;
+            }
+
+            .average-item {
+                padding: 0.8rem;
+            }
+
+            .average-label {
+                font-size: 0.7rem;
+            }
+
+            .average-value {
+                font-size: 1.4rem;
+            }
+
+            .highlight-card {
+                padding: 1.2rem;
+            }
+
+            .progress-index-score {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .evolution-section {
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+            }
+
+            .evolution-section h3 {
+                font-size: 1.4rem;
+            }
+
+            .evolution-summary-card {
+                padding: 1.2rem;
+            }
+
+            .evolution-chart-container,
+            .evolution-areas-container {
+                padding: 1.5rem;
+            }
+
+            .evolution-chart {
+                height: 140px;
+                gap: 0.6rem;
+            }
+
+            .chart-label {
+                font-size: 0.65rem;
+                bottom: -1.6rem;
+            }
+
+            .evolution-highlights {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .progress-index-container,
+            .averages-summary {
+                padding: 1.2rem;
+            }
+
+            .averages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 
 
@@ -1068,6 +1524,289 @@ function createAreaCard(area, score, average) {
     `;
 }
 
+// NUEVAS FUNCIONES PARA ANÁLISIS DE EVOLUCIÓN
+// ================================================
+
+function calculateGlobalEvolution() {
+    if (simulacrosData.length < 2) return null;
+
+    const firstResult = simulacrosData[0].persona;
+    const lastResult = simulacrosData[simulacrosData.length - 1].persona;
+
+    const firstScore = firstResult.puntaje_global || computeAverage(areas.map(a => firstResult[a.key]));
+    const lastScore = lastResult.puntaje_global || computeAverage(areas.map(a => lastResult[a.key]));
+    const improvement = lastScore - firstScore;
+    const improvementPercent = ((improvement / firstScore) * 100).toFixed(1);
+
+    return {
+        firstScore,
+        lastScore,
+        improvement,
+        improvementPercent,
+        isPositive: improvement >= 0
+    };
+}
+
+function calculateAreasEvolution() {
+    if (simulacrosData.length < 2) return null;
+
+    const firstResult = simulacrosData[0].persona;
+    const lastResult = simulacrosData[simulacrosData.length - 1].persona;
+
+    const areasEvolution = {};
+    areas.forEach(area => {
+        areasEvolution[area.key] = {
+            label: area.label,
+            firstScore: firstResult[area.key],
+            lastScore: lastResult[area.key],
+            improvement: lastResult[area.key] - firstResult[area.key]
+        };
+    });
+
+    return areasEvolution;
+}
+
+function calculateAreaAverages() {
+    if (simulacrosData.length === 0) return null;
+
+    const averages = {};
+    areas.forEach(area => {
+        const scores = simulacrosData.map(s => s.persona[area.key]);
+        averages[area.key] = computeAverage(scores);
+    });
+
+    const globalScores = simulacrosData.map(s => {
+        const scores = areas.map(a => s.persona[a.key]);
+        return computeAverage(scores);
+    });
+    averages.global = computeAverage(globalScores);
+
+    return averages;
+}
+
+function getStrongestArea(areasEvolution) {
+    if (!areasEvolution) return null;
+    const sorted = Object.entries(areasEvolution)
+        .sort((a, b) => b[1].improvement - a[1].improvement);
+    return sorted[0] ? { key: sorted[0][0], ...sorted[0][1] } : null;
+}
+
+function getWeakestArea(areasEvolution) {
+    if (!areasEvolution) return null;
+    const sorted = Object.entries(areasEvolution)
+        .sort((a, b) => a[1].improvement - b[1].improvement);
+    return sorted[0] ? { key: sorted[0][0], ...sorted[0][1] } : null;
+}
+
+function generateEvolutionSummary(globalEvolution, areasEvolution) {
+    if (!globalEvolution || !areasEvolution) return '';
+
+    const numSimulacros = simulacrosData.length;
+    const strongest = getStrongestArea(areasEvolution);
+    const weakest = getWeakestArea(areasEvolution);
+    const trend = globalEvolution.improvement > 0 ? 'positiva' : 'variable';
+
+    let summary = `Has realizado ${numSimulacros} simulacros.<br><br>`;
+    summary += `Tu puntaje global pasó de <strong>${globalEvolution.firstScore}</strong> a <strong>${globalEvolution.lastScore}</strong> puntos`;
+    
+    if (globalEvolution.improvement !== 0) {
+        summary += ` (${globalEvolution.improvement > 0 ? '+' : ''}${globalEvolution.improvement} puntos).<br><br>`;
+    } else {
+        summary += `.<br><br>`;
+    }
+
+    if (strongest) {
+        summary += `Tu mayor avance se observa en <strong>${strongest.label}</strong> (+${strongest.improvement} puntos).<br><br>`;
+    }
+
+    if (globalEvolution.improvement > 0) {
+        summary += `Mantienes una tendencia <strong>${trend}</strong> de crecimiento académico.`;
+    } else {
+        summary += `Aunque se observan algunas variaciones, se recomienda fortalecer las áreas con menor desempeño.`;
+    }
+
+    return summary;
+}
+
+function calculateProgressIndex() {
+    if (simulacrosData.length === 0) return 0;
+
+    const numSimulacros = simulacrosData.length;
+    const globalEvolution = calculateGlobalEvolution();
+    const areasEvolution = calculateAreasEvolution();
+
+    // Componente 1: Cantidad de simulacros (0-30 puntos)
+    const simulacrosScore = Math.min(numSimulacros * 6, 30);
+
+    // Componente 2: Mejora acumulada (0-40 puntos)
+    let improvementScore = 0;
+    if (globalEvolution && globalEvolution.improvement > 0) {
+        improvementScore = Math.min((globalEvolution.improvement / 100) * 40, 40);
+    } else if (globalEvolution && globalEvolution.improvement === 0) {
+        improvementScore = 20;
+    } else if (globalEvolution && globalEvolution.improvement < 0) {
+        improvementScore = Math.max(20 - (Math.abs(globalEvolution.improvement) / 100) * 20, 5);
+    }
+
+    // Componente 3: Consistencia (0-30 puntos)
+    let consistencyScore = 0;
+    if (areasEvolution) {
+        const improvements = Object.values(areasEvolution).map(a => a.improvement);
+        const positiveAreas = improvements.filter(i => i > 0).length;
+        const consistencyRatio = positiveAreas / improvements.length;
+        consistencyScore = consistencyRatio * 30;
+    }
+
+    return Math.round(simulacrosScore + improvementScore + consistencyScore);
+}
+
+function renderEvolutionChart() {
+    if (simulacrosData.length < 2) return '';
+
+    const chartData = simulacrosData.map(s => ({
+        label: s.label.split(' - ')[0],
+        score: s.persona.puntaje_global || computeAverage(areas.map(a => s.persona[a.key]))
+    }));
+
+    const minScore = Math.min(...chartData.map(d => d.score));
+    const maxScore = Math.max(...chartData.map(d => d.score));
+    const range = maxScore - minScore || 100;
+
+    let chartHTML = '<div class="evolution-chart">';
+    chartData.forEach((data, index) => {
+        const normalizedHeight = ((data.score - minScore) / range) * 100 || 30;
+        chartHTML += `
+            <div class="chart-bar" style="height: ${normalizedHeight}%;" title="${data.label}: ${data.score}">
+                <span class="chart-value">${data.score}</span>
+                <span class="chart-label">${data.label}</span>
+            </div>
+        `;
+    });
+    chartHTML += '</div>';
+
+    return chartHTML;
+}
+
+function renderEvolutionSection() {
+    if (simulacrosData.length < 2) return '';
+
+    const globalEvolution = calculateGlobalEvolution();
+    const areasEvolution = calculateAreasEvolution();
+    const averages = calculateAreaAverages();
+    const progressIndex = calculateProgressIndex();
+    const strongest = getStrongestArea(areasEvolution);
+    const weakest = getWeakestArea(areasEvolution);
+    const summary = generateEvolutionSummary(globalEvolution, areasEvolution);
+
+    return `
+        <div class="evolution-section">
+            <h3>📈 Mi Evolución Académica</h3>
+
+            <div class="evolution-summary-card">
+                <h4>Resumen de progreso</h4>
+                <p>${summary}</p>
+            </div>
+
+            <div class="evolution-metrics-grid">
+                <div class="evolution-metric-item">
+                    <span class="evolution-metric-label">Puntaje inicial</span>
+                    <div class="evolution-metric-value">${globalEvolution.firstScore}</div>
+                </div>
+                <div class="evolution-metric-item">
+                    <span class="evolution-metric-label">Puntaje actual</span>
+                    <div class="evolution-metric-value">${globalEvolution.lastScore}</div>
+                </div>
+                <div class="evolution-metric-item">
+                    <span class="evolution-metric-label">Mejora acumulada</span>
+                    <div class="evolution-metric-value" style="color: ${globalEvolution.isPositive ? 'var(--accent)' : '#e74c3c'}">
+                        ${globalEvolution.improvement > 0 ? '+' : ''}${globalEvolution.improvement}
+                    </div>
+                </div>
+                <div class="evolution-metric-item">
+                    <span class="evolution-metric-label">Variación (%)</span>
+                    <div class="evolution-metric-value" style="color: ${globalEvolution.isPositive ? 'var(--accent)' : '#e74c3c'}">
+                        ${globalEvolution.improvementPercent > 0 ? '+' : ''}${globalEvolution.improvementPercent}%
+                    </div>
+                </div>
+            </div>
+
+            <div class="evolution-content">
+                <div class="evolution-chart-container">
+                    <h4>Tendencia de puntaje global</h4>
+                    ${renderEvolutionChart()}
+                </div>
+
+                <div class="evolution-areas-container">
+                    <h4>Evolución por áreas</h4>
+                    <div class="areas-evolution-list">
+                        ${Object.entries(areasEvolution).map(([key, data]) => `
+                            <div class="area-evolution-item">
+                                <div class="area-evo-label">${data.label}</div>
+                                <div class="area-evo-bar">
+                                    <div class="area-evo-change" style="width: ${Math.abs(data.improvement) * 5}%; background: ${data.improvement >= 0 ? 'var(--accent)' : '#e74c3c'}"></div>
+                                </div>
+                                <div class="area-evo-value" style="color: ${data.improvement >= 0 ? 'var(--accent)' : '#e74c3c'}">
+                                    ${data.improvement > 0 ? '+' : ''}${data.improvement}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+
+            <div class="evolution-highlights">
+                ${strongest ? `
+                    <div class="highlight-card highlight-positive">
+                        <span class="highlight-icon">🏆</span>
+                        <div class="highlight-content">
+                            <h5>Mayor progreso</h5>
+                            <p>${strongest.label} (+${strongest.improvement} puntos)</p>
+                        </div>
+                    </div>
+                ` : ''}
+                ${weakest ? `
+                    <div class="highlight-card highlight-info">
+                        <span class="highlight-icon">📌</span>
+                        <div class="highlight-content">
+                            <h5>Área a reforzar</h5>
+                            <p>${weakest.label} (${weakest.improvement > 0 ? '+' : ''}${weakest.improvement} puntos)</p>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+
+            <div class="progress-index-container">
+                <h4>Índice de Progreso Catalyst</h4>
+                <div class="progress-index-card">
+                    <div class="progress-index-score">${progressIndex}/100</div>
+                    <div class="progress-index-bar">
+                        <div class="progress-index-fill" style="width: ${progressIndex}%"></div>
+                    </div>
+                    <p class="progress-index-explanation">
+                        Tu índice de progreso se calcula basándose en la cantidad de simulacros realizados, tu mejora acumulada y la consistencia de tu desempeño.
+                    </p>
+                </div>
+            </div>
+
+            <div class="averages-summary">
+                <h4>Promedios históricos</h4>
+                <div class="averages-grid">
+                    ${areas.map(area => `
+                        <div class="average-item">
+                            <span class="average-label">${area.label}</span>
+                            <div class="average-value">${averages[area.key]}</div>
+                        </div>
+                    `).join('')}
+                    <div class="average-item average-global">
+                        <span class="average-label">Promedio Global</span>
+                        <div class="average-value">${averages.global}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 function renderResult(persona) {
     const groupAverage = FIXED_GROUP_AVERAGE;
     const summary = buildGlobalSummary(persona, groupAverage);
@@ -1105,6 +1844,8 @@ function renderResult(persona) {
         <div class="results-list">
             ${areas.map(area => createAreaCard(area, persona[area.key], groupAverage[area.key])).join('')}
         </div>
+
+        ${renderEvolutionSection()}
     `;
 }
 </script>
