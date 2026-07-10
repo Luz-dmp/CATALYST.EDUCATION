@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrucciones | CAT AXIS-01 | Catalyst Education</title>
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(180deg, #f7f7ff 0%, #ffffff 52%, #f9fbff 100%);
+        }
+
+        .page-shell {
+            padding: 0 0 5rem;
+        }
+
+        .section-block {
+            padding: 3rem 0;
+        }
+
+        .section-heading {
+            margin-bottom: 2rem;
+            max-width: 760px;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 0.75rem;
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+        }
+
+        .section-heading p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(51, 54, 82, 0.12);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            box-shadow: 0 12px 24px rgba(51, 54, 82, 0.06);
+        }
+
+        .guide-grid,
+        .feature-grid,
+        .content-grid,
+        .rules-grid,
+        .access-grid {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .guide-grid,
+        .content-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .rules-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .access-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .feature-card,
+        .content-card,
+        .rule-card,
+        .session-card,
+        .faq-item {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 45px rgba(51, 54, 82, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before,
+        .content-card::before,
+        .rule-card::before,
+        .session-card::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            right: -48px;
+            top: -48px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(250, 208, 44, 0.22), transparent 70%);
+            transition: transform 0.35s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover,
+        .content-card:hover,
+        .rule-card:hover,
+        .session-card:hover,
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 28px 60px rgba(51, 54, 82, 0.12);
+        }
+
+        .feature-card:hover::before,
+        .content-card:hover::before,
+        .rule-card:hover::before,
+        .session-card:hover::before {
+            transform: scale(1.12);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ffe88c);
+            color: var(--bg-dark);
+            font-weight: 800;
+            margin-bottom: 0.95rem;
+        }
+
+        .content-card h3,
+        .rule-card h3,
+        .session-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .placeholder-box {
+            margin-top: 1rem;
+            border: 1px dashed rgba(250, 208, 44, 0.45);
+            border-radius: 20px;
+            min-height: 130px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(250, 208, 44, 0.12), rgba(255, 255, 255, 0.9));
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .media-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            box-shadow: 0 16px 35px rgba(51, 54, 82, 0.08);
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.92);
+            cursor: zoom-in;
+        }
+
+        .media-frame img {
+            display: block;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.35s ease, filter 0.35s ease;
+            cursor: zoom-in;
+        }
+
+        .media-frame[role="button"]:focus-visible {
+            outline: 3px solid rgba(250, 208, 44, 0.45);
+            outline-offset: 4px;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(12, 16, 30, 0.82);
+            backdrop-filter: blur(6px);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-panel {
+            position: relative;
+            width: min(92vw, 980px);
+            max-height: 88vh;
+            border-radius: 24px;
+            background: #fff;
+            padding: 0.8rem;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .lightbox-panel img {
+            display: block;
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            border: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(51, 54, 82, 0.16);
+            cursor: pointer;
+        }
+
+        .media-frame:hover img {
+            transform: scale(1.05);
+            filter: saturate(1.08);
+        }
+
+        .media-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--primary);
+            font-size: 0.74rem;
+            font-weight: 800;
+            box-shadow: 0 12px 24px rgba(51, 54, 82, 0.12);
+        }
+
+        .media-caption {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(26, 27, 38, 0.78);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 24px;
+            padding: 1rem;
+            box-shadow: 0 20px 45px rgba(51, 54, 82, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 28px 60px rgba(51, 54, 82, 0.12);
+        }
+
+        .gallery-card .media-frame {
+            margin-top: 0;
+        }
+
+        .gallery-card .media-frame img {
+            height: 220px;
+        }
+
+        .gallery-card p {
+            margin-top: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .timeline {
+            position: relative;
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-left: 1rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), rgba(51, 54, 82, 0.18));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.3rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: #fff;
+        }
+
+        .timeline-item strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item span {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .checklist {
+            display: grid;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            max-width: 720px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.95rem 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 12px 24px rgba(51, 54, 82, 0.06);
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .checklist-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(51, 54, 82, 0.1);
+        }
+
+        .checklist-item .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 2px solid rgba(51, 54, 82, 0.2);
+            display: inline-grid;
+            place-items: center;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item .check::after {
+            content: '✓';
+            font-size: 0.8rem;
+            color: #fff;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .checklist-item.done {
+            border-color: rgba(250, 208, 44, 0.42);
+            background: linear-gradient(90deg, rgba(250, 208, 44, 0.12), rgba(255, 255, 255, 0.98));
+        }
+
+        .checklist-item.done .check {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .checklist-item.done .check::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .countdown {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .countdown .unit {
+            min-width: 84px;
+            padding: 0.95rem 0.8rem;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            text-align: center;
+            box-shadow: 0 18px 30px rgba(51, 54, 82, 0.06);
+        }
+
+        .countdown .unit strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .countdown .unit span {
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .faq-item {
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            border-radius: 18px;
+            padding: 1rem 1.1rem;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 14px 28px rgba(51, 54, 82, 0.06);
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            list-style: none;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            color: var(--accent);
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .faq-item[open] summary::after {
+            content: '–';
+        }
+
+        .faq-item p {
+            margin-top: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .btn-locked {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 720px) {
+            .hero {
+                padding-top: 92px;
+                padding-bottom: 100px;
+            }
+
+            .hero-btns {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" role="navigation">
+        <div class="logo">
+            <img src="../../assets/img/Logo.png" alt="Catalyst">
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="../../index.html">Inicio</a>
+            <a href="planes.html">Planes</a>
+            <a href="resultados.html">Resultados</a>
+            <a href="blog.html">Blog</a>
+            <a href="comunidad.html">Comunidad</a>
+            <a href="#acceso" class="btn-accent">Inscribirme</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Simulacro CAT AXIS-01</span>
+            <h1 class="fade-in">Tu preparación <span>real</span> para el ICFES</h1>
+            <p class="fade-in">
+                Reúne todo lo que necesitas saber antes de presentar el simulacro: cómo entrar, cómo responder, qué materiales llevar y cómo aprovechar cada sesión.
+            </p>
+            <div class="hero-btns fade-in">
+                <a href="https://forms.office.com/r/bmfVRcgs1V" class="btn-accent">Inscribirme al simulacro</a>
+                <a href="#como-responder" class="btn-outline">Cómo responder</a>
+            </div>
+            <div class="pill-row fade-in">
+                <span class="pill">📍 Condiciones reales</span>
+                <span class="pill">⏱️ Dos sesiones</span>
+                <span class="pill">📘 Cuadernillo listo</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container page-shell">
+        <section id="instrucciones" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Sobre el simulacro</span>
+                <h2>¿Qué es CAT AXIS-01?</h2>
+                <p>Este simulacro está pensado para que vivas una experiencia lo más cercana posible al examen real: tiempo, exigencia, concentración y estrategia.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card fade-in">
+                    <h3>Afinamiento final</h3>
+                    <p>Una última prueba para cerrar vacíos antes de la fecha real del ICFES.</p>
+                </article>
+                <article class="feature-card fade-in">
+                    <h3>Condiciones reales</h3>
+                    <p>Se desarrollará con el mismo enfoque, duración y dinámica que exige una prueba oficial.</p>
+                </article>
+                <article class="feature-card fade-in">
+                    <h3>Retroalimentación útil</h3>
+                    <p>Identifica rápidamente qué necesitas reforzar y cómo administrar mejor tu tiempo.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="como-responder" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Cómo responder</span>
+                <h2>¿Cómo responder el simulacro?</h2>
+                <p>Sigue este orden para diligenciar el formulario con tranquilidad y evitar errores de ingreso.</p>
+            </div>
+            <div class="guide-grid">
+                <article class="content-card fade-in">
+                    <div class="step-number">01</div>
+                    <h3>Ingresa a la sesión</h3>
+                    <p>Usa el botón de acceso habilitado y verifica que estés en el formulario correcto.</p>
+                    <div class="media-frame">
+                        <img src="../img/inicio.jpeg" alt="Captura del ingreso al formulario" loading="lazy">
+                        <span class="media-badge">Paso 1</span>
+                        <span class="media-caption">Ingreso al formulario</span>
+                    </div>
+                </article>
+                <article class="content-card fade-in">
+                    <div class="step-number">02</div>
+                    <h3>Completa tus datos</h3>
+                    <p>Escribe tu nombre, documento y correo correctamente antes de comenzar.</p>
+                    <div class="media-frame">
+                        <img src="../img/datos.jpeg" alt="Captura con tus datos" loading="lazy">
+                        <span class="media-badge">Paso 2</span>
+                        <span class="media-caption">Datos personales</span>
+                    </div>
+                </article>
+                <article class="content-card fade-in">
+                    <div class="step-number">03</div>
+                    <h3>Ingresa al cuadernillo</h3>
+                    <p>Lee cada pregunta con calma y responde en el orden que mejor te permita gestionar el tiempo.</p>
+                    <div class="media-frame">
+                        <img src="../img/cuadernillo.jpeg" alt="Captura del cuadernillo" loading="lazy">
+                        <span class="media-badge">Paso 3</span>
+                        <span class="media-caption">Cuadernillo</span>
+                    </div>
+                </article>
+                <article class="content-card fade-in">
+                    <div class="step-number">04</div>
+                    <h3>Envía antes de cerrar</h3>
+                    <p>Si terminas antes del cierre, revisa tus respuestas y envía el formulario con tiempo.</p>
+                    <div class="media-frame">
+                        <img src="../img/enviar.jpeg" alt="Captura del botón de envío" loading="lazy">
+                        <span class="media-badge">Paso 4</span>
+                        <span class="media-caption">Envío final</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="cuadernillo" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Conoce el cuadernillo</span>
+                <h2>Mira lo que verás en el día del simulacro</h2>
+                <p>Esta galería te sirve para mostrar la portada y algunas páginas del cuadernillo antes del día de la prueba.</p>
+            </div>
+            <div class="gallery-grid">
+                <article class="gallery-card fade-in">
+                    <div class="media-frame">
+                        <img src="../img/portada.jpeg" alt="Portada del cuadernillo" loading="lazy">
+                        <span class="media-badge">✦ Portada</span>
+                        <span class="media-caption">Portada S1</span>
+                    </div>
+                    <p>Portada S1</p>
+                </article>
+                <article class="gallery-card fade-in">
+                    <div class="media-frame">
+                        <img src="../img/pagina2.jpg" alt="Página interior 01" loading="lazy">
+                        <span class="media-badge">✦ Interior</span>
+                        <span class="media-caption">Página interior</span>
+                    </div>
+                    <p>Página interior</p>
+                </article>
+                <article class="gallery-card fade-in">
+                    <div class="media-frame">
+                        <img src="../img/pagina3.jpg" alt="Página interior 02" loading="lazy">
+                        <span class="media-badge">✦ Portada</span>
+                        <span class="media-caption">Portada S2</span>
+                    </div>
+                    <p>Portada S2</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="antes-de-comenzar" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Antes de comenzar</span>
+                <h2>Checklist final</h2>
+                <p>Marca los puntos que ya tienes listos para que la experiencia se sienta lo más parecida posible a la prueba real.</p>
+            </div>
+            <div class="content-grid">
+                <article class="feature-card fade-in">
+                    <h3>Materiales</h3>
+                    <p>Hojas, lápiz o lapicero, reloj o cronómetro y un lugar cómodo para trabajar.</p>
+                </article>
+                <article class="feature-card fade-in">
+                    <h3>Equipo</h3>
+                    <p>Computador cargado, internet estable y navegador actualizado antes de entrar.</p>
+                </article>
+                <article class="feature-card fade-in">
+                    <h3>Ambiente</h3>
+                    <p>Busca un espacio silencioso donde no te interrumpan durante la duración de la sesión.</p>
+                </article>
+            </div>
+            <div class="checklist">
+                <div class="checklist-item fade-in"><span class="check"></span><span>Tengo hojas para operaciones</span></div>
+                <div class="checklist-item fade-in"><span class="check"></span><span>Tengo lápiz o lapicero</span></div>
+                <div class="checklist-item fade-in"><span class="check"></span><span>Tengo la hojas de respuestas</span></div>
+                <div class="checklist-item fade-in"><span class="check"></span><span>Estoy en un lugar silencioso</span></div>
+                <div class="checklist-item fade-in"><span class="check"></span><span>Mi computador está cargado</span></div>
+            </div>
+        </section>
+
+        <section id="horario" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Horario</span>
+                <h2>Así se desarrolla el día</h2>
+                <p>El reloj no espera a nadie; por eso es importante que llegues preparado desde el principio.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <strong>07:00 a.m. — 12:00 p.m.</strong>
+                    <span>Sesión 1</span>
+                </div>
+                <div class="timeline-item fade-in">
+                    <strong>12:00 p.m. — 01:00 p.m.</strong>
+                    <span>Descanso</span>
+                </div>
+                <div class="timeline-item fade-in">
+                    <strong>01:00 p.m. — 06:00 p.m.</strong>
+                    <span>Sesión 2</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="reglas" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Reglas del simulacro</span>
+                <h2>Lo más importante durante la prueba</h2>
+            </div>
+            <div class="rules-grid">
+                <article class="rule-card fade-in">
+                    <h3>📵 Sin celular</h3>
+                    <p>No se permite usar el celular durante ninguna sesión. Si lo usas puede borrarse el avance que tienen dentro del formulario.</p>
+                </article>
+                <article class="rule-card fade-in">
+                    <h3>🌐 Sin ayuda externa</h3>
+                    <p>No consultes internet ni pidas ayuda a terceros.</p>
+                </article>
+                <article class="rule-card fade-in">
+                    <h3>⏱️ Respeta el tiempo</h3>
+                    <p>El tiempo es parte del reto y del resultado.</p>
+                </article>
+                <article class="rule-card fade-in">
+                    <h3>📤 Envía a tiempo</h3>
+                    <p>Si terminas antes de cerrar, revisa y envía tu formulario.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="acceso" class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">Acceso</span>
+                <h2>Sesiones disponibles</h2>
+                <p>Los botones se habilitan automáticamente en la hora indicada. Mientras no llegue el momento, aparecerán deshabilitados.</p>
+            </div>
+            <div class="access-grid">
+                <article class="session-card fade-in">
+                    <h3>Sesión 1</h3>
+                    <p>07:00 a.m. — 12:00 p.m.</p>
+                    <div class="countdown" id="countdown-s1">
+                        <div class="unit"><strong id="s1-d">00</strong><span>Días</span></div>
+                        <div class="unit"><strong id="s1-h">00</strong><span>Hrs</span></div>
+                        <div class="unit"><strong id="s1-m">00</strong><span>Min</span></div>
+                        <div class="unit"><strong id="s1-s">00</strong><span>Seg</span></div>
+                    </div>
+                    <a href="#" class="btn-outline btn-locked" id="btn-s1" aria-disabled="true">Disponible en la fecha</a>
+                </article>
+                <article class="session-card fade-in">
+                    <h3>Sesión 2</h3>
+                    <p>01:00 p.m. — 06:00 p.m.</p>
+                    <div class="countdown" id="countdown-s2">
+                        <div class="unit"><strong id="s2-d">00</strong><span>Días</span></div>
+                        <div class="unit"><strong id="s2-h">00</strong><span>Hrs</span></div>
+                        <div class="unit"><strong id="s2-m">00</strong><span>Min</span></div>
+                        <div class="unit"><strong id="s2-s">00</strong><span>Seg</span></div>
+                    </div>
+                    <a href="#" class="btn-outline btn-locked" id="btn-s2" aria-disabled="true">Disponible en la fecha</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-heading fade-in">
+                <span class="hero-tag">FAQ</span>
+                <h2>Preguntas frecuentes</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item fade-in">
+                    <summary>¿Qué pasa si llego tarde?</summary>
+                    <p>El tiempo de la sesión ya está corriendo; por eso es importante entrar a tiempo, igual que en una prueba oficial.</p>
+                </details>
+                <details class="faq-item fade-in">
+                    <summary>¿Puedo usar el celular?</summary>
+                    <p>No. La idea es que vivas la prueba en las mismas condiciones de concentración que el ICFES.</p>
+                </details>
+                <details class="faq-item fade-in">
+                    <summary>¿Qué pasa si no termino?</summary>
+                    <p>Debes enviar tu formulario antes de cerrar la sesión aunque no hayas respondido todo. Eso también forma parte del ejercicio.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>© 2026 Catalyst Education. Comunidad de estudiantes con aspiraciones altas y resultados medibles.</p>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Vista completa de la imagen">
+        <div class="lightbox-panel">
+            <button class="lightbox-close" id="closeLightbox" type="button" aria-label="Cerrar vista completa">✕</button>
+            <img id="lightboxImage" src="" alt="Vista completa de la imagen">
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        function closeLightboxView() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openLightboxView(img) {
+            if (!img) return;
+            lightboxImage.src = img.currentSrc || img.src;
+            lightboxImage.alt = img.alt || 'Vista completa';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.querySelectorAll('.media-frame').forEach(frame => {
+            const img = frame.querySelector('img');
+            if (!img) return;
+
+            frame.setAttribute('role', 'button');
+            frame.setAttribute('tabindex', '0');
+            frame.setAttribute('aria-label', 'Abrir imagen completa');
+
+            frame.addEventListener('click', () => openLightboxView(img));
+            frame.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openLightboxView(img);
+                }
+            });
+        });
+
+        closeLightbox.addEventListener('click', closeLightboxView);
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) closeLightboxView();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightboxView();
+            }
+        });
+        const examConfig = {
+            session1Start: '2026-07-12T07:00:00-05:00',
+            session2Start: '2026-07-12T13:00:00-05:00',
+            session2End: '2026-07-12T18:00:00-05:00',
+            inscriptionLink: '#REEMPLAZA-EL-LINK-DE-INSCRIPCION',
+            session1Link: '#REEMPLAZA-CON-EL-LINK-SESION-1',
+            session2Link: '#REEMPLAZA-CON-EL-LINK-SESION-2'
+        };
+
+        const btnInscription = document.querySelector('a[href="#acceso"].btn-accent');
+        if (btnInscription) {
+            btnInscription.href = examConfig.inscriptionLink;
+            btnInscription.target = '_blank';
+            btnInscription.rel = 'noopener';
+        }
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function getParts(target) {
+            const diff = target - Date.now();
+            if (diff <= 0) return null;
+            return {
+                d: Math.floor(diff / 86400000),
+                h: Math.floor((diff / 3600000) % 24),
+                m: Math.floor((diff / 60000) % 60),
+                s: Math.floor((diff / 1000) % 60)
+            };
+        }
+        function setCountdown(prefix, target) {
+            const p = getParts(target);
+            const elements = ['d', 'h', 'm', 's'].map(k => document.getElementById(prefix + '-' + k));
+            if (!p) {
+                elements.forEach(el => { if (el) el.textContent = '00'; });
+                return false;
+            }
+            document.getElementById(prefix + '-d').textContent = pad(p.d);
+            document.getElementById(prefix + '-h').textContent = pad(p.h);
+            document.getElementById(prefix + '-m').textContent = pad(p.m);
+            document.getElementById(prefix + '-s').textContent = pad(p.s);
+            return true;
+        }
+        function unlockButton(btn, link) {
+            if (!btn) return;
+            btn.classList.remove('btn-locked');
+            btn.classList.add('btn-accent');
+            btn.textContent = 'Ingresar ahora';
+            btn.href = link;
+            btn.target = '_blank';
+            btn.rel = 'noopener';
+            btn.setAttribute('aria-disabled', 'false');
+        }
+
+        const t1 = new Date(examConfig.session1Start).getTime();
+        const t2 = new Date(examConfig.session2Start).getTime();
+        const t2end = new Date(examConfig.session2End).getTime();
+        const btn1 = document.getElementById('btn-s1');
+        const btn2 = document.getElementById('btn-s2');
+
+        function tick() {
+            setCountdown('s1', t1);
+            setCountdown('s2', t2);
+            const now = Date.now();
+            if (now >= t1 && now < t2) unlockButton(btn1, examConfig.session1Link);
+            if (now >= t2 && now < t2end) unlockButton(btn2, examConfig.session2Link);
+        }
+        tick();
+        setInterval(tick, 1000);
+
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', () => item.classList.toggle('done'));
+        });
+    </script>
+</body>
+</html>
