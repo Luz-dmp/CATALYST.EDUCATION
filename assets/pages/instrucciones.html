@@ -307,6 +307,77 @@
             color: var(--primary);
         }
 
+        .session-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-panel {
+            margin-top: 0.25rem;
+            border-radius: 24px;
+            padding: 1rem;
+            border: 1px solid rgba(250, 208, 44, 0.28);
+            background: linear-gradient(135deg, rgba(250, 208, 44, 0.12), rgba(255, 255, 255, 0.98));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 18px 32px rgba(51, 54, 82, 0.08);
+        }
+
+        .form-panel.is-hidden {
+            display: none;
+        }
+
+        .form-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .form-panel-header .panel-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--primary);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .form-panel-header .panel-status {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .form-embed {
+            width: 100%;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(51, 54, 82, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 28px rgba(51, 54, 82, 0.08);
+        }
+
+        .form-embed iframe {
+            display: block;
+            width: 100%;
+            min-height: 560px;
+            border: 0;
+            background: #fff;
+        }
+
+        .form-hint {
+            margin-top: 0.45rem;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
         .timeline {
             position: relative;
             display: grid;
@@ -743,7 +814,8 @@
                         <div class="unit"><strong id="s1-m">00</strong><span>Min</span></div>
                         <div class="unit"><strong id="s1-s">00</strong><span>Seg</span></div>
                     </div>
-                    <a href="#" class="btn-outline btn-locked" id="btn-s1" aria-disabled="true">Disponible en la fecha</a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=UJ5k6tInGEOcuS_P_hb9QbdrTwDQ5ZxKrr3P1ALRKzBUQVZOUFRRMk40NjhWMU1EN0gwS1IwM0RLTy4u&embed=true" class="btn-outline btn-locked" id="btn-s1" aria-disabled="true">Ingresa al formulario</a>
+                        <p class="form-hint">El formulario se habilitará en la fecha y hora indicadas.</p>
                 </article>
                 <article class="session-card fade-in">
                     <h3>Sesión 2</h3>
@@ -754,7 +826,8 @@
                         <div class="unit"><strong id="s2-m">00</strong><span>Min</span></div>
                         <div class="unit"><strong id="s2-s">00</strong><span>Seg</span></div>
                     </div>
-                    <a href="#" class="btn-outline btn-locked" id="btn-s2" aria-disabled="true">Disponible en la fecha</a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=UJ5k6tInGEOcuS_P_hb9QbdrTwDQ5ZxKrr3P1ALRKzBUN0VWMUMyWUxNRVZEUzJJR1VSNVM4VUZaOS4u&embed=true" class="btn-outline btn-locked" id="btn-s2" aria-disabled="true">Ingresa al formulario</a>
+                        <p class="form-hint">El formulario se habilitará en la fecha y hora indicadas.</p>
                 </article>
             </div>
         </section>
@@ -844,16 +917,16 @@
             session1Start: '2026-07-12T07:00:00-05:00',
             session2Start: '2026-07-12T13:00:00-05:00',
             session2End: '2026-07-12T18:00:00-05:00',
-            inscriptionLink: '#REEMPLAZA-EL-LINK-DE-INSCRIPCION',
-            session1Link: '#REEMPLAZA-CON-EL-LINK-SESION-1',
-            session2Link: '#REEMPLAZA-CON-EL-LINK-SESION-2'
+            inscriptionLink: 'https://forms.office.com/Pages/ResponsePage.aspx?id=UJ5k6tInGEOcuS_P_hb9QbdrTwDQ5ZxKrr3P1ALRKzBUQVZOUFRRMk40NjhWMU1EN0gwS1IwM0RLTy4u&embed=true',
+            session1Link: 'https://forms.office.com/Pages/ResponsePage.aspx?id=UJ5k6tInGEOcuS_P_hb9QbdrTwDQ5ZxKrr3P1ALRKzBUQVZOUFRRMk40NjhWMU1EN0gwS1IwM0RLTy4u&embed=true',
+            session2Link: 'https://forms.office.com/Pages/ResponsePage.aspx?id=UJ5k6tInGEOcuS_P_hb9QbdrTwDQ5ZxKrr3P1ALRKzBUN0VWMUMyWUxNRVZEUzJJR1VSNVM4VUZaOS4u&embed=true'
         };
 
         const btnInscription = document.querySelector('a[href="#acceso"].btn-accent');
         if (btnInscription) {
             btnInscription.href = examConfig.inscriptionLink;
-            btnInscription.target = '_blank';
-            btnInscription.rel = 'noopener';
+            btnInscription.target = '_self';
+            btnInscription.rel = '';
         }
 
         function pad(n) { return String(n).padStart(2, '0'); }
@@ -880,15 +953,21 @@
             document.getElementById(prefix + '-s').textContent = pad(p.s);
             return true;
         }
-        function unlockButton(btn, link) {
+        function unlockButton(btn, link, panelId) {
             if (!btn) return;
             btn.classList.remove('btn-locked');
             btn.classList.add('btn-accent');
             btn.textContent = 'Ingresar ahora';
             btn.href = link;
-            btn.target = '_blank';
-            btn.rel = 'noopener';
+            btn.target = '_self';
+            btn.rel = '';
             btn.setAttribute('aria-disabled', 'false');
+
+            const panel = panelId ? document.getElementById(panelId) : null;
+            if (panel) {
+                panel.classList.remove('is-hidden');
+                panel.setAttribute('aria-hidden', 'false');
+            }
         }
 
         const t1 = new Date(examConfig.session1Start).getTime();
@@ -901,11 +980,24 @@
             setCountdown('s1', t1);
             setCountdown('s2', t2);
             const now = Date.now();
-            if (now >= t1 && now < t2) unlockButton(btn1, examConfig.session1Link);
-            if (now >= t2 && now < t2end) unlockButton(btn2, examConfig.session2Link);
+            if (now >= t1 && now < t2) unlockButton(btn1, examConfig.session1Link, 'form-panel-s1');
+            if (now >= t2 && now < t2end) unlockButton(btn2, examConfig.session2Link, 'form-panel-s2');
         }
         tick();
         setInterval(tick, 1000);
+
+        const panel1 = document.getElementById('form-panel-s1');
+        const panel2 = document.getElementById('form-panel-s2');
+
+        if (panel1) {
+            panel1.classList.remove('is-hidden');
+            panel1.setAttribute('aria-hidden', 'false');
+        }
+
+        if (panel2) {
+            panel2.classList.remove('is-hidden');
+            panel2.setAttribute('aria-hidden', 'false');
+        }
 
         document.querySelectorAll('.checklist-item').forEach(item => {
             item.addEventListener('click', () => item.classList.toggle('done'));
