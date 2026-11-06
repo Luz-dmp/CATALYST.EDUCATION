@@ -1301,6 +1301,20 @@ async function consultar() {
         simulacrosData = [];
         setErrorMessage('❌ Ocurrió un problema al buscar los datos.');
     }
+
+    
+const documentoBuscado = String(doc).trim();
+
+const prueba = await supabaseClient
+    .from('resultados_cat_axis_01_gratis_Octubre')
+    .select('documento')
+    .eq('documento', documentoBuscado);
+
+console.log('DOCUMENTO:', documentoBuscado);
+console.log('RESULTADO:', prueba.data);
+console.log('ERROR:', prueba.error);
+console.log('CANTIDAD:', prueba.data?.length);
+
 }
 
 
